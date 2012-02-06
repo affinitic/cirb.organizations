@@ -26,6 +26,8 @@ setup(name='cirb.organizations',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'z3c.saconfig',
+          'plone.app.z3cform',
       ],
       entry_points="""
       # -*- Entry points: -*-
