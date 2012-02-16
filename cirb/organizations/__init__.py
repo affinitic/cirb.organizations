@@ -7,5 +7,5 @@ organizationsMessageFactory = MessageFactory('cirb.organizations')
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
 
-from sqlachemy.ext import declarative
+from sqlalchemy.ext import declarative
 ORMBase = declarative.declarative_base()
