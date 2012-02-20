@@ -28,6 +28,7 @@ setup(name='cirb.organizations',
           # -*- Extra requirements: -*-
           'z3c.saconfig',
           'plone.app.z3cform',
+          'collective.z3cform.wizard',
       ],
       entry_points="""
       # -*- Entry points: -*-

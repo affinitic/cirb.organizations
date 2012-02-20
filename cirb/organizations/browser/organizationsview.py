@@ -5,7 +5,8 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 
 from z3c.saconfig import Session
 from z3c.form import form, field, button
-from plone.app.z3cform.layout import FormWrapper
+from plone.app.z3cform.layout import wrap_form
+from collective.z3cform.wizard import wizard
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
@@ -14,42 +15,68 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile as FiveV
 from cirb.organizations import organizationsMessageFactory as _
 from cirb.organizations.content.organization import Organization
 
+from zope.schema.vocabulary import SimpleVocabulary
 
 class IOrganizations(Interface):
     """
     Organizations view interface
     """
     name = schema.TextLine(title=_(u"OrganizationName"))
-    website = schema.TextLine(title=_(u"website"))    
+    status = schema.TextLine(title=_(u"Status")) 
+    # TODO 
+    logo = schema.Bytes(title=_(u"Logo"), required=False)
+    picture = schema.Bytes(title=_(u"Picture"), required=False)
+
+    website = schema.TextLine(title=_(u"Website"))    
+    status = schema.TextLine(title=_(u"Language")) 
+    # auto generate field :
+    x = schema.TextLine()
+    y = schema.TextLine()
+
+class IAddress(Interface):
+    street = schema.TextLine(title=_(u"Street"))
+    num = schema.TextLine(title=_(u"Number"))
+    post_code = schema.TextLine(title=_(u"Post Code"))
+    municipality = schema.TextLine(title=_(u"Municipality"))
+
+class ICategory(Interface):
+    welcom = schema.Bool()
+
+class IInCharge(Interface):
+    title = schema.TextLine(title=_(u"title"))
+
+class IContact(Interface):
+    phone = schema.TextLine(title=_(u"phone"))
 
 
-class OrganizationsForm(form.Form):
+class OrganizationsForm(wizard.Step):
+    prefix = "orga"
     fields = field.Fields(IOrganizations)
-    ignoreContext = True # don't use context to get widget data
 
-    @button.buttonAndHandler(_(u'Search organization'))
-    def handleApply(self, action):
-        data, errors = self.extractData()
+    def load(self, context):
+        data = self.getContent()
         name = data.get('name') # ... or do stuff
-        self.test = Session.query(Organization).filter(Organization.name.like("%{0}%".format(name))).all()
-        print self.test
-        self.status = "Thank you very much!"
+        print name
+        #self.test = Session.query(Organization).filter(Organization.name.like("%{0}%".format(name))).all()
+        #self.status = "Thank you very much!"
 
-    @button.buttonAndHandler(u"Cancel")
-    def handleCancel(self, action):
-        """User cancelled. Redirect back to the front page."""
+    def apply(self, context):
+        data = self.getContent()
+        print 'Name from orga: {0}'.format(data.get('name'))
 
+class AddressForm(wizard.Step):
+    prefix = "addr"
+    field = field.Fields(IAddress)
 
-class OrganizationFormWrapper(FormWrapper):
-    form = OrganizationsForm
-    label = _(u"Add a organization")
+    def load(self, context):                                                                 
+        data = self.getContent()
+    
+    def apply(self, context):
+        data = self.getContent()
 
-    def get_all(self):
-        return Session.query(Organization).all()
+class Wizard(wizard.Wizard):
+    label = _(u"Organization")
+    steps = OrganizationsForm, AddressForm 
 
-    def get_search(self):
-        import pdb; pdb.set_trace()
-        return self.test
+WizardView = wrap_form(Wizard)
 
-    def status(self):
-        return self.status

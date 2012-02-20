@@ -5,10 +5,9 @@
     <!-- -*- extra stuff goes here -*- -->
 
    <browser:page
-      for="*"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="organizations_form"
-      class=".organizationsview.OrganizationFormWrapper"
-      template="templates/organizationsview.pt"
+      class=".organizationsview.WizardView"
       permission="zope.Public"
       />
 

@@ -34,7 +34,9 @@ def setupOrganizations(context):
             category=cat, 
             status="ASBL", 
             language="fr", 
-            website="http://www.cirb.irisnet.be")
+            website="http://www.cirb.irisnet.be",
+            x="5.253",
+            y="152.35")
 
     orga2 = Organization(name='orgaistation 2', 
             address=addr, 
@@ -43,7 +45,9 @@ def setupOrganizations(context):
             category=cat, 
             status="SPRL", 
             language="nl", 
-            website="http://www.cibg.irisnet.be")
+            website="http://www.cibg.irisnet.be",
+            x="5.253",
+            y="152.35")
 
     session.add(orga)
     session.add(orga2)
