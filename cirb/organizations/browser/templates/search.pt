@@ -1,0 +1,14 @@
+<metal:use use-macro="context/@@ploneform-macros/titlelessform" />
+
+<div tal:condition="view/get_results">
+    <ul>
+        <li tal:repeat="orga view/results">
+            <span tal:content="orga/name"></span>
+        </li>
+    </ul>
+</div>
+
+<!-- TODO check permission -->
+<div class="add-orga">
+    <a href="" tal:attributes="href string:${context/portal_url}/organizations_form">add orga</a>
+</div>

@@ -7,6 +7,9 @@ from z3c.saconfig.interfaces import IEngineFactory
 from z3c.saconfig import Session
 import transaction
 
+from zope.interface import alsoProvides
+from cirb.organizations.browser.organizationssearch import ISearch
+
 def setupOrganizations(context):
     logger = context.getLogger("setupOrganization")
     logger.info('start setup organization')
@@ -14,7 +17,35 @@ def setupOrganizations(context):
     portal_workflow = site.portal_workflow
     if context.readDataFile('cirb.organizations.txt') is None:
         return
-    
+
+    ORGAFR = 'organizationfr'
+    ORGANL = 'organizationnl'
+    if not site.hasObject(ORGAFR):
+        site.invokeFactory(type_name='Folder',
+                id=ORGAFR,
+                title="Organisme",
+                description="",
+                language="fr")
+        orgafr = getattr(site, ORGAFR)
+        #orgafr.setExcludeFromNav(True)
+        alsoProvides(orgafr, ISearch)
+        portal_workflow.doActionFor(orgafr,'publish')
+
+        site.invokeFactory(type_name='Folder',
+                id=ORGANL,
+                title="Organisme",
+                description="",
+                language="nl")
+        organl = getattr(site, ORGANL)
+        #organl.setExcludeFromNav(True)
+        alsoProvides(organl, ISearch)
+        portal_workflow.doActionFor(organl,'publish')
+        organl.addTranslationReference(orgafr)
+
+    add_test_organisations_in_db(logger)
+
+
+def add_test_organisations_in_db(logger):
     # TODO check if table exists
     engine = component.getUtility(IEngineFactory, name="gscetterbeek")()
     ORMBase.metadata.create_all(engine)

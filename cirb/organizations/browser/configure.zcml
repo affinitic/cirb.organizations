@@ -4,12 +4,25 @@
     i18n_domain="cirb.organizations">
     <!-- -*- extra stuff goes here -*- -->
 
+   <browser:resourceDirectory
+      name="cirb.organizations.scripts"
+      directory="scripts"
+      layer=".interfaces.IOrganizationsLayer"
+   />
+
    <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="organizations_form"
-      class=".organizationsview.WizardView"
+      class=".organizationsform.WizardView"
       permission="zope.Public"
       />
 
+    <browser:page
+      for="*"
+      name="organizations_search"
+      class=".organizationssearch.SearchView"
+      allowed_interface=".organizationssearch.ISearch"
+      permission="zope.Public"
+      />
 
 </configure>

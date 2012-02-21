@@ -2,6 +2,10 @@ from zope.interface import Interface
 from zope import schema
 
 from cirb.organizations import organizationsMessageFactory as _
+import zope.interface
+
+class IOrganizationsLayer(Interface):
+        """A layer specific for this add-on product."""
 
 class IOrganizations(Interface):
     """
