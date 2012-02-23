@@ -4,6 +4,7 @@ from zope.interface import implements, Interface
 from z3c.saconfig import Session
 from z3c.form import form, field, button
 from plone.app.z3cform.layout import wrap_form
+from plone.app.z3cform.layout import FormWrapper
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
@@ -18,7 +19,6 @@ class ISearch(IOrganizationsLayer):
     search = schema.TextLine(title=_(u'Search'), required=False)
 
 class Search(form.Form):
-    implements(ISearch)
     label = _(u'Organization search')
     ignoreContext = True
     fields = field.Fields(ISearch)
@@ -46,5 +46,10 @@ class Search(form.Form):
             return None    
         return self.results
 
-SearchView =  wrap_form(Search)
+#SearchView =  wrap_form(Search)
 
+class SearchView(FormWrapper):
+    form = Search
+from zope.component import provideAdapter
+from zope.publisher.interfaces.browser import IBrowserRequest
+provideAdapter(adapts=(ISearch, IBrowserRequest), provides=ISearch, factory=SearchView, name="organizations_search")

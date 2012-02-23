@@ -18,7 +18,8 @@ class IOrganizations(Interface):
     picture = schema.Bytes(title=_(u"Picture"), required=False)
 
     website = schema.TextLine(title=_(u"Website"), required=False)    
-    status = schema.TextLine(title=_(u"Language"), required=False) 
+    language = schema.TextLine(title=_(u"Language"), required=True) 
+    status = schema.TextLine(title=_(u"Status"), required=False) 
     # auto generate field, it could be hidden for user :
     x = schema.TextLine(title=u"x")
     y = schema.TextLine(title=u"y")

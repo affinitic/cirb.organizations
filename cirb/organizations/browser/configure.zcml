@@ -25,4 +25,8 @@
       permission="zope.Public"
       />
 
+    <browser:defaultView
+      for=".organizationssearch.ISearch"
+      name="organizations_search" />
+
 </configure>

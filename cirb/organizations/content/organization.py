@@ -5,6 +5,11 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.ext.declarative import AbstractConcreteBase
 
+class Association(ORMBase):
+    __tablename__ = 'association'
+    canonical_id = Column(Integer, ForeignKey('organization.organization_id'), primary_key=True)
+    translated_id = Column(Integer, ForeignKey('organization.organization_id'), primary_key=True)
+    association_type = Column(String(255), primary_key=True)
 
 class Organization(ORMBase):
     __tablename__ = 'organization'
@@ -30,6 +35,10 @@ class Organization(ORMBase):
     category = relationship('Category', uselist=False, backref='organization')
     person_incharge = relationship('InCharge', uselist=False, backref='organization')
     person_contact = relationship('Contact', uselist=False, backref='organization')
+    translated_organization = relationship(Association, 
+                                        primaryjoin=organization_id==Association.canonical_id,
+                                        secondaryjoin=and_(organization_id==Association.translated_id, Association.association_type=="lang"),
+                                        secondary="association")
 
 
 class Address(ORMBase):
