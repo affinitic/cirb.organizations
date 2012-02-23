@@ -1,18 +1,14 @@
 from zope import schema
-from zope.interface import implements, Interface
 
 from z3c.saconfig import Session
 from z3c.form import form, field, button
-from plone.app.z3cform.layout import wrap_form
 from plone.app.z3cform.layout import FormWrapper
 
-from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from cirb.organizations import organizationsMessageFactory as _
-from cirb.organizations.content.organization import *
-from cirb.organizations.browser.interfaces import *
+from cirb.organizations.content.organization import Organization
+from cirb.organizations.browser.interfaces import ISearch, IOrganizationsLayer
 
 
 class ISearch(IOrganizationsLayer):
