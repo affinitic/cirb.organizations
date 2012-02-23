@@ -29,9 +29,9 @@ class Search(form.Form):
         session = Session()
         search = data.get('search')
         if not search:
-            self.results = session.query(Organization).all()
+            self.results = session.query(Organization).filter(Organization.language==self.context.Language()).all()
         else:
-            self.results = session.query(Organization).filter(Organization.name.like('%{0}%'.format(search))).all()
+            self.results = session.query(Organization).filter(Organization.name.like('%{0}%'.format(search))).filter(Organization.language==self.context.Language()).all()
         if len(self.results) ==  0:
             self.status = _(u"No organization found.")
 
@@ -54,3 +54,4 @@ class SearchView(FormWrapper):
 from zope.component import provideAdapter
 from zope.publisher.interfaces.browser import IBrowserRequest
 provideAdapter(adapts=(ISearch, IBrowserRequest), provides=ISearch, factory=SearchView, name="organizations_search")
+
