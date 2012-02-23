@@ -17,6 +17,5 @@
   <!-- -*- extra stuff goes here -*- -->
 
   <include package=".browser" />
-  <include package="plone.app.z3cform" />  
-  
+  <include package="plone.app.z3cform" />
 </configure>
