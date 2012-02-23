@@ -11,22 +11,30 @@
    />
 
    <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      for=".interfaces.ISearch"
       name="organizations_form"
       class=".organizationsform.WizardView"
       permission="zope.Public"
       />
 
     <browser:page
-      for="*"
+      for=".interfaces.ISearch"
       name="organizations_search"
       class=".organizationssearch.SearchView"
-      allowed_interface=".organizationssearch.ISearch"
+      allowed_interface=".interfaces.ISearch"
       permission="zope.Public"
       />
 
     <browser:defaultView
-      for=".organizationssearch.ISearch"
+      for=".interfaces.ISearch"
       name="organizations_search" />
+
+    <browser:page
+      for="*"
+      name="organizations_manage"
+      class=".organizationsmanage.ManageView"
+      template="templates/manage.pt"
+      permission="zope.Public"
+      />
 
 </configure>
