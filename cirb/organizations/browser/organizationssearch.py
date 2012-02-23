@@ -11,9 +11,6 @@ from cirb.organizations.content.organization import Organization
 from cirb.organizations.browser.interfaces import ISearch, IOrganizationsLayer
 
 
-class ISearch(IOrganizationsLayer):
-    search = schema.TextLine(title=_(u'Search'), required=False)
-
 class Search(form.Form):
     label = _(u'Organization search')
     ignoreContext = True

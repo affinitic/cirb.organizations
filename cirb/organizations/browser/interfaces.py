@@ -7,7 +7,11 @@ import zope.interface
 from z3c.form import interfaces
 
 class IOrganizationsLayer(Interface):
-        """A layer specific for this add-on product."""
+    """A layer specific for this add-on product."""
+
+class ISearch(IOrganizationsLayer):
+    search = schema.TextLine(title=_(u'Search'), required=False)
+
 
 from zope.schema import vocabulary
 class Terms(vocabulary.SimpleVocabulary):
@@ -16,8 +20,8 @@ class Terms(vocabulary.SimpleVocabulary):
         return self.getTermByToken(token).value
 
 STATUS = Terms([
-    Terms.createTerm(1,'asbl', _(u'ASBL')),
-    Terms.createTerm(2,'autres', _(u'Autres')),
+    Terms.createTerm('asbl','asbl', _(u'ASBL')),
+    Terms.createTerm('other','autres', _(u'Autres')),
     ])
 
 LANG = Terms([

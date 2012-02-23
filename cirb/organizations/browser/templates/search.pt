@@ -10,5 +10,5 @@
 
 <!-- TODO check permission -->
 <div class="add-orga">
-    <a href="" tal:attributes="href string:${context/portal_url}/organizations_form">add orga</a>
+    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form">add orga</a>
 </div>

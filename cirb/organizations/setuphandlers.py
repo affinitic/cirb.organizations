@@ -8,7 +8,7 @@ from z3c.saconfig import Session
 import transaction
 
 from zope.interface import alsoProvides
-from cirb.organizations.browser.organizationssearch import ISearch
+from cirb.organizations.browser.interfaces import ISearch
 
 def setupOrganizations(context):
     logger = context.getLogger("setupOrganization")
