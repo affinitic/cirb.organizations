@@ -16,6 +16,7 @@ class Organization(ORMBase):
     # Sequence required by oracle
     organization_id = Column(Integer, Sequence('organization_seq'), primary_key=True, autoincrement=True)
     # TODO add automatique create_date
+    create_date = Column(DateTime, default=func.now())
     name = Column(String(255), nullable=False,)
     status = Column(String(255))
     address_id = Column(Integer(), ForeignKey('address.address_id'))

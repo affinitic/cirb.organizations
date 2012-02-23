@@ -130,6 +130,8 @@ class Wizard(wizard.Wizard):
         setattr(orga, 'person_contact', contact)
         setattr(orga, 'category', cat)
         sqlalsession.add(orga)
+        #sqlalsession.flush()
+
         transaction.commit()
 
 

@@ -50,6 +50,7 @@ class Search(form.Form):
 
 class SearchView(FormWrapper):
     form = Search
+
 from zope.component import provideAdapter
 from zope.publisher.interfaces.browser import IBrowserRequest
 provideAdapter(adapts=(ISearch, IBrowserRequest), provides=ISearch, factory=SearchView, name="organizations_search")

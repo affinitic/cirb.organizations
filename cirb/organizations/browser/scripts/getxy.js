@@ -23,6 +23,7 @@ $(document).ready(function(){
                     $('#orga-widgets-x').val(x);
                     $('#orga-widgets-y').val(y);
                 }
+            },
             error:function(){
                 $('#orga-widgets-x').val('error');
             },

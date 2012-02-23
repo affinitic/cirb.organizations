@@ -1,11 +1,29 @@
+# -*- coding: utf-8 -*-
 from zope.interface import Interface
 from zope import schema
 
 from cirb.organizations import organizationsMessageFactory as _
 import zope.interface
+from z3c.form import interfaces
 
 class IOrganizationsLayer(Interface):
         """A layer specific for this add-on product."""
+
+from zope.schema import vocabulary
+class Terms(vocabulary.SimpleVocabulary):
+    zope.interface.implements(interfaces.ITerms)
+    def getValue(self, token):
+        return self.getTermByToken(token).value
+
+STATUS = Terms([
+    Terms.createTerm(1,'asbl', _(u'ASBL')),
+    Terms.createTerm(2,'autres', _(u'Autres')),
+    ])
+
+LANG = Terms([
+    Terms.createTerm('fr','fr',_(u'Français')),
+    Terms.createTerm('nl','nl',_(u'Neerlandais')),
+    ])
 
 class IOrganizations(Interface):
     """
@@ -18,11 +36,11 @@ class IOrganizations(Interface):
     picture = schema.Bytes(title=_(u"Picture"), required=False)
 
     website = schema.TextLine(title=_(u"Website"), required=False)    
-    language = schema.TextLine(title=_(u"Language"), required=True) 
-    status = schema.TextLine(title=_(u"Status"), required=False) 
+    language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
+    status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
     # auto generate field, it could be hidden for user :
-    x = schema.TextLine(title=u"x")
-    y = schema.TextLine(title=u"y")
+    x = schema.TextLine(title=u"x", required=True)
+    y = schema.TextLine(title=u"y", required=True)
 
 class IAddress(Interface):
     street = schema.TextLine(title=_(u"Street"))
