@@ -1,9 +1,11 @@
-from sqlalchemy import *
+from sqlalchemy import (Column, Integer, ForeignKey, String, Sequence,
+        DateTime, func, LargeBinary, and_, Boolean)
+from sqlalchemy.orm import relationship, backref
+from sqlalchemy.ext.declarative import AbstractConcreteBase
 from zope.interface import implements
 from cirb.organizations import ORMBase
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy.ext.declarative import AbstractConcreteBase
+from cirb.organizations.interfaces import IOrganization
+
 
 class Association(ORMBase):
     __tablename__ = 'association'
@@ -11,8 +13,10 @@ class Association(ORMBase):
     translated_id = Column(Integer, ForeignKey('organization.organization_id'), primary_key=True)
     association_type = Column(String(255), primary_key=True)
 
+
 class Organization(ORMBase):
     __tablename__ = 'organization'
+    implements(IOrganization)
     # Sequence required by oracle
     organization_id = Column(Integer, Sequence('organization_seq'), primary_key=True, autoincrement=True)
     # TODO add automatique create_date
@@ -31,16 +35,16 @@ class Organization(ORMBase):
     language = Column(String(2))
     #used to geolocalisation
     x = Column(String(255))
-    y = Column(String(255)) 
+    y = Column(String(255))
 
     address = relationship('Address', backref=backref('organization', uselist=False))
     category = relationship('Category', uselist=False, backref='organization')
     person_incharge = relationship('InCharge', uselist=False, backref='organization')
     person_contact = relationship('Contact', uselist=False, backref='organization')
-    translated_organization = relationship(Association, 
-            primaryjoin=organization_id==Association.canonical_id,
-            secondaryjoin=and_(organization_id==Association.translated_id, Association.association_type=="lang"),
-            secondary="association")
+    translated_organization = relationship(Association,
+                                        primaryjoin=organization_id == Association.canonical_id,
+                                        secondaryjoin=and_(organization_id == Association.translated_id, Association.association_type == "lang"),
+                                        secondary="association")
 
 
 class Address(ORMBase):
@@ -50,6 +54,7 @@ class Address(ORMBase):
     num = Column(String(10))
     post_code = Column(String(10))
     municipality = Column(String(255))
+
 
 class Category(ORMBase):
     __tablename__ = 'category'
@@ -86,21 +91,25 @@ class Category(ORMBase):
     other = Column(String(255))
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
 
+
 class Person(AbstractConcreteBase, ORMBase):
     title = Column(String(255))
     first_name = Column(String(255))
     second_name = Column(String(255))
     function = Column(String(255))
 
+
 class InCharge(Person):
     __tablename__ = 'incharge'
-    __mapper_args__ = {'polymorphic_identity':'incharge', 'concrete':True}
+    __mapper_args__ = {'polymorphic_identity': 'incharge', 'concrete': True}
     person_id = Column(Integer, primary_key=True)
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
 
+
 class Contact(Person):
     __tablename__ = 'contact'
-    __mapper_args__ = {'polymorphic_identity':'contact','concrete':True}
+    __mapper_args__ = {'polymorphic_identity': 'contact',
+                       'concrete': True}
     person_id = Column(Integer, primary_key=True)
     phone = Column(String(255))
     fax = Column(String(255))

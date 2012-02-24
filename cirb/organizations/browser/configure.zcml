@@ -11,7 +11,14 @@
    />
 
    <browser:page
-      for=".interfaces.ISearch"
+      for="*"
+      name="organizations_form"
+      class=".organizationsform.WizardView"
+      permission="zope.Public"
+      />
+
+   <browser:page
+      for="..interfaces.IOrganization"
       name="organizations_form"
       class=".organizationsform.WizardView"
       permission="zope.Public"
