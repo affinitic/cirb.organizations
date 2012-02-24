@@ -28,7 +28,8 @@ setup(name='cirb.organizations',
           'z3c.saconfig',
           'plone.app.z3cform',
           'collective.z3cform.wizard',
-          'collective.shuttle'
+          'collective.shuttle',
+          'five.grok'
       ],
       entry_points="""
       # -*- Entry points: -*-

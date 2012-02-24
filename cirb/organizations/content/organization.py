@@ -2,9 +2,9 @@ from sqlalchemy import (Column, Integer, ForeignKey, String, Sequence,
         DateTime, func, LargeBinary, and_, Boolean)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import AbstractConcreteBase
-from Acquisition import Implicit
-from OFS.Traversable import Traversable
+from zope.interface import implements
 from cirb.organizations import ORMBase
+from cirb.organizations.interfaces import IOrganization
 
 
 class Association(ORMBase):
@@ -14,8 +14,9 @@ class Association(ORMBase):
     association_type = Column(String(255), primary_key=True)
 
 
-class Organization(ORMBase, Traversable, Implicit):
+class Organization(ORMBase):
     __tablename__ = 'organization'
+    implements(IOrganization)
     # Sequence required by oracle
     organization_id = Column(Integer, Sequence('organization_seq'), primary_key=True, autoincrement=True)
     # TODO add automatique create_date
