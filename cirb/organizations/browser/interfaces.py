@@ -21,6 +21,8 @@ class Terms(vocabulary.SimpleVocabulary):
 
 STATUS = Terms([
     Terms.createTerm('asbl','asbl', _(u'ASBL')),
+    Terms.createTerm('sprl','sprl', _(u'SPRL')),
+    Terms.createTerm('pouvoirpublique','pouvoirpublique', _(u'Pouvoir Publique')),
     Terms.createTerm('other','autres', _(u'Autres')),
     ])
 
