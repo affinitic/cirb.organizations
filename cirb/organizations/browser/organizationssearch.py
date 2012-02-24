@@ -39,8 +39,13 @@ class Search(form.Form):
         return self.results
 
 
+from collective.z3cform.wizard.wizard import WIZARD_SESSION_KEY
 class SearchView(FormWrapper):
-    form = Search
+    form = Search    
+    #import pdb; pdb.set_trace()
+    def __call__(self, *args, **kw):
+        self.request.SESSION.clear()
+        return super(SearchView, self).__call__(*args, **kw)
 
 from zope.component import provideAdapter
 from zope.publisher.interfaces.browser import IBrowserRequest

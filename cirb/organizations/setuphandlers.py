@@ -1,5 +1,3 @@
-from sqlalchemy import types, schema
-from zope.interface import implements
 from cirb.organizations import ORMBase
 from cirb.organizations.content.organization import *
 from zope import component
@@ -69,12 +67,17 @@ def add_test_organisations_in_db(logger):
                 website="http://www.cirb.irisnet.be",
                 x="5.253",
                 y="152.35")
+        addr2 = Address(street='mystreet', num='007', post_code='1000', municipality='Bruxelles')
+        cat2 = Category(music=True, welcome=True, other="god")
+        incharge2 = InCharge(title="Sir", first_name="Ferguson", second_name="Alex")
+        contact_addr2 = Address(street='contact street', num='7', post_code='1001', municipality='Brux')
+        contact2 = Contact(title="double zero", first_name="Bond", second_name="James", phone="007/11.11.11", fax="00", email="jb@mi6.uk", address=contact_addr2)
 
         orga2 = Organization(name='orgaistation 2', 
-                address=addr, 
-                person_incharge=incharge,
-                person_contact=contact, 
-                category=cat, 
+                address=addr2, 
+                person_incharge=incharge2,
+                person_contact=contact2, 
+                category=cat2, 
                 status="SPRL", 
                 language="nl", 
                 website="http://www.cibg.irisnet.be",

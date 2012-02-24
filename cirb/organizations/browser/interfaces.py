@@ -35,8 +35,7 @@ class IOrganizations(Interface):
     """
     Organizations view interface
     """
-    name = schema.TextLine(title=_(u"OrganizationName"))
-    status = schema.TextLine(title=_(u"Status")) 
+    name = schema.TextLine(title=_(u"Organization name"))
     # TODO 
     logo = schema.Bytes(title=_(u"Logo"), required=False)
     picture = schema.Bytes(title=_(u"Picture"), required=False)
@@ -44,6 +43,7 @@ class IOrganizations(Interface):
     website = schema.TextLine(title=_(u"Website"), required=False)    
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
     status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
+    status_other = schema.TextLine(title=_(u"Other status"), required=False) 
     # auto generate field, it could be hidden for user :
     x = schema.TextLine(title=u"x", required=True)
     y = schema.TextLine(title=u"y", required=True)

@@ -1,6 +1,6 @@
 from Products.Five import BrowserView
 from z3c.saconfig import Session
-from cirb.organizations.content.organization import *
+from cirb.organizations.content.organization import Organization
 
 class ManageView(BrowserView):
     

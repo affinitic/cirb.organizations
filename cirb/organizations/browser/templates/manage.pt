@@ -5,9 +5,24 @@ i18n:domain="cirb.organizations">
 <body>
 
 <div metal:fill-slot="main">
-    <ul>
-        <li tal:repeat="orga view/manage"><a href="" tal:attributes="href string:${context/absolute_url}/${orga/organization_id}"><tal:block tal:content="orga/name">name</tal:block></a> </li>
-    </ul>
+    <table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Trans</th>
+        </tr>
+        <tr tal:repeat="orga view/manage">
+            <td>
+                <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form?edit=${orga/organization_id}">
+                    <span><tal:block tal:content="orga/name">name</tal:block></span>
+                </a>
+            </td>
+            <td>
+                <span><tal:block tal:content="python:orga.translated_organization" /> </span>
+            </td>
+        </tr>
+    </tbody>
+    <table>
 </div>
 </body>
 
