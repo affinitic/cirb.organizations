@@ -19,6 +19,7 @@ class Organization(ORMBase):
     create_date = Column(DateTime, default=func.now())
     name = Column(String(255), nullable=False,)
     status = Column(String(255))
+    status_other = Column(String(255))
     address_id = Column(Integer(), ForeignKey('address.address_id'))
     #category_id = Column(Integer(), ForeignKey('category.category_id'), nullable=False,)
     #person_incharge_id = Column(Integer(), ForeignKey('incharge.person_id'), nullable=False)
@@ -37,9 +38,9 @@ class Organization(ORMBase):
     person_incharge = relationship('InCharge', uselist=False, backref='organization')
     person_contact = relationship('Contact', uselist=False, backref='organization')
     translated_organization = relationship(Association, 
-                                        primaryjoin=organization_id==Association.canonical_id,
-                                        secondaryjoin=and_(organization_id==Association.translated_id, Association.association_type=="lang"),
-                                        secondary="association")
+            primaryjoin=organization_id==Association.canonical_id,
+            secondaryjoin=and_(organization_id==Association.translated_id, Association.association_type=="lang"),
+            secondary="association")
 
 
 class Address(ORMBase):
