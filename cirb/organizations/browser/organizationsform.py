@@ -40,8 +40,11 @@ class OrganizationsStep(wizard.GroupStep):
 
     def load(self, context):
         data = self.getContent()
-        name = data.get('name') # ... or do stuff
-        print name
+        edit = self.request.form.get('edit')
+        if edit:
+            orga = Session.query(Organization).get(edit)
+            data['name'] = orga.name
+
         #self.test = Session.query(Organization).filter(Organization.name.like("%{0}%".format(name))).all()
         #self.status = "Thank you very much!"
 
