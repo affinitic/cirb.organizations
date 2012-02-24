@@ -9,6 +9,7 @@
 </div>
 
 <!-- TODO check permission -->
-<div class="add-orga">
-    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form">add orga</a>
+<div class="manage-orga">
+    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form">add orga</a><br />
+    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_manage">manage orga</a>
 </div>
