@@ -28,6 +28,8 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <!-- -*- extra stuff goes here -*- -->
+  
+  <i18n:registerTranslations directory="locales" />
 
   <include package=".browser" />
   <include package="plone.app.z3cform" />

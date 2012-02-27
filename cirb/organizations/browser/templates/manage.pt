@@ -18,7 +18,15 @@ i18n:domain="cirb.organizations">
                 </a>
             </td>
             <td>
-                <span><tal:block tal:content="python:orga.translated_organization" /> </span>
+                <span tal:condition="python:len(orga.translated_organization)==0">
+                   <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form?trans=${orga/organization_id}"> trans </a>
+                </span>
+
+                    <tal:block tal:repeat="trans orga/translated_organization">
+                        <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form?edit=${trans/translated_id}&set_language=nl">
+                            edit trans
+                       </a>
+                    </tal:block> 
             </td>
         </tr>
     </tbody>

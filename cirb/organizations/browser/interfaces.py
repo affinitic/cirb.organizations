@@ -44,6 +44,8 @@ class IOrganizations(Interface):
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
     status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
     status_other = schema.TextLine(title=_(u"Other status"), required=False) 
+    objectif = schema.TextLine(title=_(u"Objectif"), required=False) 
+    comments = schema.TextLine(title=_(u"Comments"), required=False) 
     # auto generate field, it could be hidden for user :
     x = schema.TextLine(title=u"x", required=True)
     y = schema.TextLine(title=u"y", required=True)

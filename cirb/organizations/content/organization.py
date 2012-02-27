@@ -19,20 +19,19 @@ class Organization(ORMBase):
     implements(IOrganization)
     # Sequence required by oracle
     organization_id = Column(Integer, Sequence('organization_seq'), primary_key=True, autoincrement=True)
-    # TODO add automatique create_date
     create_date = Column(DateTime, default=func.now())
     name = Column(String(255), nullable=False,)
     status = Column(String(255))
     status_other = Column(String(255))
     address_id = Column(Integer(), ForeignKey('address.address_id'))
-    #category_id = Column(Integer(), ForeignKey('category.category_id'), nullable=False,)
-    #person_incharge_id = Column(Integer(), ForeignKey('incharge.person_id'), nullable=False)
-    #person_contact_id = Column(Integer(), ForeignKey('contact.person_id'), nullable=False)
     # TODO test blob file :
     logo = Column(LargeBinary)
     picture = Column(LargeBinary)
     website = Column(String(255))
     language = Column(String(2))
+    objectif = Column(String(255))
+    comments = Column(String(255))
+
     #used to geolocalisation
     x = Column(String(255))
     y = Column(String(255))
