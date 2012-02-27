@@ -7,7 +7,7 @@ from collective.z3cform.wizard import wizard
 from plone.z3cform.fieldsets import group
 
 from cirb.organizations import organizationsMessageFactory as _
-from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge
+from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, Association
 from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations
 
 
@@ -15,13 +15,6 @@ class AddressGroup(group.Group):
     prefix = "addr"
     label = _(u"Address")
     fields = field.Fields(IAddress)
-
-    def load(self, context): 
-        data = self.getContent()
-    
-    def apply(self, context):
-        data = self.getContent()
-
 
 class OrganizationsStep(wizard.GroupStep):
     prefix = "orga"
@@ -38,8 +31,11 @@ class OrganizationsStep(wizard.GroupStep):
             data = init_form(orga)
             self.request.SESSION[self.wizard.sessionKey] = data
             self.request.SESSION[self.wizard.sessionKey]['edit'] = edit
-        #self.test = Session.query(Organization).filter(Organization.name.like("%{0}%".format(name))).all()
-        #self.status = "Thank you very much!"
+        trans = self.wizard.session.get('trans')
+        if trans:
+            data = init_trans_form(trans)
+            self.request.SESSION[self.wizard.sessionKey] = data
+            self.request.SESSION[self.wizard.sessionKey]['trans'] = trans
 
 
 class CategoryStep(wizard.Step):
@@ -47,23 +43,11 @@ class CategoryStep(wizard.Step):
     label = _(u"Category")
     fields = field.Fields(ICategory)
     
-    def load(self, context): 
-        data = self.getContent()
-
-    def apply(self, context):
-        data = self.getContent()
-
 
 class InChargeStep(wizard.Step):
     prefix = "incharge"
     label = _(u"Person in charge")
     fields = field.Fields(IInCharge)
-
-    def load(self, context):
-        data = self.getContent()
-
-    def apply(self, context):
-        data = self.getContent()
 
 
 class ContactStep(wizard.GroupStep):
@@ -71,12 +55,6 @@ class ContactStep(wizard.GroupStep):
     label = _(u"Person for contact")
     fields = field.Fields(IContact)
     groups = [AddressGroup]
-
-    def load(self, context):                                              
-        data = self.getContent()
-
-    def apply(self, context):
-        data = self.getContent()
 
 
 class Wizard(wizard.Wizard):
@@ -96,7 +74,8 @@ class Wizard(wizard.Wizard):
         catstep = data.get('cat')
         inchargestep = data.get('incharge')
         contactstep = data.get('contact')
-        edition = self.session.get('edit') 
+        edition = self.session.get('edit')
+        trans = self.session.get('trans')
         if edition:
             orga = sqlalsession.query(Organization).get(edition)
             cat = orga.category
@@ -141,6 +120,14 @@ class Wizard(wizard.Wizard):
             sqlalsession.flush()
         else:
             sqlalsession.add(orga)
+        if trans:
+            sqlalsession.flush()
+            print 'Translated : {0}, Trans : {1}'.format(trans, orga.organization_id)
+            assoc = Association(association_type = "lang")
+            assoc.translated_id = orga.organization_id
+            assoc.canonical_id = trans
+            sqlalsession.add(assoc)
+           
         transaction.commit()
         self.request.SESSION.clear()
 
@@ -151,6 +138,11 @@ def check_edit(session, form):
         session['edit'] = form.get('edit')
     else:
         session['edit'] = 0
+    if form.get('trans'):
+        session['trans'] = form.get('trans')
+    else:
+        session['trans'] = 0
+
     return session
 
 def init_form(orga):
@@ -189,3 +181,13 @@ def get_fields_name(steps):
         for key in step.fields.keys():
             fields_name.append(key)
     return fields_name
+
+def init_trans_form(trans):
+    languages = ['fr','nl']
+    data = {}
+    orga = Session.query(Organization).get(trans)
+    if orga.language in languages:
+        languages.pop(languages.index(orga.language))
+    if len(languages) == 1:
+        data['orga'] = {"language":languages[0]}
+    return data

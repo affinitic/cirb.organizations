@@ -11,7 +11,7 @@ class Association(ORMBase):
     __tablename__ = 'association'
     canonical_id = Column(Integer, ForeignKey('organization.organization_id'), primary_key=True)
     translated_id = Column(Integer, ForeignKey('organization.organization_id'), primary_key=True)
-    association_type = Column(String(255), primary_key=True)
+    association_type = Column(String(255), Sequence('association_seq'), primary_key=True)
 
 
 class Organization(ORMBase):
@@ -101,7 +101,7 @@ class Person(AbstractConcreteBase, ORMBase):
 class InCharge(Person):
     __tablename__ = 'incharge'
     __mapper_args__ = {'polymorphic_identity': 'incharge', 'concrete': True}
-    person_id = Column(Integer, primary_key=True)
+    person_id = Column(Integer, Sequence('incharge_seq'), primary_key=True)
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
 
 
@@ -109,7 +109,7 @@ class Contact(Person):
     __tablename__ = 'contact'
     __mapper_args__ = {'polymorphic_identity': 'contact',
                        'concrete': True}
-    person_id = Column(Integer, primary_key=True)
+    person_id = Column(Integer, Sequence('contact_seq'), primary_key=True)
     phone = Column(String(255))
     fax = Column(String(255))
     email = Column(String(255))
