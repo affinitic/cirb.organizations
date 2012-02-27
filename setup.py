@@ -29,7 +29,8 @@ setup(name='cirb.organizations',
           'plone.app.z3cform',
           'collective.z3cform.wizard',
           'collective.shuttle',
-          'five.grok'
+          'five.grok',
+          'cx_Oracle',
       ],
       entry_points="""
       # -*- Entry points: -*-
