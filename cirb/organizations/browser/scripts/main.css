@@ -1,0 +1,18 @@
+.html{
+
+}
+.wizard-steps{
+    display:inline;
+}
+
+li.wizard-step-link {
+    display:block;
+    float:left;
+    width:200px;
+}
+li.wizard-step-link.selected {
+    background-color: #eee;
+}
+.form{
+    clear:both;
+}
