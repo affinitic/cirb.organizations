@@ -1,6 +1,8 @@
-var urlService = "http://service.gis.irisnetlab.be/urbis/";
+var urlService = $('div.data').data('gis-service');
 
 $(document).ready(function(){
+    readonlyHidden('orga-widgets-x');
+    readonlyHidden('orga-widgets-y');
     $('#addr-widgets-municipality').focus(function(){
         getaddresses($('#addr-widgets-street').val()+' '+$('#addr-widgets-num').val()+' '+$('#addr-widgets-post_code').val());
     });
@@ -19,6 +21,8 @@ $(document).ready(function(){
                     if(!(isNaN(x) || isNaN(y))) {
                         $('#orga-widgets-x').val(x);
                         $('#orga-widgets-y').val(y);
+                        visible('orga-widgets-x');
+                        visible('orga-widgets-y');
                     }
                 },
                 error:function(){
@@ -29,3 +33,11 @@ $(document).ready(function(){
 
     };
 });
+
+function readonlyHidden(inputid) {
+    $('#'+inputid+'').attr('readonly', 'readonly');
+    $('#formfield-'+inputid+'').attr('style', 'visibility:hidden');
+}
+function visible(inputid){
+    $('#formfield-'+inputid+'').attr('style', 'visibility:visible');
+}

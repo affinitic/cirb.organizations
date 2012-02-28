@@ -2,14 +2,24 @@
 lang="en"
 metal:use-macro="here/main_template/macros/master"
 i18n:domain="cirb.organizations">
+
+<tal:js metal:fill-slot="javascript_head_slot">    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"> </script>
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/++resource++cirb.organizations.scripts/confirm.js"></script>
+</tal:js>
+<tal:css metal:fill-slot="style_slot">
+    <link rel="stylesheet" href=" http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" type="text/css"/>
+</tal:css>
+
 <body>
 
 <div metal:fill-slot="main">
-    <table>
+    <table class="manage_orga">
     <tbody>
         <tr>
-            <th>Name</th>
-            <th>Trans</th>
+            <th i18n:translate="Name">Name</th>
+            <th i18n:translate="Trans">Trans</th>
+            <th i18n:translate="Del">Del</th>
         </tr>
         <tr tal:repeat="orga view/manage">
             <td>
@@ -18,19 +28,25 @@ i18n:domain="cirb.organizations">
                 </a>
             </td>
             <td>
-                <span tal:condition="python:len(orga.translated_organization)==0">
-                   <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form?trans=${orga/organization_id}"> trans </a>
+                <span tal:condition="not: python:orga.get_translation()">
+                   <a href="" tal:attributes="href string:${view/translate_url}&trans=${orga/organization_id}"> trans </a>
                 </span>
 
-                    <tal:block tal:repeat="trans orga/translated_organization">
-                        <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form?edit=${trans/translated_id}&set_language=nl">
+                    <!--tal:block tal:define="trans python:orga.get_translation()">
+                        <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form?edit=${trans/organization_id}&set_language=nl">
                             edit trans
-                       </a>
-                    </tal:block> 
+                        </a>
+                    </tal:block--> 
+            </td>
+            <td>
+                <a href="" tal:attributes="href string:${context/absolute_url}/organizations_delete?del=${orga/organization_id}" class="confirmDel">del</a>
             </td>
         </tr>
     </tbody>
     <table>
+    <div id="dialog" i18n:attributes="title confirmation-required">
+        <tal:block i18n:translate="do-you-want-to-delete-this-organization"> Are you sure about this? </tal:block>
+    </div>
 </div>
 </body>
 

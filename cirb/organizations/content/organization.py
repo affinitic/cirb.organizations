@@ -2,6 +2,8 @@ from sqlalchemy import (Column, Integer, ForeignKey, String, Sequence,
         DateTime, func, LargeBinary, and_, Boolean)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import AbstractConcreteBase
+from sqlalchemy.sql import or_
+from z3c.saconfig import Session
 from zope.interface import implements
 from cirb.organizations import ORMBase
 from cirb.organizations.interfaces import IOrganization
@@ -44,6 +46,17 @@ class Organization(ORMBase):
                                         primaryjoin=organization_id == Association.canonical_id,
                                         secondaryjoin=and_(organization_id == Association.translated_id, Association.association_type == "lang"),
                                         secondary="association")
+    def get_translation(self):
+        session = Session()
+        trans_orga = session.query(Association).filter(Association.canonical_id==self.organization_id).scalar()
+        attr = "translated_id"
+        if not trans_orga:
+            trans_orga = session.query(Association).filter(Association.translated_id==self.organization_id).scalar()
+            attr = "canonical_id"
+        if not trans_orga:
+            return False
+        
+        return session.query(Organization).get(getattr(trans_orga, attr))
 
 
 class Address(ORMBase):

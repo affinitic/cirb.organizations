@@ -10,6 +10,9 @@ from cirb.organizations import organizationsMessageFactory as _
 from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, Association
 from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations
 
+from zope.app.pagetemplate import viewpagetemplatefile
+
+import os
 
 class AddressGroup(group.Group):
     prefix = "addr"
@@ -21,14 +24,15 @@ class OrganizationsStep(wizard.GroupStep):
     label = _(u"Organization Information")
     fields = field.Fields(IOrganizations)
     groups = [AddressGroup]
+    index = viewpagetemplatefile.ViewPageTemplateFile('templates/orgastep.pt')
 
     def load(self, context):
         data = self.getContent()
-        self.wizard.session = check_edit(self.wizard.session, self.request.form)
+        self.wizard.session = check_edit_trans(self.wizard.session, self.request.form)
         edit = self.wizard.session.get('edit')
         if edit:
             orga = Session.query(Organization).get(edit)
-            data = init_form(orga)
+            data = init_edit_form(orga)
             self.request.SESSION[self.wizard.sessionKey] = data
             self.request.SESSION[self.wizard.sessionKey]['edit'] = edit
         trans = self.wizard.session.get('trans')
@@ -36,6 +40,12 @@ class OrganizationsStep(wizard.GroupStep):
             data = init_trans_form(trans)
             self.request.SESSION[self.wizard.sessionKey] = data
             self.request.SESSION[self.wizard.sessionKey]['trans'] = trans
+
+    def get_gis_service(self):
+        gis_url = os.environ.get('GIS_SERVICE')
+        if not gis_url:
+            gis_url = 'http://service.gis.irisnetlab.be/urbis/'
+        return gis_url
 
 
 class CategoryStep(wizard.Step):
@@ -133,7 +143,7 @@ class Wizard(wizard.Wizard):
 
 WizardView = wrap_form(Wizard)
 
-def check_edit(session, form):
+def check_edit_trans(session, form):
     if form.get('edit'):
         session['edit'] = form.get('edit')
     else:
@@ -145,7 +155,7 @@ def check_edit(session, form):
 
     return session
 
-def init_form(orga):
+def init_edit_form(orga):
     orga_fields = get_fields_name([OrganizationsStep, AddressGroup])
     cat_fields = get_fields_name([CategoryStep])
     incharge_fields = get_fields_name([InChargeStep])

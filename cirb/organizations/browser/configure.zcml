@@ -8,7 +8,7 @@
       name="cirb.organizations.scripts"
       directory="scripts"
       layer=".interfaces.IOrganizationsLayer"
-   />
+      />
 
    <browser:page
       for="*"
@@ -41,6 +41,14 @@
       name="organizations_manage"
       class=".organizationsmanage.ManageView"
       template="templates/manage.pt"
+      permission="zope.Public"
+      />
+    
+     <browser:page
+      for="*"
+      name="organizations_delete"
+      class=".organizationsmanage.DeleteView"
+      attribute="delete"
       permission="zope.Public"
       />
 
