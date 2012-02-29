@@ -25,6 +25,6 @@
      tal:content="structure form/render">
 </div>
 
-<script type="text/javascript" tal:attributes="src string:${context/portal_url}/++resource++cirb.organizations.scripts/getxy.js"></script>
+<!--script type="text/javascript" tal:attributes="src string:${context/portal_url}/++resource++cirb.organizations.scripts/getxy.js"></script-->
 
 </html>

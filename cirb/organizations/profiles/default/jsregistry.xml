@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts">
 
-    <!--javascript
+    <javascript
         id="++resource++cirb.organizations.scripts/getxy.js"
         cacheable="False" compression="safe" cookable="False"
-        enabled="True" expression=""  inline="False" /-->
+        enabled="True" expression=""  inline="False" />
     
 </object>

@@ -2,62 +2,64 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="cirb.organizations">
-    <!-- -*- extra stuff goes here -*- -->
 
-   <browser:resourceDirectory
-      name="cirb.organizations.scripts"
-      directory="scripts"
-      layer=".interfaces.IOrganizationsLayer"
-      />
-
-   <browser:page
-      for="*"
-      name="organizations_form"
-      class=".organizationsform.WizardView"
-      permission="zope.Public"
-      />
-
-   <browser:page
-      for="..interfaces.IOrganization"
-      name="organizations_form"
-      class=".organizationsform.WizardView"
-      permission="zope.Public"
-      />
-
+    <browser:resourceDirectory
+        name="cirb.organizations.scripts"
+        directory="scripts"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+  
+    <!-- search orga -->
     <browser:page
-      for=".interfaces.ISearch"
-      name="organizations_search"
-      class=".organizationssearch.SearchView"
-      allowed_interface=".interfaces.ISearch"
-      permission="zope.Public"
-      />
-
+        for=".interfaces.ISearch"
+        name="organizations_search"
+        class=".organizationssearch.SearchView"
+        allowed_interface=".interfaces.ISearch"
+        permission="zope.Public"
+        />
+  
     <browser:defaultView
-      for=".interfaces.ISearch"
-      name="organizations_search" />
+        for=".interfaces.ISearch"
+        name="organizations_search" />
+
+    <!-- CRUD -->
+    <browser:page
+        for="*"
+        name="organizations_form"
+        class=".organizationsform.WizardView"
+        permission="cmf.ModifyPortalContent"
+        />
 
     <browser:page
-      for="*"
-      name="organizations_manage"
-      class=".organizationsmanage.ManageView"
-      template="templates/manage.pt"
-      permission="zope.Public"
-      />
-    
-     <browser:page
-      for="*"
-      name="organizations_delete"
-      class=".organizationsmanage.DeleteView"
-      attribute="delete"
-      permission="zope.Public"
-      />
+        for="..interfaces.IOrganization"
+        name="organizations_form"
+        class=".organizationsform.WizardView"
+        permission="cmf.ModifyPortalContent"
+        />
 
-     <!-- Used to gis -->
-     <browser:page
+    <browser:page
+        for="*"
+        name="organizations_manage"
+        class=".organizationsmanage.ManageView"
+        template="templates/manage.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+    
+    <browser:page
+        for="*"
+        name="organizations_delete"
+        class=".organizationsmanage.DeleteView"
+        attribute="delete"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <!-- Used to gis -->
+    <browser:page
         for="*"
         name="get_json"
         class=".organizationssearch.SearchView"
         attribute="get_json"
         permission="zope.Public"
         />
+
 </configure>

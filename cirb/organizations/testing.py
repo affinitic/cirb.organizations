@@ -5,7 +5,7 @@ import cirb.organizations
 
 ORGA = PloneWithPackageLayer(
         zcml_filename="configure.zcml",
-        zcml_package=cirb.ORGA,
+        zcml_package=cirb.organizations,
         additional_z2_products=(),
         gs_profile_id='cirb.organizations:default',
         name="ORGA")

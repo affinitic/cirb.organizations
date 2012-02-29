@@ -54,6 +54,7 @@ def setupOrganizations(context):
         Members.reindexObject()
 
     add_test_organisations_in_db(logger)
+    logger.info('end setup organization')
 
 
 def add_test_organisations_in_db(logger):
@@ -108,4 +109,3 @@ def add_test_organisations_in_db(logger):
         transaction.commit()
     else:
         logger.info('There are already some organizations in DB.')
-    logger.info('end setup organization')

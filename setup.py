@@ -32,6 +32,11 @@ setup(name='cirb.organizations',
           'five.grok',
           'cx_Oracle',
       ],
+      extras_require = {
+          'test': [
+              'plone.app.testing',
+          ]
+      },
       entry_points="""
       # -*- Entry points: -*-
 

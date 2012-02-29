@@ -162,6 +162,7 @@ def init_edit_form(orga):
     for key in orga_fields:
         if key in orga.__dict__.keys():
             tmp[key] = getattr(orga, key)
+            print '{0} : {1}'.format(key,getattr(orga, key))
         if key in orga.address.__dict__.keys():
             tmp[key] = getattr(orga.address, key)
     data['orga'] = tmp 
