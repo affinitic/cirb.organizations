@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 from zope.interface import Interface
 from zope import schema
 
@@ -35,26 +36,26 @@ class IOrganizations(Interface):
     """
     Organizations view interface
     """
-    name = schema.TextLine(title=_(u"Organization name"))
+    name = schema.TextLine(title=_(u"Organization name"), max_length=255)
     # TODO 
     logo = schema.Bytes(title=_(u"Logo"), required=False)
     picture = schema.Bytes(title=_(u"Picture"), required=False)
 
-    website = schema.TextLine(title=_(u"Website"), required=False)    
+    website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
     status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
-    status_other = schema.TextLine(title=_(u"Other status"), required=False) 
-    objectif = schema.TextLine(title=_(u"Objectif"), required=False) 
-    comments = schema.TextLine(title=_(u"Comments"), required=False) 
+    status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 
+    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=255) 
+    comments = schema.Text(title=_(u"Comments"), required=False, max_length=255) 
     # auto generate field, it could be hidden for user :
     x = schema.TextLine(title=u"x", required=True)
     y = schema.TextLine(title=u"y", required=True)
 
 class IAddress(Interface):
-    street = schema.TextLine(title=_(u"Street"))
-    num = schema.TextLine(title=_(u"Number"))
-    post_code = schema.TextLine(title=_(u"Post Code"))
-    municipality = schema.TextLine(title=_(u"Municipality"))
+    street = schema.TextLine(title=_(u"Street"), max_length=255)
+    num = schema.TextLine(title=_(u"Number"), max_length=10)
+    post_code = schema.TextLine(title=_(u"Post Code"), max_length=10)
+    municipality = schema.TextLine(title=_(u"Municipality"), max_length=255)
 
 class ICategory(Interface):
     welcome = schema.Bool(title=_(u"welcome"))
@@ -90,19 +91,21 @@ class ICategory(Interface):
 
 
 class IInCharge(Interface):
-    title = schema.TextLine(title=_(u"title"), required=False)
-    first_name = schema.TextLine(title=_(u"first_name"))
-    second_name = schema.TextLine(title=_(u"second_name"))
-    function = schema.TextLine(title=_(u"function"), required=False)
+    title = schema.TextLine(title=_(u"title"), required=False, max_length=255)
+    first_name = schema.TextLine(title=_(u"first_name"), max_length=255)
+    second_name = schema.TextLine(title=_(u"second_name"), max_length=255)
+    function = schema.TextLine(title=_(u"function"), required=False, max_length=255)
 
 class IContact(Interface):
-    title = schema.TextLine(title=_(u"title"), required=False)
-    first_name = schema.TextLine(title=_(u"first_name"))
-    second_name = schema.TextLine(title=_(u"second_name"))
+    title = schema.TextLine(title=_(u"title"), required=False, max_length=255)
+    first_name = schema.TextLine(title=_(u"first_name"), max_length=255)
+    second_name = schema.TextLine(title=_(u"second_name"), max_length=255)
     function = schema.TextLine(title=_(u"function"), required=False)
-    phone = schema.TextLine(title=_(u"phone"))
-    fax = schema.TextLine(title=_(u"fax"))
-    email = schema.TextLine(title=_(u"email"))
+    phone = schema.TextLine(title=_(u"phone"), max_length=255)
+    fax = schema.TextLine(title=_(u"fax"), max_length=255)
+    email = schema.TextLine(title=_(u"email"), 
+                        max_length=255, 
+                        constraint=re.compile("'^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE").match)
     # add address 
 
 

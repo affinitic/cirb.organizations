@@ -16,3 +16,7 @@ li.wizard-step-link.selected {
 .form{
     clear:both;
 }
+form#cat div{
+    width:300px;
+    float:left;
+}

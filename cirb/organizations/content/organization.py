@@ -2,7 +2,6 @@ from sqlalchemy import (Column, Integer, ForeignKey, String, Sequence,
         DateTime, func, LargeBinary, and_, Boolean)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import AbstractConcreteBase
-from sqlalchemy.sql import or_
 from z3c.saconfig import Session
 from zope.interface import implements
 from cirb.organizations import ORMBase

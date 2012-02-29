@@ -52,4 +52,12 @@
       permission="zope.Public"
       />
 
+     <!-- Used to gis -->
+     <browser:page
+        for="*"
+        name="get_json"
+        class=".organizationssearch.SearchView"
+        attribute="get_json"
+        permission="zope.Public"
+        />
 </configure>

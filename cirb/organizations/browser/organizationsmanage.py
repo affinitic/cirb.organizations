@@ -46,3 +46,4 @@ class DeleteView(BrowserView):
         # TODO add status message
         return self.request.response.redirect(self.context.absolute_url())
 
+
