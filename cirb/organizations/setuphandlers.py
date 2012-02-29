@@ -40,6 +40,19 @@ def setupOrganizations(context):
         portal_workflow.doActionFor(organl,'publish')
         organl.addTranslationReference(orgafr)
 
+
+        news = site.news
+        news.setExcludeFromNav(True)
+        news.reindexObject()
+
+        events = site.events
+        events.setExcludeFromNav(True)
+        events.reindexObject()
+
+        Members = site.Members
+        Members.setExcludeFromNav(True)
+        Members.reindexObject()
+
     add_test_organisations_in_db(logger)
 
 
@@ -51,38 +64,38 @@ def add_test_organisations_in_db(logger):
     session = Session()
     if len(session.query(Organization).all()) < 1:
 
-        addr = Address(street='mystreet', num='007', post_code='1000', municipality='Bruxelles')
+        addr = Address(street='avenue des arts', num='21', post_code='1000', municipality='Bruxelles')
         cat = Category(music=True, welcome=True, other="god")
-        incharge = InCharge(title="Sir", first_name="Ferguson", second_name="Alex")
+        incharge = InCharge(title="Sir", first_name="Benoit", second_name="Suttor")
         contact_addr = Address(street='contact street', num='7', post_code='1001', municipality='Brux')
-        contact = Contact(title="double zero", first_name="Bond", second_name="James", phone="007/11.11.11", fax="00", email="jb@mi6.uk", address=contact_addr)
+        contact = Contact(title="Monsieur", first_name="James", second_name="Bond", phone="007/11.11.11", fax="00", email="jb@mi6.uk", address=contact_addr)
         # TODO add logo
-        orga = Organization(name='orgaTEST1', 
+        orga = Organization(name='CIRB', 
                 address=addr, 
                 person_incharge=incharge,
                 person_contact=contact, 
                 category=cat, 
-                status="ASBL", 
+                status="asbl", 
                 language="fr", 
                 website="http://www.cirb.irisnet.be",
-                x="5.253",
-                y="152.35")
-        addr2 = Address(street='mystreet', num='007', post_code='1000', municipality='Bruxelles')
+                x="150041",
+                y="170633")
+        addr2 = Address(street='kunststraat', num='21', post_code='1000', municipality='Brussel')
         cat2 = Category(music=True, welcome=True, other="god")
-        incharge2 = InCharge(title="Sir", first_name="Ferguson", second_name="Alex")
-        contact_addr2 = Address(street='contact street', num='7', post_code='1001', municipality='Brux')
+        incharge2 = InCharge(title="Sir", first_name="Benoit", second_name="Suttor")
+        contact_addr2 = Address(street='contact street', num='7', post_code='1000', municipality='Brux')
         contact2 = Contact(title="double zero", first_name="Bond", second_name="James", phone="007/11.11.11", fax="00", email="jb@mi6.uk", address=contact_addr2)
 
-        orga2 = Organization(name='orgaistation 2', 
+        orga2 = Organization(name='CIBG', 
                 address=addr2, 
                 person_incharge=incharge2,
                 person_contact=contact2, 
                 category=cat2, 
-                status="SPRL", 
+                status="asbl", 
                 language="nl", 
                 website="http://www.cibg.irisnet.be",
-                x="5.253",
-                y="152.35")
+                x="150041",
+                y="170633")
 
         session.add(orga)
         session.add(orga2)

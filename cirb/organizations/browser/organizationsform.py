@@ -71,10 +71,8 @@ class Wizard(wizard.Wizard):
     label = _(u"Organization")
     steps = OrganizationsStep, CategoryStep, InChargeStep, ContactStep
 
-    def initialize(self):
-        print self.onFirstStep
-        print self.session
-        super(Wizard, self).initialize()
+    #def initialize(self):
+    #    super(Wizard, self).initialize()
     
     def finish(self):
         data = self.session
@@ -132,7 +130,6 @@ class Wizard(wizard.Wizard):
             sqlalsession.add(orga)
         if trans:
             sqlalsession.flush()
-            print 'Translated : {0}, Trans : {1}'.format(trans, orga.organization_id)
             assoc = Association(association_type = "lang")
             assoc.translated_id = orga.organization_id
             assoc.canonical_id = trans

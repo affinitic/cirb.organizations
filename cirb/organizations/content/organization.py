@@ -30,8 +30,8 @@ class Organization(ORMBase):
     picture = Column(LargeBinary)
     website = Column(String(255))
     language = Column(String(2))
-    objectif = Column(String(255))
-    comments = Column(String(255))
+    objectif = Column(String(1024))
+    comments = Column(String(1024))
 
     #used to geolocalisation
     x = Column(String(255))

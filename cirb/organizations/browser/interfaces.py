@@ -45,8 +45,8 @@ class IOrganizations(Interface):
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
     status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
     status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 
-    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=255) 
-    comments = schema.Text(title=_(u"Comments"), required=False, max_length=255) 
+    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=1024) 
+    comments = schema.Text(title=_(u"Comments"), required=False, max_length=1024) 
     # auto generate field, it could be hidden for user :
     x = schema.TextLine(title=u"x", required=True)
     y = schema.TextLine(title=u"y", required=True)
@@ -105,7 +105,7 @@ class IContact(Interface):
     fax = schema.TextLine(title=_(u"fax"), max_length=255)
     email = schema.TextLine(title=_(u"email"), 
                         max_length=255, 
-                        constraint=re.compile("'^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE").match)
+                        constraint=re.compile('^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE).match)
     # add address 
 
 

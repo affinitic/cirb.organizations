@@ -36,8 +36,10 @@ $(document).ready(function(){
 
 function readonlyHidden(inputid) {
     $('#'+inputid+'').attr('readonly', 'readonly');
-    $('#formfield-'+inputid+'').attr('style', 'visibility:hidden');
+    if ($('#formfield-'+inputid).val() != '') {
+        $('#formfield-'+inputid).attr('style', 'visibility:hidden');
+    } 
 }
 function visible(inputid){
-    $('#formfield-'+inputid+'').attr('style', 'visibility:visible');
+    $('#formfield-'+inputid).attr('style', 'visibility:visible');
 }
