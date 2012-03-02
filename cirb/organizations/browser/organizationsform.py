@@ -114,11 +114,12 @@ class Wizard(wizard.Wizard):
     def initialize(self):
         if isinstance(self.context, OrganizationWrapper):
             orga = Session().query(Organization).get(self.context.organization_id)
+            self.loadSteps(orga)
         else:
             orga = Organization(address=Address(), category=Category(), person_incharge=InCharge(), person_contact=Contact())
             orga.person_contact.address=Address()
         self.session['organization'] = orga
-        self.loadSteps(orga)
+        
     
     def finish(self):
         #super(Wizard, self).finish()
