@@ -37,14 +37,15 @@ class Organization(ORMBase):
     x = Column(String(255))
     y = Column(String(255))
 
-    address = relationship('Address', backref=backref('organization', uselist=False))
-    category = relationship('Category', uselist=False, backref='organization')
-    person_incharge = relationship('InCharge', uselist=False, backref='organization')
-    person_contact = relationship('Contact', uselist=False, backref='organization')
+    address = relationship('Address', backref=backref('organization', uselist=False, cascade="all, delete-orphan"))
+    category = relationship('Category', uselist=False, backref='organization', cascade="all, delete-orphan")
+    person_incharge = relationship('InCharge', uselist=False, backref='organization', cascade="all, delete-orphan")
+    person_contact = relationship('Contact', uselist=False, backref='organization', cascade="all, delete-orphan")
     translated_organization = relationship(Association,
                                         primaryjoin=organization_id == Association.canonical_id,
                                         secondaryjoin=and_(organization_id == Association.translated_id, Association.association_type == "lang"),
                                         secondary="association")
+
     def get_translation(self):
         session = Session()
         trans_orga = session.query(Association).filter(Association.canonical_id==self.organization_id).scalar()
