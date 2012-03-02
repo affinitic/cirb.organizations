@@ -3,13 +3,22 @@
 <div tal:condition="view/get_results">
     <ul>
         <li tal:repeat="orga view/results">
-            <span tal:content="orga/name"></span>
+            <fieldset>
+                <legend tal:content="orga/name"></legend>
+                <img tal:attributes="src orga/logo" />
+                <span tal:content="orga/status">status</span>
+                <span tal:content="orga/status_other">status other</span>
+                <div class="address">
+                    <span tal:content="orga/address/num">num</span>,&nbsp;<span tal:content="orga/address/street">street</span><br />
+                    <span tal:content="orga/address/post_code">post_code</span>&nbsp;<span tal:content="orga/address/municipality"></span>
+                </div>
+            </fieldset>
         </li>
     </ul>
 </div>
 
 <!-- TODO check permission -->
 <div class="manage-orga">
-    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form">add orga</a><br />
-    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_manage">manage orga</a>
+    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form"><tal:block i18n:translate="add_orga"> add orga</tal:block></a>&nbsp;&nbsp;&nbsp;
+    <a href="" tal:attributes="href string:${context/absolute_url}/organizations_manage"><tal:block i18n:translate="maange_orga">manage orga</tal:block></a>
 </div>

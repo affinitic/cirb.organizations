@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import re
+import zope.interface
 from zope.interface import Interface
 from zope import schema
+from zope.schema import vocabulary
+from plone.namedfile import field
 
 from cirb.organizations import organizationsMessageFactory as _
-import zope.interface
 from z3c.form import interfaces
 
 class IOrganizationsLayer(Interface):
@@ -14,7 +16,6 @@ class ISearch(IOrganizationsLayer):
     search = schema.TextLine(title=_(u'Search'), required=False)
 
 
-from zope.schema import vocabulary
 class Terms(vocabulary.SimpleVocabulary):
     zope.interface.implements(interfaces.ITerms)
     def getValue(self, token):
@@ -38,8 +39,8 @@ class IOrganizations(Interface):
     """
     name = schema.TextLine(title=_(u"Organization name"), max_length=255)
     # TODO 
-    logo = schema.Bytes(title=_(u"Logo"), required=False)
-    picture = schema.Bytes(title=_(u"Picture"), required=False)
+    logo = field.NamedImage(title=_(u"Logo"), required=False)
+    picture = field.NamedImage(title=_(u"Picture"), required=False)
 
     website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 

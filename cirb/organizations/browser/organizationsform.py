@@ -5,6 +5,8 @@ import transaction
 from plone.app.z3cform.layout import wrap_form
 from collective.z3cform.wizard import wizard
 from plone.z3cform.fieldsets import group
+from plone.namedfile.field import NamedImage
+from plone.namedfile import file
 
 from cirb.organizations import organizationsMessageFactory as _
 from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, Association
@@ -28,18 +30,19 @@ class OrganizationsStep(wizard.GroupStep):
 
     def load(self, context):
         data = self.getContent()
-        self.wizard.session = check_edit_trans(self.wizard.session, self.request.form)
-        edit = self.wizard.session.get('edit')
-        if edit:
-            orga = Session.query(Organization).get(edit)
-            data = init_edit_form(orga)
-            self.request.SESSION[self.wizard.sessionKey] = data
-            self.request.SESSION[self.wizard.sessionKey]['edit'] = edit
-        trans = self.wizard.session.get('trans')
-        if trans:
-            data = init_trans_form(trans)
-            self.request.SESSION[self.wizard.sessionKey] = data
-            self.request.SESSION[self.wizard.sessionKey]['trans'] = trans
+        #self.wizard.session = check_edit_trans(self.wizard.session, self.request.form)
+        #edit = self.wizard.session.get('edit')
+        for field in self.fields:
+            data[field] = getattr(context, field)
+        for group in self.groups:
+            for field in group.fields:
+                data[field] = getattr(context.address, field)
+        # self.request.SESSION[self.wizard.sessionKey] = data
+        #trans = self.wizard.session.get('trans')
+        #if trans:
+        #    data = init_trans_form(trans)
+        #    self.request.SESSION[self.wizard.sessionKey] = data
+        #    self.request.SESSION[self.wizard.sessionKey]['trans'] = trans
 
     def get_gis_service(self):
         gis_url = os.environ.get('GIS_SERVICE')
@@ -76,9 +79,8 @@ class Wizard(wizard.Wizard):
     
     def finish(self):
         data = self.session
-        print 'data : {0}'.format(data)
         sqlalsession = Session()
-        orgastep = data.get('orga')
+        orgastep = data.get(OrganizationsStep.prefix)
         catstep = data.get('cat')
         inchargestep = data.get('incharge')
         contactstep = data.get('contact')
@@ -117,7 +119,10 @@ class Wizard(wizard.Wizard):
                 
         for key, value in orgastep.items():
             if key in Organization.__dict__.keys():
-                setattr(orga, key, value)
+                if isinstance(OrganizationsStep.fields[key].field, NamedImage) and value:
+                    setattr(orga, key, value.data)
+                else:
+                    setattr(orga, key, value)
             if key in Address.__dict__.keys():
                 setattr(orga_address, key, value)
         setattr(orga, 'address', orga_address)
@@ -153,6 +158,7 @@ def check_edit_trans(session, form):
     return session
 
 def init_edit_form(orga):
+    orga = orga._organization
     orga_fields = get_fields_name([OrganizationsStep, AddressGroup])
     cat_fields = get_fields_name([CategoryStep])
     incharge_fields = get_fields_name([InChargeStep])
@@ -161,8 +167,12 @@ def init_edit_form(orga):
     tmp={}
     for key in orga_fields:
         if key in orga.__dict__.keys():
-            tmp[key] = getattr(orga, key)
-            print '{0} : {1}'.format(key,getattr(orga, key))
+            if isinstance(OrganizationsStep.fields[key].field, NamedImage):
+                orga_logo = getattr(orga, key)
+                if orga_logo is not None:
+                    tmp[key] = file.NamedImage(data=orga_logo)
+            else:
+                tmp[key] = getattr(orga, key)
         if key in orga.address.__dict__.keys():
             tmp[key] = getattr(orga.address, key)
     data['orga'] = tmp 

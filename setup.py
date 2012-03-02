@@ -30,6 +30,8 @@ setup(name='cirb.organizations',
           'collective.z3cform.wizard',
           'collective.shuttle',
           'five.grok',
+          'plone.namedfile',
+          'plone.formwidget.namedfile',
           'cx_Oracle',
       ],
       extras_require = {
