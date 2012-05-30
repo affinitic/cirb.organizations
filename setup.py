@@ -25,6 +25,8 @@ setup(name='cirb.organizations',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.LinguaPlone',
+          'Pillow',
           'z3c.saconfig',
           'plone.app.z3cform',
           'collective.z3cform.wizard',

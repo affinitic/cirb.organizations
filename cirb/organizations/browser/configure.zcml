@@ -8,7 +8,10 @@
         directory="scripts"
         layer=".interfaces.IOrganizationsLayer"
         />
-  
+    
+    <include package="Products.CMFCore" 
+        file="permissions.zcml" />
+
     <!-- search orga -->
     <browser:page
         for=".interfaces.ISearch"
@@ -27,7 +30,7 @@
         for="*"
         name="organizations_form"
         class=".organizationsform.WizardView"
-        permission="cmf.ModifyPortalContent"
+        permission="cmf.AddPortalContent"
         />
 
     <browser:page
