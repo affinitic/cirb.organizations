@@ -1,5 +1,5 @@
 from cirb.organizations import ORMBase
-from cirb.organizations.content.organization import *
+from cirb.organizations.content.organization import Address, Category, InCharge, Organization, Contact, Association
 from zope import component
 from z3c.saconfig.interfaces import IEngineFactory
 from z3c.saconfig import Session
@@ -12,7 +12,7 @@ def setupOrganizations(context):
     logger = context.getLogger("setupOrganization")
     logger.info('start setup organization')
     site = context.getSite()
-    portal_workflow = site.portal_workflow
+    #portal_workflow = site.portal_workflow
     if context.readDataFile('cirb.organizations.txt') is None:
         return
 
@@ -27,7 +27,7 @@ def setupOrganizations(context):
         orgafr = getattr(site, ORGAFR)
         #orgafr.setExcludeFromNav(True)
         alsoProvides(orgafr, ISearch)
-        portal_workflow.doActionFor(orgafr,'publish')
+        #portal_workflow.doActionFor(orgafr,'publish')
 
         site.invokeFactory(type_name='Folder',
                 id=ORGANL,
@@ -37,21 +37,21 @@ def setupOrganizations(context):
         organl = getattr(site, ORGANL)
         #organl.setExcludeFromNav(True)
         alsoProvides(organl, ISearch)
-        portal_workflow.doActionFor(organl,'publish')
+        #portal_workflow.doActionFor(organl,'publish')
         organl.addTranslationReference(orgafr)
 
 
-        news = site.news
-        news.setExcludeFromNav(True)
-        news.reindexObject()
+        #news = site.news
+        #news.setExcludeFromNav(True)
+        #news.reindexObject()
 
-        events = site.events
-        events.setExcludeFromNav(True)
-        events.reindexObject()
+        #events = site.events
+        #events.setExcludeFromNav(True)
+        #events.reindexObject()
 
-        Members = site.Members
-        Members.setExcludeFromNav(True)
-        Members.reindexObject()
+        #Members = site.Members
+        #Members.setExcludeFromNav(True)
+        #Members.reindexObject()
 
     add_test_organisations_in_db(logger)
     logger.info('end setup organization')

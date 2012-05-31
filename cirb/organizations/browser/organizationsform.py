@@ -31,6 +31,7 @@ class OrganizationsStep(wizard.GroupStep):
     def load(self, context):
         data = self.getContent()
         for field in self.fields:
+            import pdb; pdb.set_trace()
             data[field] = getattr(context, field, None)
         for group in self.groups:
             for field in group.fields:
@@ -39,7 +40,11 @@ class OrganizationsStep(wizard.GroupStep):
     def apply(self, context):
         data = self.getContent()
         for field in self.fields:
-            setattr(self.wizard.session['organization'], field, data[field])
+            if isinstance(data[field], file.NamedImage):
+                blob = data[field].data
+                setattr(self.wizard.session['organization'], field, blob)
+            else:
+                setattr(self.wizard.session['organization'], field, data[field])
         for group in self.groups:
             for field in group.fields:
                 setattr(self.wizard.session['organization'].address, field, data[field])

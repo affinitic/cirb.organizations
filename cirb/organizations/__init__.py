@@ -1,4 +1,4 @@
-# -*- extra stuff goes here -*-
+# -*- coding: utf-8 -*-
 from sqlalchemy.ext import declarative
 from zope.i18nmessageid import MessageFactory
 #from Acquisition import Implicit
