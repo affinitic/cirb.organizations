@@ -13,6 +13,7 @@ from cirb.organizations.content.organization import Organization, Category, Addr
 from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations
 
 from zope.app.pagetemplate import viewpagetemplatefile
+from zope.app.file.image import Image
 
 import os
 
@@ -31,8 +32,12 @@ class OrganizationsStep(wizard.GroupStep):
     def load(self, context):
         data = self.getContent()
         for field in self.fields:
-            import pdb; pdb.set_trace()
-            data[field] = getattr(context, field, None)
+            if field == 'logo' or field == 'picture':
+                blob = getattr(context, field, None)
+                if blob:
+                    data[field] = file.NamedImage(data=blob)
+            else:    
+                data[field] = getattr(context, field, None)
         for group in self.groups:
             for field in group.fields:
                 data[field] = getattr(context.address, field, None)

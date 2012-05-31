@@ -61,7 +61,7 @@ import zope.component
 import zope.interface
 import z3c.form
 from collective.z3cform.wizard.interfaces import IWizard
-class WizardWidgets(FieldWidgets): #, grok.MultiAdapter):
+class WizardWidgets(FieldWidgets, grok.MultiAdapter):
 
     zope.component.adapts(
         IWizard, z3c.form.interfaces.IFormLayer, zope.interface.Interface)
