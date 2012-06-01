@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
 import tempfile
-import transaction
 
 from sqlalchemy import create_engine
 from cirb.organizations import ORMBase
