@@ -7,7 +7,7 @@ class TestOracle(unittest.TestCase):
 
     def setUp(self):
         super(TestOracle, self).setUp()
-        self.dbURI = 'oracle://etterbeek_culture:etterbeek_culture753@192.168.13.190/ORASTA01'
+        self.dbURI = 'oracle://etterbeek_culture:etterbeek_culture753@ 192.168.13.190/ORASTA01'
         self.engine = create_engine(self.dbURI)
         self.metadata = MetaData()
         
@@ -23,7 +23,8 @@ class TestOracle(unittest.TestCase):
         self.test_table.drop(self.engine, checkfirst=False)
 
     def test_add_without_accent(self):
-        insert = self.test_table.insert().values(test_table_id=1, test_string=u'insert without accent')
+        insert = self.test_table.insert().values(test_table_id=1,
+                                                 test_string=u'insert without accent')
         conn = self.engine.connect()
         result = conn.execute(insert)
         self.assertTrue(result.is_insert)
@@ -33,7 +34,8 @@ class TestOracle(unittest.TestCase):
         self.assertEqual(result.pop(), (1, u'insert without accent'))
 
     def test_add_with_accent(self):
-        insert = self.test_table.insert().values(test_table_id=2, test_string=u'insert with accent : é')
+        insert = self.test_table.insert().values(test_table_id=2, 
+                                                 test_string=u'insert with accent : é')
         conn = self.engine.connect()
         result = conn.execute(insert)
         self.assertTrue(result.is_insert)

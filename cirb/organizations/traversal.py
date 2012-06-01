@@ -8,8 +8,6 @@ from zope.component import adapts
 from five import grok
 from z3c.saconfig import Session
 
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-
 from collective.shuttle.traversal import Traverser, TraversableItem
 from OFS.interfaces import ITraversable
 from Acquisition import Implicit
@@ -40,6 +38,7 @@ class OrganizationWrapper(Implicit):
         except AttributeError:
             return Implicit.__getattr__(self, name)
 
+
 class OrganizationTraversable(TraversableItem):
     
     def __getitem__(self, key):
@@ -56,27 +55,28 @@ class OrganizationTraversable(TraversableItem):
 def getOrganizationsTraversable(context):
     return OrganizationTraversable("editorga")
 
-from z3c.form.field import FieldWidgets 
-import zope.component
-import zope.interface
-import z3c.form
+#from z3c.form.field import FieldWidgets 
+#import zope.component
+#import zope.interface
+#import z3c.form
 from collective.z3cform.wizard.interfaces import IWizard
-class WizardWidgets(FieldWidgets): #, grok.MultiAdapter):
-
-    zope.component.adapts(
-        IWizard, z3c.form.interfaces.IFormLayer, zope.interface.Interface)
-
-    def __init__(self, form, request, content):
-        print 'WizardWidgets'
-        super(WizardWidgets, self).__init__(form, request, content)
-        self.form = self.form.currentStep
-
+#class WizardWidgets(FieldWidgets): #, grok.MultiAdapter):
+#
+#    zope.component.adapts(
+#        IWizard, z3c.form.interfaces.IFormLayer, zope.interface.Interface)
+#
+#    def __init__(self, form, request, content):
+#        print 'WizardWidgets'
+#        super(WizardWidgets, self).__init__(form, request, content)
+#        self.form = self.form.currentStep
+#
 from plone.z3cform.traversal import FormWidgetTraversal
 from Acquisition import aq_base
 class WizardWidgetTraversal(FormWidgetTraversal):
     adapts(IWizard, IBrowserRequest) 
 
     def _form_traverse(self, form, name):
+        import pdb; pdb.set_trace()
         print '_form_traverse'
         if name in form.widgets:
             return form.widgets.get(name)

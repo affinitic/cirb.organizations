@@ -9,12 +9,10 @@ from plone.namedfile.field import NamedImage
 from plone.namedfile import file
 from cirb.organizations.traversal import OrganizationWrapper
 from cirb.organizations import organizationsMessageFactory as _
-from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, Association
+from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge
 from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations
 
 from zope.app.pagetemplate import viewpagetemplatefile
-from zope.app.file.image import Image
-
 import os
 
 class AddressGroup(group.Group):
