@@ -10,16 +10,24 @@ from cirb.organizations.interfaces import IOrganization
 
 class Association(ORMBase):
     __tablename__ = 'association'
-    canonical_id = Column(Integer, ForeignKey('organization.organization_id'), primary_key=True)
-    translated_id = Column(Integer, ForeignKey('organization.organization_id'), primary_key=True)
-    association_type = Column(String(255), Sequence('association_seq'), primary_key=True)
+    canonical_id = Column(Integer,
+                          ForeignKey('organization.organization_id'),
+                          primary_key=True)
+    translated_id = Column(Integer,
+                           ForeignKey('organization.organization_id'),
+                           primary_key=True)
+    association_type = Column(String(255), 
+                              Sequence('association_seq'),
+                              primary_key=True)
 
 
 class Organization(ORMBase):
     __tablename__ = 'organization'
     implements(IOrganization)
     # Sequence required by oracle
-    organization_id = Column(Integer, Sequence('organization_seq'), primary_key=True, autoincrement=True)
+    organization_id = Column(Integer,
+                             Sequence('organization_seq'),
+                             primary_key=True, autoincrement=True)
     create_date = Column(DateTime, default=func.now())
     name = Column(String(255), nullable=False,)
     status = Column(String(255))
@@ -37,10 +45,16 @@ class Organization(ORMBase):
     x = Column(String(255))
     y = Column(String(255))
 
-    address = relationship('Address', backref=backref('organization', uselist=False, cascade="all, delete-orphan"))
-    category = relationship('Category', uselist=False, backref='organization', cascade="all, delete-orphan")
-    person_incharge = relationship('InCharge', uselist=False, backref='organization', cascade="all, delete-orphan")
-    person_contact = relationship('Contact', uselist=False, backref='organization', cascade="all, delete-orphan")
+    address = relationship('Address', backref=backref('organization',
+                                                      uselist=False, cascade="all, delete-orphan"))
+    category = relationship('Category', uselist=False,
+                            backref='organization', cascade="all, delete-orphan")
+    person_incharge = relationship('InCharge', uselist=False,
+                                   backref='organization',
+                                   cascade="all, delete-orphan")
+    person_contact = relationship('Contact', uselist=False,
+                                  backref='organization',
+                                  cascade="all, delete-orphan")
     translated_organization = relationship(Association,
                                         primaryjoin=organization_id == Association.canonical_id,
                                         secondaryjoin=and_(organization_id == Association.translated_id, Association.association_type == "lang"),
@@ -48,14 +62,14 @@ class Organization(ORMBase):
 
     def get_translation(self):
         session = Session()
-        trans_orga = session.query(Association).filter(Association.canonical_id==self.organization_id).scalar()
+        trans_orga = session.query(Association).filter(Association.canonical_id == self.organization_id).scalar()
         attr = "translated_id"
         if not trans_orga:
-            trans_orga = session.query(Association).filter(Association.translated_id==self.organization_id).scalar()
+            trans_orga = session.query(Association).filter(Association.translated_id == self.organization_id).scalar()
             attr = "canonical_id"
         if not trans_orga:
             return False
-        
+
         return session.query(Organization).get(getattr(trans_orga, attr))
 
 

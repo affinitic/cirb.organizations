@@ -5,7 +5,7 @@ import transaction
 from plone.app.z3cform.layout import FormWrapper
 from collective.z3cform.wizard import wizard
 from plone.z3cform.fieldsets import group
-from plone.namedfile.field import NamedImage
+#from plone.namedfile.field import NamedImage
 from plone.namedfile import file
 from cirb.organizations.traversal import OrganizationWrapper
 from cirb.organizations import organizationsMessageFactory as _
