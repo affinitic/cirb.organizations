@@ -16,7 +16,7 @@ class Association(ORMBase):
     translated_id = Column(Integer,
                            ForeignKey('organization.organization_id'),
                            primary_key=True)
-    association_type = Column(String(255), 
+    association_type = Column(String(255),
                               Sequence('association_seq'),
                               primary_key=True)
 

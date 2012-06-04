@@ -1,9 +1,11 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 #from Products.LinguaPlone.interfaces import ITranslatable
+from Products.statusmessages.interfaces import IStatusMessage
 
 from z3c.saconfig import Session
 from cirb.organizations.content.organization import Organization
+from cirb.organizations import organizationsMessageFactory as _
 import transaction
 import logging
 
@@ -40,9 +42,14 @@ class DeleteView(BrowserView):
     def delete(self):
         id_del_orga = self.request.form.get('del')
         if not delete_orga(self.session, id_del_orga):
-            self.logger.info(u'no id fund for delete a organization')
+            msg = u'no id fund for delete a organization'
+            self.logger.info(msg)
+            IStatusMessage(self.request).add(msg, type="error")
             return self.request.response.redirect(self.context.absolute_url())
+        msg = _(u"The organization {0} is deleted".format(self.session.query(Organization).get(id_del_orga)))
+        IStatusMessage(self.request).add(msg, type="info")
         return self.request.response.redirect(self.context.absolute_url())
+
 
 def delete_orga(session, id):
     del_orga = session.query(Organization).get(id)
@@ -54,6 +61,6 @@ def delete_orga(session, id):
 
     session.delete(del_orga)
     transaction.commit()
+    # XXX delete Association
 
-    # TODO add status message
     return True

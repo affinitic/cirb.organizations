@@ -55,6 +55,8 @@ class TestOrmbase(unittest.TestCase):
         self.assertEqual(orgafr.get_translation().name, u"Wijn")
         self.assertEqual(organl.get_translation().name, u"Vin")
 
+    def test_zdelete(self):
+        session = Session()
         del_orga_id = session.query(Organization).all()[0].organization_id
         result = delete_orga(session, del_orga_id)
         self.assertTrue(result)

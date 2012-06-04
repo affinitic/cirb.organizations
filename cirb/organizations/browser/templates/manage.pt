@@ -29,7 +29,7 @@ i18n:domain="cirb.organizations">
             </td>
             <td>
                 <span tal:condition="not: python:orga.get_translation()">
-                   <a href="" tal:attributes="href string:${view/translate_url}&trans=${orga/organization_id}"> trans </a>
+                   <a href="" tal:attributes="href string:${view/translate_url}&canonical_id=${orga/organization_id}"> trans </a>
                 </span>
 
                     <tal:block tal:condition="python:orga.get_translation()" tal:define="trans python:orga.get_translation()">

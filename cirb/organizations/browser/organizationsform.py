@@ -9,16 +9,18 @@ from plone.z3cform.fieldsets import group
 from plone.namedfile import file
 from cirb.organizations.traversal import OrganizationWrapper
 from cirb.organizations import organizationsMessageFactory as _
-from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge
+from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, Association
 from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations
 
 from zope.app.pagetemplate import viewpagetemplatefile
 import os
 
+
 class AddressGroup(group.Group):
     prefix = "addr"
     label = _(u"Address")
     fields = field.Fields(IAddress)
+
 
 class OrganizationsStep(wizard.GroupStep):
     prefix = "orga"
@@ -34,12 +36,12 @@ class OrganizationsStep(wizard.GroupStep):
                 blob = getattr(context, field, None)
                 if blob:
                     data[field] = file.NamedImage(data=blob)
-            else:    
+            else:
                 data[field] = getattr(context, field, None)
         for group in self.groups:
             for field in group.fields:
                 data[field] = getattr(context.address, field, None)
-    
+
     def apply(self, context):
         data = self.getContent()
         for field in self.fields:
@@ -51,7 +53,6 @@ class OrganizationsStep(wizard.GroupStep):
         for group in self.groups:
             for field in group.fields:
                 setattr(self.wizard.session['organization'].address, field, data[field])
-    
 
     def get_gis_service(self):
         gis_url = os.environ.get('GIS_SERVICE')
@@ -64,7 +65,7 @@ class CategoryStep(wizard.Step):
     prefix = "cat"
     label = _(u"Category")
     fields = field.Fields(ICategory)
-    
+
     def load(self, context):
         data = self.getContent()
         for field in self.fields:
@@ -74,7 +75,7 @@ class CategoryStep(wizard.Step):
         data = self.getContent()
         for field in self.fields:
             setattr(self.wizard.session['organization'].category, field, data[field])
-    
+
 
 class InChargeStep(wizard.Step):
     prefix = "incharge"
@@ -90,7 +91,7 @@ class InChargeStep(wizard.Step):
         data = self.getContent()
         for field in self.fields:
             setattr(self.wizard.session['organization'].person_incharge, field, data[field])
-    
+
 
 class ContactStep(wizard.GroupStep):
     prefix = "contact"
@@ -113,7 +114,7 @@ class ContactStep(wizard.GroupStep):
         for group in self.groups:
             for field in group.fields:
                 setattr(self.wizard.session['organization'].person_contact.address, field, data[field])
-    
+
 
 class Wizard(wizard.Wizard):
     label = _(u"Organization")
@@ -125,28 +126,29 @@ class Wizard(wizard.Wizard):
             self.loadSteps(orga)
         else:
             orga = Organization(address=Address(), category=Category(), person_incharge=InCharge(), person_contact=Contact())
-            orga.person_contact.address=Address()
+            orga.person_contact.address = Address()
         self.session['organization'] = orga
-        
-    
+        self.session['canonical_id'] = self.request.get('canonical_id')
+
     def finish(self):
         #super(Wizard, self).finish()
         self.applySteps(self.context)
         sqlalsession = Session()
         sqlalsession.flush()
         organization = self.session['organization']
+        canonical_id = self.session['canonical_id']
         if organization.organization_id:
             sqlalsession.merge(organization)
         else:
             sqlalsession.add(organization)
-        """
-        if trans:
-            sqlalsession.flush()
-            assoc = Association(association_type = "lang")
-            assoc.translated_id = orga.organization_id
-            assoc.canonical_id = trans
-            sqlalsession.add(assoc)
-        """   
+            if canonical_id:
+                # flush required for organization.organization_id creation
+                sqlalsession.flush()
+                assoc = Association(association_type="lang")
+                assoc.translated_id = organization.organization_id
+                assoc.canonical_id = canonical_id
+                sqlalsession.add(assoc)
+
         transaction.commit()
         self.request.SESSION.clear()
 
@@ -155,6 +157,6 @@ class Wizard(wizard.Wizard):
         return self.action
         #return self.context.absolute_url() + '/' + self.__name__
 
+
 class WizardView(FormWrapper):
     form = Wizard
-
