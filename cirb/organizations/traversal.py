@@ -76,7 +76,6 @@ class WizardWidgetTraversal(FormWidgetTraversal):
     adapts(IWizard, IBrowserRequest) 
 
     def _form_traverse(self, form, name):
-        import pdb; pdb.set_trace()
         print '_form_traverse'
         if name in form.widgets:
             return form.widgets.get(name)
