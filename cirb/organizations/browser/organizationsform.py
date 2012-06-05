@@ -9,8 +9,8 @@ from plone.z3cform.fieldsets import group
 from plone.namedfile import file
 from cirb.organizations.traversal import OrganizationWrapper
 from cirb.organizations import organizationsMessageFactory as _
-from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, Association
-from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations
+from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, AdditionalInformation, Association
+from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations, IAdditionalInformation
 
 from zope.app.pagetemplate import viewpagetemplatefile
 import os
@@ -61,22 +61,6 @@ class OrganizationsStep(wizard.GroupStep):
         return gis_url
 
 
-class CategoryStep(wizard.Step):
-    prefix = "cat"
-    label = _(u"Category")
-    fields = field.Fields(ICategory)
-
-    def load(self, context):
-        data = self.getContent()
-        for field in self.fields:
-            data[field] = getattr(context.category, field, None)
-
-    def apply(self, context):
-        data = self.getContent()
-        for field in self.fields:
-            setattr(self.wizard.session['organization'].category, field, data[field])
-
-
 class InChargeStep(wizard.Step):
     prefix = "incharge"
     label = _(u"Person in charge")
@@ -116,16 +100,48 @@ class ContactStep(wizard.GroupStep):
                 setattr(self.wizard.session['organization'].person_contact.address, field, data[field])
 
 
+class CategoryStep(wizard.Step):
+    prefix = "cat"
+    label = _(u"Category")
+    fields = field.Fields(ICategory)
+
+    def load(self, context):
+        data = self.getContent()
+        for field in self.fields:
+            data[field] = getattr(context.category, field, None)
+
+    def apply(self, context):
+        data = self.getContent()
+        for field in self.fields:
+            setattr(self.wizard.session['organization'].category, field, data[field])
+
+
+class AdditionalInformationStep(wizard.Step):
+    prefix = "additionalinfo"
+    label = _(u"Descritpion and comments")
+    fields = field.Fields(IAdditionalInformation)
+
+    def load(self, context):
+        data = self.getContent()
+        for field in self.fields:
+            data[field] = getattr(context.additionalinfo, field, None)
+
+    def apply(self, context):
+        data = self.getContent()
+        for field in self.fields:
+            setattr(self.wizard.session['organization'].additionalinfo, field, data[field])
+
+
 class Wizard(wizard.Wizard):
     label = _(u"Organization")
-    steps = OrganizationsStep, CategoryStep, InChargeStep, ContactStep
+    steps = OrganizationsStep, InChargeStep, ContactStep, CategoryStep, AdditionalInformationStep
 
     def initialize(self):
         if isinstance(self.context, OrganizationWrapper):
             orga = Session().query(Organization).get(self.context.organization_id)
             self.loadSteps(orga)
         else:
-            orga = Organization(address=Address(), category=Category(), person_incharge=InCharge(), person_contact=Contact())
+            orga = Organization(address=Address(), category=Category(), person_incharge=InCharge(), person_contact=Contact(), additionalinfo=AdditionalInformation())
             orga.person_contact.address = Address()
         self.session['organization'] = orga
         self.session['canonical_id'] = self.request.get('canonical_id')

@@ -4,7 +4,7 @@ from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 
 from z3c.saconfig import Session
-from cirb.organizations.content.organization import Organization
+from cirb.organizations.content.organization import Organization, Association
 from cirb.organizations import organizationsMessageFactory as _
 import transaction
 import logging
@@ -52,15 +52,34 @@ class DeleteView(BrowserView):
 
 
 def delete_orga(session, id):
+    assoc = []
     del_orga = session.query(Organization).get(id)
     if not del_orga:
         return False
     translated_orga = del_orga.get_translation()
     if translated_orga:
+        assoc.append(translated_orga.organization_id)
         session.delete(translated_orga)
 
+    assoc.append(del_orga.organization_id)
     session.delete(del_orga)
     transaction.commit()
-    # XXX delete Association
+    if len(assoc) > 1:
+        delete_association(assoc)
 
     return True
+
+
+def delete_association(ids):
+    if not len(ids) == 2:
+        logger = logging.getLogger('cirb.organizations.browser.organizationsmanage')
+        logger.error("Try to delete an association, but there are not 2 ids.")
+        return
+    session = Session()
+    query1 = session.query(Association).filter(Association.canonical_id == ids[0]).filter(Association.translated_id == ids[1]).filter(Association.association_type == 'lang')
+    query2 = session.query(Association).filter(Association.canonical_id == ids[1]).filter(Association.translated_id == ids[0]).filter(Association.association_type == 'lang')
+    query = query1.union(query2)
+    assoc = query.all()
+    if len(assoc) > 1:
+        logger.error("There are {0} association with ids {1} and {2}").format(len(assoc), ids[0], ids[1])
+    session.delete(query.first())

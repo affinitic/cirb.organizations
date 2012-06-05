@@ -33,7 +33,6 @@ class Organization(ORMBase):
     status = Column(String(255))
     status_other = Column(String(255))
     address_id = Column(Integer(), ForeignKey('address.address_id'))
-    # TODO test blob file :
     logo = Column(LargeBinary)
     picture = Column(LargeBinary)
     website = Column(String(255))
@@ -48,13 +47,18 @@ class Organization(ORMBase):
     address = relationship('Address', backref=backref('organization',
                                                       uselist=False, cascade="all, delete-orphan"))
     category = relationship('Category', uselist=False,
-                            backref='organization', cascade="all, delete-orphan")
+                            backref='organization',
+                            cascade="all, delete-orphan")
     person_incharge = relationship('InCharge', uselist=False,
                                    backref='organization',
                                    cascade="all, delete-orphan")
     person_contact = relationship('Contact', uselist=False,
                                   backref='organization',
                                   cascade="all, delete-orphan")
+    additionalinfo = relationship('AdditionalInformation', uselist=False,
+                                  backref='organization',
+                                  cascade="all, delete-orphan")
+
     translated_organization = relationship(Association,
                                         primaryjoin=organization_id == Association.canonical_id,
                                         secondaryjoin=and_(organization_id == Association.translated_id, Association.association_type == "lang"),
@@ -143,3 +147,13 @@ class Contact(Person):
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
     address_id = Column(Integer(), ForeignKey('address.address_id'))
     address = relationship('Address', backref=backref('contact', uselist=False))
+
+
+class AdditionalInformation(ORMBase):
+    __tablename__ = 'additionalinformation'
+    additionalinformation_id = Column(Integer,
+                             Sequence('additionalinformation_seq'),
+                             primary_key=True, autoincrement=True)
+    objectif = Column(String(1024))
+    comments = Column(String(1024))
+    organization_id = Column(Integer, ForeignKey('organization.organization_id'))

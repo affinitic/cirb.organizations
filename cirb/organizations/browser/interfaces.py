@@ -22,15 +22,15 @@ class Terms(vocabulary.SimpleVocabulary):
         return self.getTermByToken(token).value
 
 STATUS = Terms([
-    Terms.createTerm('asbl','asbl', _(u'ASBL')),
-    Terms.createTerm('sprl','sprl', _(u'SPRL')),
-    Terms.createTerm('pouvoirpublique','pouvoirpublique', _(u'Pouvoir Publique')),
-    Terms.createTerm('other','autres', _(u'Autres')),
+    Terms.createTerm('asbl', 'asbl', _(u'ASBL')),
+    Terms.createTerm('sprl', 'sprl', _(u'SPRL')),
+    Terms.createTerm('pouvoirpublique', 'pouvoirpublique', _(u'Pouvoir Publique')),
+    Terms.createTerm('other', 'autres', _(u'Autres')),
     ])
 
 LANG = Terms([
-    Terms.createTerm('fr','fr',_(u'Français')),
-    Terms.createTerm('nl','nl',_(u'Neerlandais')),
+    Terms.createTerm('fr', 'fr', _(u'Français')),
+    Terms.createTerm('nl', 'nl', _(u'Néerlandais')),
     ])
 
 class IOrganizations(Interface):
@@ -46,8 +46,6 @@ class IOrganizations(Interface):
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
     status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
     status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 
-    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=1024) 
-    comments = schema.Text(title=_(u"Comments"), required=False, max_length=1024) 
     # auto generate field, it could be hidden for user :
     x = schema.TextLine(title=u"x", required=True)
     y = schema.TextLine(title=u"y", required=True)
@@ -109,4 +107,7 @@ class IContact(Interface):
                         constraint=re.compile('^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE).match)
     # add address 
 
+class IAdditionalInformation(Interface):
+    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=1024) 
+    comments = schema.Text(title=_(u"Comments"), required=False, max_length=1024) 
 

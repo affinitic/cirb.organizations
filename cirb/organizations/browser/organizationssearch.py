@@ -10,9 +10,10 @@ from cirb.organizations.content.organization import Organization
 from cirb.organizations.browser.interfaces import ISearch
 
 import json
-import logging
+#import logging
 
 SESSION_SEARCH_IDS = "search_ids"
+
 
 class Search(form.Form):
     label = _(u'Organization search')
@@ -31,9 +32,11 @@ class Search(form.Form):
             self.results = session.query(Organization).filter(Organization.name.like('%{0}%'.format(search))).filter(Organization.language == self.context.Language()).all()
 
         # add result in a session variable for the GIS Service
-        if SESSION_SEARCH_IDS in self.request.SESSION.keys():
-            self.request.SESSION.delete(SESSION_SEARCH_IDS)
-        self.request.SESSION.set(SESSION_SEARCH_IDS, [orga.organization_id for orga in self.results])
+
+        if 'SESSION' in self.request.keys():
+            if SESSION_SEARCH_IDS in self.request.SESSION.keys():
+                self.request.SESSION.delete(SESSION_SEARCH_IDS)
+            self.request.SESSION.set(SESSION_SEARCH_IDS, [orga.organization_id for orga in self.results])
 
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
@@ -51,22 +54,24 @@ class Search(form.Form):
 
 
 class SearchView(FormWrapper):
-    form = Search    
+    form = Search
+
     def __call__(self, *args, **kw):
-        keys = [k for k in self.request.SESSION.keys() if WIZARD_SESSION_KEY in k]
-        for key in keys:
-            self.request.SESSION.delete(key)
+        if 'SESSION' in self.request.keys():
+            keys = [key for key in self.request.SESSION.keys() if WIZARD_SESSION_KEY in key]
+            for key in keys:
+                self.request.SESSION.delete(key)
         return super(SearchView, self).__call__(*args, **kw)
 
     def get_json(self):
         ids = self.request.SESSION.get(SESSION_SEARCH_IDS)
-        self.request.response.setHeader('Content-Type',"application/json")
+        self.request.response.setHeader('Content-Type', "application/json")
         return list_to_json(ids)
+
 
 def list_to_json(ids):
     return json.dumps(ids)
-    
- 
+
 
 from zope.component import provideAdapter
 from zope.publisher.interfaces.browser import IBrowserRequest
