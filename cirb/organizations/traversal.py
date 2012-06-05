@@ -15,6 +15,7 @@ from .browser.interfaces import ISearch
 from .interfaces import IOrganization
 from cirb.organizations.content.organization import Organization
 
+
 def isInt(name):
     m = re.compile(r'^\d+$')
     return bool(m.match(name))
@@ -23,12 +24,13 @@ def isInt(name):
 class PloneTraverser(Traverser):
     grok.adapts(ISearch, IHTTPRequest)
     grok.provides(IPublishTraverse)
-    
+
 
 class OrganizationWrapper(Implicit):
-    """ Traversable organization 
+    """ Traversable organization
     """
     implements(IOrganization)
+
     def __init__(self, organization):
         self._organization = organization
 
@@ -40,7 +42,7 @@ class OrganizationWrapper(Implicit):
 
 
 class OrganizationTraversable(TraversableItem):
-    
+
     def __getitem__(self, key):
         if isInt(key):
             session = Session()
@@ -50,12 +52,13 @@ class OrganizationTraversable(TraversableItem):
                 return  wrapper.__of__(self)
         raise KeyError
 
+
 @grok.adapter(ISearch, name=u"editorga")
 @grok.implementer(ITraversable)
 def getOrganizationsTraversable(context):
     return OrganizationTraversable("editorga")
 
-#from z3c.form.field import FieldWidgets 
+#from z3c.form.field import FieldWidgets
 #import zope.component
 #import zope.interface
 #import z3c.form
@@ -69,11 +72,14 @@ from collective.z3cform.wizard.interfaces import IWizard
 #        print 'WizardWidgets'
 #        super(WizardWidgets, self).__init__(form, request, content)
 #        self.form = self.form.currentStep
-#
+
+
 from plone.z3cform.traversal import FormWidgetTraversal
 from Acquisition import aq_base
+
+
 class WizardWidgetTraversal(FormWidgetTraversal):
-    adapts(IWizard, IBrowserRequest) 
+    adapts(IWizard, IBrowserRequest)
 
     def _form_traverse(self, form, name):
         print '_form_traverse'
@@ -85,5 +91,3 @@ class WizardWidgetTraversal(FormWidgetTraversal):
         for group in form.groups:
             if group.widgets and name in group.widgets:
                 return group.widgets.get(name)
-
-
