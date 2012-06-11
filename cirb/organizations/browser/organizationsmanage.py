@@ -6,8 +6,10 @@ from Products.statusmessages.interfaces import IStatusMessage
 from z3c.saconfig import Session
 from cirb.organizations.content.organization import Organization, Association
 from cirb.organizations import organizationsMessageFactory as _
+#from cirb.organizations.browser.interfaces import IOrganizationsLayer
 import transaction
 import logging
+#from zope.interface import implements
 
 
 class ManageView(BrowserView):
@@ -29,7 +31,7 @@ class ManageView(BrowserView):
         else:
             view = context.getTranslation('fr')
             absolute_url = "{0}/organizations_form?set_language=fr".format(view.absolute_url())
-        return absolute_url
+            return absolute_url
 
 
 class DeleteView(BrowserView):
@@ -82,4 +84,24 @@ def delete_association(ids):
     assoc = query.all()
     if len(assoc) > 1:
         logger.error("There are {0} association with ids {1} and {2}").format(len(assoc), ids[0], ids[1])
-    session.delete(query.first())
+        session.delete(query.first())
+
+from zope.interface import implements
+from plone.namedfile.interfaces import IImageScaleTraversable
+
+class OView(BrowserView):
+    implements(IImageScaleTraversable)
+
+    def __call__(self, *args, **kwargs):
+        lang = self.request.get("set_language")
+        if lang:
+            redirect = self.context.getTranslation(lang)
+            import pdb; pdb.set_trace()
+            return self.request.RESPONSE.redirect(redirect)
+
+        return super(OView,self).__call__(args, kwargs)
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.logger = logging.getLogger('cirb.organizations.browser.organizationmanage')

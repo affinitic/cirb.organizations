@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"
+metal:use-macro="here/main_template/macros/master"
+i18n:domain="cirb.organizations">
+
+<tal:head metal:fill-slot="head_slot">      
+    <meta http-equiv="imagetoolbar" content="no" />
+</tal:head>
+
+<tal:css metal:fill-slot="style_slot">
+    <!--link rel="stylesheet" tal:attributes="href string:${portal_url}/++resource++" type="text/css"/-->
+</tal:css>
+
+<tal:js metal:fill-slot="javascript_head_slot">    
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/++resource++cirb.organizations.scripts/singlemap.js"></script>
+<script type="text/javascript">
+
+</script>
+</tal:js>
+
+<body>
+
+<div metal:fill-slot="main"  tal:attributes="data-lang context/Language; data-x context/x; data-y context/y" class="data">
+    <h1 i18n:translate="Fiche">Fiche</h1>
+    <div class="content-left">
+        <img tal:replace="structure context/@@images/logo" width="200px" />
+        <h2 class="name" tal:content="context/name"></h2>
+        <div class="address">
+            <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
+            <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span>
+        </div>
+
+        <div><span i18n:translate="Tél.">tel</span><span tal:content="context/person_contact/phone">phone</span></div>
+        <div tal:content="context/person_contact/email">email</div>
+        <div tal:content="context/website">website</div>
+
+
+        <h3 i18n:translate="Responsable de l'organisme">Responsable de l'organisme</h3>
+        <div><span i18n:translate="Nom :">Nom :</span><span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span></div>
+        <div><span i18n:translate="Fonction :">Fonction :</span><span tal:content="context/person_incharge/function"></span></div>
+        
+        <h3 i18n:translate="Personne de contact">Personne de contact</h3>
+    </div>
+
+    <div class="content-right">
+        <div id="urbis_map" style="width:350px; height:250px; border: solid #000 1px;"></div>
+    </div>
+
+</div>
+</body>
+</html>

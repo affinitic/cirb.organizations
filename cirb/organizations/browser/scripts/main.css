@@ -20,3 +20,18 @@ form#cat div{
     width:300px;
     float:left;
 }
+
+.manage-orga {
+    float:right;
+}
+
+.orga_search li.orga {
+    display: block;
+}
+
+.content-left img {
+    width: 250px;
+    height: auto;
+    float: left;
+    padding-right: 15px;
+}

@@ -6,4 +6,14 @@
         cacheable="False" compression="safe" cookable="False"
         enabled="True" expression=""  inline="False" />
     
+    <javascript
+        id="http://gis.irisnet.be/api/urbis.js"
+        cacheable="False" compression="safe" cookable="False"
+        enabled="True" expression=""  inline="False" />
+
+    <javascript
+        id="++resource++cirb.organizations.scripts/multipointmap.js"
+        cacheable="False" compression="safe" cookable="False"
+        enabled="True" expression=""  inline="False" />
+
 </object>

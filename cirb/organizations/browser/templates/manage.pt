@@ -23,7 +23,7 @@ i18n:domain="cirb.organizations">
         </tr>
         <tr tal:repeat="orga view/manage">
             <td>
-                    <a href="" tal:attributes="href string:${context/absolute_url}/editorga/${orga/organization_id}/organizations_form">
+                    <a href="" tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/organizations_form">
                     <span><tal:block tal:content="orga/name">name</tal:block></span>
                 </a>
             </td>

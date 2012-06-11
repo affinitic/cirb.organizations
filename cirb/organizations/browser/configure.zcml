@@ -8,7 +8,7 @@
         directory="scripts"
         layer=".interfaces.IOrganizationsLayer"
         />
-    
+
     <include package="Products.CMFCore" 
         file="permissions.zcml" />
 
@@ -20,7 +20,7 @@
         allowed_interface=".interfaces.ISearch"
         permission="zope.Public"
         />
-  
+
     <browser:defaultView
         for=".interfaces.ISearch"
         name="organizations_search" />
@@ -47,7 +47,7 @@
         template="templates/manage.pt"
         permission="cmf.ModifyPortalContent"
         />
-    
+
     <browser:page
         for="*"
         name="organizations_delete"
@@ -59,9 +59,27 @@
     <!-- Used to gis -->
     <browser:page
         for="*"
-        name="get_json"
+        name="json"
         class=".organizationssearch.SearchView"
-        attribute="get_json"
+        attribute="json"
+        permission="zope.Public"
+        />
+
+    <browser:page
+        for="*"
+        name="oview"
+        class=".organizationsmanage.OView"
+        template="templates/oview.pt"
+        permission="zope.Public"
+        />
+
+    <browser:viewlet  
+        name="plone.app.i18n.locales.languageselector"
+        for="*"
+        layer=".interfaces.IOrganizationsLayer"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".viewlets.LanguageSelector"
+        template="templates/languageselector.pt"
         permission="zope.Public"
         />
 

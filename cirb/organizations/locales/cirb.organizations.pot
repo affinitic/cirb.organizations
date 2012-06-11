@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Wed Feb 29 10:38:56 2012\n"
+"POT-Creation-Date: Wed Jun  6 16:13:01 2012\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -23,268 +23,276 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: zope/app/locales/extract.py\n"
 
-#: cirb.organizations:/browser/interfaces.py:104
-msgid "phone"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:105
-msgid "fax"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:106
-msgid "email"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:14
-#: cirb.organizations:/browser/organizationssearch.py:41
-msgid "Search"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:24
-msgid "ASBL"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:25
-msgid "SPRL"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:26
-msgid "Pouvoir Publique"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:27
-msgid "Autres"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:31
-msgid "Fran\303\247ais"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:32
-msgid "Neerlandais"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:39
-msgid "Organization name"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:41
-msgid "Logo"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:42
-msgid "Picture"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:44
-msgid "Website"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:45
-msgid "Language"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:46
-msgid "Status"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:47
-msgid "Other status"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:48
-msgid "Objectif"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:49
-msgid "Comments"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:55
-msgid "Street"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:56
-msgid "Number"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:57
-msgid "Post Code"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:58
-msgid "Municipality"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:61
-msgid "welcome"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:62
-msgid "language_training"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:63
-msgid "plastic_art"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:64
-msgid "scenic_art"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:65
-msgid "social_cohesion"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:66
-msgid "legal_advice"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:67
-msgid "culture"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:68
-msgid "danse"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:69
-msgid "sustainable_development"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:70
-msgid "employment"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:71
-msgid "childhood"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:72
-msgid "education"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:73
-msgid "envrironment"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:74
-msgid "body_language"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:75
-msgid "familly"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:76
-msgid "training"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:77
-msgid "handicap"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:78
-msgid "information"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:79
-msgid "it"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:80
-msgid "youth"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:81
-msgid "accomodation"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:82
-msgid "music"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:83
-msgid "social_restaurant"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:84
-msgid "mental_health"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:85
-msgid "health"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:86
-msgid "solidarity"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:87
-msgid "tutoring"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:88
-msgid "sport"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:89
-msgid "third_age"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:90
-msgid "other"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:94
 #: cirb.organizations:/browser/interfaces.py:100
-msgid "title"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:95
-#: cirb.organizations:/browser/interfaces.py:101
-msgid "first_name"
-msgstr ""
-
-#: cirb.organizations:/browser/interfaces.py:96
-#: cirb.organizations:/browser/interfaces.py:102
+#: cirb.organizations:/browser/interfaces.py:107
 msgid "second_name"
 msgstr ""
 
-#: cirb.organizations:/browser/interfaces.py:97
-#: cirb.organizations:/browser/interfaces.py:103
+#: cirb.organizations:/browser/interfaces.py:101
+#: cirb.organizations:/browser/interfaces.py:108
 msgid "function"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:19
-msgid "Address"
+#: cirb.organizations:/browser/interfaces.py:109
+msgid "phone"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:24
-msgid "Organization Information"
+#: cirb.organizations:/browser/interfaces.py:110
+msgid "fax"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:53
+#: cirb.organizations:/browser/interfaces.py:111
+msgid "email"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:118
+msgid "Objectif"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:119
+msgid "Comments"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:18
+#: cirb.organizations:/browser/organizationssearch.py:40
+msgid "Search"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:27
+msgid "ASBL"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:28
+msgid "SPRL"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:29
+msgid "Pouvoir Publique"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:30
+msgid "Autres"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:34
+msgid "Fran\303\247ais"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:35
+msgid "N\303\251erlandais"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:43
+msgid "Organization name"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:45
+msgid "Logo"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:46
+msgid "Picture"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:48
+msgid "Website"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:49
+msgid "Language"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:50
+msgid "Status"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:51
+msgid "Other status"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:58
+msgid "Street"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:59
+msgid "Number"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:60
+msgid "Post Code"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:61
+msgid "Municipality"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:65
+msgid "welcome"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:66
+msgid "language_training"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:67
+msgid "plastic_art"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:68
+msgid "scenic_art"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:69
+msgid "social_cohesion"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:70
+msgid "legal_advice"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:71
+msgid "culture"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:72
+msgid "danse"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:73
+msgid "sustainable_development"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:74
+msgid "employment"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:75
+msgid "childhood"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:76
+msgid "education"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:77
+msgid "envrironment"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:78
+msgid "body_language"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:79
+msgid "familly"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:80
+msgid "training"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:81
+msgid "handicap"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:82
+msgid "information"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:83
+msgid "it"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:84
+msgid "youth"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:85
+msgid "accomodation"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:86
+msgid "music"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:87
+msgid "social_restaurant"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:88
+msgid "mental_health"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:89
+msgid "health"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:90
+msgid "solidarity"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:91
+msgid "tutoring"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:92
+msgid "sport"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:93
+msgid "third_age"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:94
+msgid "other"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:98
+#: cirb.organizations:/browser/interfaces.py:105
+msgid "title"
+msgstr ""
+
+#: cirb.organizations:/browser/interfaces.py:99
+#: cirb.organizations:/browser/interfaces.py:106
+msgid "first_name"
+msgstr ""
+
+#: cirb.organizations:/browser/organizationsform.py:105
 msgid "Category"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:59
-msgid "Person in charge"
+#: cirb.organizations:/browser/organizationsform.py:121
+msgid "Descritpion and comments"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:65
-msgid "Person for contact"
-msgstr ""
-
-#: cirb.organizations:/browser/organizationsform.py:71
+#: cirb.organizations:/browser/organizationsform.py:136
 msgid "Organization"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationssearch.py:18
+#: cirb.organizations:/browser/organizationsform.py:21
+msgid "Address"
+msgstr ""
+
+#: cirb.organizations:/browser/organizationsform.py:27
+msgid "Organization Information"
+msgstr ""
+
+#: cirb.organizations:/browser/organizationsform.py:66
+msgid "Person in charge"
+msgstr ""
+
+#: cirb.organizations:/browser/organizationsform.py:82
+msgid "Person for contact"
+msgstr ""
+
+#: cirb.organizations:/browser/organizationsmanage.py:51
+msgid "The organization {0} is deleted"
+msgstr ""
+
+#: cirb.organizations:/browser/organizationssearch.py:20
 msgid "Organization search"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationssearch.py:39
+#: cirb.organizations:/browser/organizationssearch.py:38
 msgid "No organization found."
 msgstr ""
 

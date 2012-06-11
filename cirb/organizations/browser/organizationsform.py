@@ -5,8 +5,9 @@ import transaction
 from plone.app.z3cform.layout import FormWrapper
 from collective.z3cform.wizard import wizard
 from plone.z3cform.fieldsets import group
-#from plone.namedfile.field import NamedImage
+from plone.namedfile.field import NamedImage
 from plone.namedfile import file
+#from plone.formwidget.namedfile import NamedFileWidget
 from cirb.organizations.traversal import OrganizationWrapper
 from cirb.organizations import organizationsMessageFactory as _
 from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, AdditionalInformation, Association
@@ -32,7 +33,7 @@ class OrganizationsStep(wizard.GroupStep):
     def load(self, context):
         data = self.getContent()
         for field in self.fields:
-            if field == 'logo' or field == 'picture':
+            if isinstance(self.fields[field].field, NamedImage):
                 blob = getattr(context, field, None)
                 if blob:
                     data[field] = file.NamedImage(data=blob)
@@ -173,6 +174,20 @@ class Wizard(wizard.Wizard):
         return self.action
         #return self.context.absolute_url() + '/' + self.__name__
 
+    def translate_url(self):
+        import pdb; pdb.set_trace()
+        from Acquisition import aq_inner
+        context = aq_inner(self.context)
+        if context.getLanguage() == 'fr':
+            view = context.getTranslation('nl')
+            absolute_url = "{0}/organizations_form?set_language=nl".format(view.absolute_url())
+        else:
+            view = context.getTranslation('fr')
+            absolute_url = "{0}/organizations_form?set_language=fr".format(view.absolute_url())
+
+        return absolute_url
 
 class WizardView(FormWrapper):
     form = Wizard
+
+    

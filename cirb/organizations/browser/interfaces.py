@@ -9,8 +9,10 @@ from plone.namedfile import field
 from cirb.organizations import organizationsMessageFactory as _
 from z3c.form import interfaces
 
+
 class IOrganizationsLayer(Interface):
     """A layer specific for this add-on product."""
+
 
 class ISearch(IOrganizationsLayer):
     search = schema.TextLine(title=_(u'Search'), required=False)
@@ -33,6 +35,7 @@ LANG = Terms([
     Terms.createTerm('nl', 'nl', _(u'Néerlandais')),
     ])
 
+
 class IOrganizations(Interface):
     """
     Organizations view interface
@@ -50,11 +53,13 @@ class IOrganizations(Interface):
     x = schema.TextLine(title=u"x", required=True)
     y = schema.TextLine(title=u"y", required=True)
 
+
 class IAddress(Interface):
     street = schema.TextLine(title=_(u"Street"), max_length=255)
     num = schema.TextLine(title=_(u"Number"), max_length=10)
     post_code = schema.TextLine(title=_(u"Post Code"), max_length=10)
     municipality = schema.TextLine(title=_(u"Municipality"), max_length=255)
+
 
 class ICategory(Interface):
     welcome = schema.Bool(title=_(u"welcome"))
@@ -95,6 +100,7 @@ class IInCharge(Interface):
     second_name = schema.TextLine(title=_(u"second_name"), max_length=255)
     function = schema.TextLine(title=_(u"function"), required=False, max_length=255)
 
+
 class IContact(Interface):
     title = schema.TextLine(title=_(u"title"), required=False, max_length=255)
     first_name = schema.TextLine(title=_(u"first_name"), max_length=255)
@@ -107,7 +113,7 @@ class IContact(Interface):
                         constraint=re.compile('^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE).match)
     # add address 
 
+
 class IAdditionalInformation(Interface):
     objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=1024) 
-    comments = schema.Text(title=_(u"Comments"), required=False, max_length=1024) 
-
+    comments = schema.Text(title=_(u"Comments"), required=False, max_length=1024)

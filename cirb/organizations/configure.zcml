@@ -37,6 +37,6 @@
 
   <grok:grok package=".traversal" />
   
-  <adapter factory=".traversal.WizardWidgetTraversal" name="widget" /> 
+  <!--adapter factory=".traversal.WizardWidgetTraversal" name="widget" /-->
 
 </configure>
