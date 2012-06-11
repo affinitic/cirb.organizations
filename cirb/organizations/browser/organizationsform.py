@@ -174,18 +174,17 @@ class Wizard(wizard.Wizard):
         return self.action
         #return self.context.absolute_url() + '/' + self.__name__
 
-    def translate_url(self):
-        import pdb; pdb.set_trace()
-        from Acquisition import aq_inner
-        context = aq_inner(self.context)
-        if context.getLanguage() == 'fr':
-            view = context.getTranslation('nl')
-            absolute_url = "{0}/organizations_form?set_language=nl".format(view.absolute_url())
-        else:
-            view = context.getTranslation('fr')
-            absolute_url = "{0}/organizations_form?set_language=fr".format(view.absolute_url())
+    #def translate_url(self):
+    #    from Acquisition import aq_inner
+    #    context = aq_inner(self.context)
+    #    if context.getLanguage() == 'fr':
+    #        view = context.getTranslation('nl')
+    #        absolute_url = "{0}/organizations_form?set_language=nl".format(view.absolute_url())
+    #    else:
+    #        view = context.getTranslation('fr')
+    #        absolute_url = "{0}/organizations_form?set_language=fr".format(view.absolute_url())
 
-        return absolute_url
+    #    return absolute_url
 
 class WizardView(FormWrapper):
     form = Wizard

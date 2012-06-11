@@ -79,7 +79,6 @@
         layer=".interfaces.IOrganizationsLayer"
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         class=".viewlets.LanguageSelector"
-        template="templates/languageselector.pt"
         permission="zope.Public"
         />
 

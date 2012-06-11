@@ -2,9 +2,9 @@
 import re
 from zope.publisher.interfaces.http import IHTTPRequest
 from zope.publisher.interfaces import IPublishTraverse
-from zope.publisher.interfaces.browser import IBrowserRequest
+#from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.interface import implements
-from zope.component import adapts
+#from zope.component import adapts
 from five import grok
 from z3c.saconfig import Session
 
@@ -19,6 +19,7 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from Products.CMFPlone.interfaces import IHideFromBreadcrumbs
 from Products.LinguaPlone.interfaces import ITranslatable
+
 
 def isInt(name):
     m = re.compile(r'^\d+$')
@@ -38,7 +39,7 @@ class OrganizationWrapper(Implicit):
 
     def __init__(self, organization):
         self._organization = organization
-        initlogo = self._organization.logo 
+        initlogo = self._organization.logo
         if not initlogo:
             self._logo = file.NamedImage()
         else:
@@ -48,7 +49,6 @@ class OrganizationWrapper(Implicit):
             self._picture = file.NamedImage()
         else:
             self._picture = file.NamedImage(data=initpicture)
-
 
     security.declarePublic('logo')
     @property
@@ -81,19 +81,24 @@ class OrganizationWrapper(Implicit):
         return self.__parent__.getPhysicalPath() + (self.getId(),)
 
     def getTranslation(self):
+        """ return id of the transalted organization or None """
+        import pdb; pdb.set_trace()
         session = Session()
         query1 = session.query(Association).filter(Association.canonical_id == self.organization_id).filter(Association.association_type == 'lang')
         query2 = session.query(Association).filter(Association.translated_id == self.organization_id).filter(Association.association_type == 'lang')
         query = query1.union(query2)
         assoc = query.all()
+        if len(assoc) > 1:
+            raise IndexError # to many translation for this organization
+        if len(assoc) == 0:
+            return None
 
-        import pdb; pdb.set_trace()
-        return
-
+        organization_ids = [assoc[0].canonical_id, assoc[0].translated_id]
+        organization_ids.remove(self.organization_id)
+        return organization_ids.pop()
 
 from AccessControl.class_init import InitializeClass
 InitializeClass(OrganizationWrapper)
-
 
 
 class OrganizationTraversable(TraversableItem):
