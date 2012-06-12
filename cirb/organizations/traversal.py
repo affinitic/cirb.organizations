@@ -13,7 +13,7 @@ from OFS.interfaces import ITraversable
 from Acquisition import Implicit
 from .browser.interfaces import ISearch
 from .interfaces import IOrganization
-from cirb.organizations.content.organization import Organization, Association
+from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, AdditionalInformation, Association
 from plone.namedfile import file
 from plone.namedfile.interfaces import IImageScaleTraversable
 from AccessControl.SecurityInfo import ClassSecurityInfo
@@ -75,27 +75,59 @@ class OrganizationWrapper(Implicit):
         return self._organization.name
 
     def absolute_url(self):
-        return "{0}/{1}".format(self.__parent__.absolute_url(), self.getId())
+        container = self.aq_parent.aq_parent
+        translatedContainer = container.getTranslation(self.language)
+        return "/".join((translatedContainer.absolute_url(),
+                         'org',
+                         self.getId()))
 
     def getPhysicalPath(self):
         return self.__parent__.getPhysicalPath() + (self.getId(),)
 
-    def getTranslation(self):
-        """ return id of the transalted organization or None """
-        import pdb; pdb.set_trace()
-        session = Session()
-        query1 = session.query(Association).filter(Association.canonical_id == self.organization_id).filter(Association.association_type == 'lang')
-        query2 = session.query(Association).filter(Association.translated_id == self.organization_id).filter(Association.association_type == 'lang')
-        query = query1.union(query2)
-        assoc = query.all()
-        if len(assoc) > 1:
-            raise IndexError # to many translation for this organization
-        if len(assoc) == 0:
-            return None
+    # ITranslatable
 
-        organization_ids = [assoc[0].canonical_id, assoc[0].translated_id]
-        organization_ids.remove(self.organization_id)
-        return organization_ids.pop()
+    def Language(self):
+        return self._organization.language
+
+    def _wrapOrganization(self, organization):
+        parent = self.aq_parent
+        return OrganizationWrapper(organization).__of__(parent)
+
+    def getTranslation(self, language):
+        """ return id of the transalted organization or None """
+        translation = self._organization.get_translation()
+        if translation.language == language:
+            return self._wrapOrganization(translation)
+
+    def getTranslations(self, include_canonical=True, review_state=True,
+                          _is_canonical=None):
+        """Returns a dict of {lang : [object, wf_state]}.
+          If review_state is False, returns a dict of {lang : object}
+        """
+        translation = self._wrapOrganization(self._organization.get_translation())
+        if review_state:
+            return {translation.language: [translation, None]}
+        else:
+            return {translation.language: translation}
+
+    def hasTranslation(self, language):
+        return bool(self._organization.get_translation())
+
+    def addTranslation(self, language):
+        organization = Organization(address=Address(), category=Category(), person_incharge=InCharge(), person_contact=Contact(), additionalinfo=AdditionalInformation())
+        organization.name = self._organization.name
+        organization.language = language
+        session = Session()
+        session.add(organization)
+        session.flush()
+        canonical_id = self.getId()
+        assoc = Association(association_type="lang")
+        assoc.translated_id = organization.organization_id
+        assoc.canonical_id = canonical_id
+        session.add(assoc)
+        session.flush()
+
+
 
 from AccessControl.class_init import InitializeClass
 InitializeClass(OrganizationWrapper)
