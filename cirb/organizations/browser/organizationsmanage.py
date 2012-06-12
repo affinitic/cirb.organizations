@@ -97,7 +97,6 @@ class OView(BrowserView):
         lang = self.request.get("set_language")
         if lang:
             #redirect = self.context.getTranslation(lang)
-            #import pdb; pdb.set_trace()
             #return self.request.RESPONSE.redirect(redirect)
             pass
 
