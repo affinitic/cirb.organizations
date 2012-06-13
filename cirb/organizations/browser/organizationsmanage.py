@@ -89,17 +89,18 @@ def delete_association(ids):
 from zope.interface import implements
 from plone.namedfile.interfaces import IImageScaleTraversable
 
+
 class OView(BrowserView):
     implements(IImageScaleTraversable)
 
     def __call__(self, *args, **kwargs):
         lang = self.request.get("set_language")
         if lang:
-            redirect = self.context.getTranslation(lang)
-            import pdb; pdb.set_trace()
-            return self.request.RESPONSE.redirect(redirect)
+            #redirect = self.context.getTranslation(lang)
+            #return self.request.RESPONSE.redirect(redirect)
+            pass
 
-        return super(OView,self).__call__(args, kwargs)
+        return super(OView, self).__call__(args, kwargs)
 
     def __init__(self, context, request):
         self.context = context
