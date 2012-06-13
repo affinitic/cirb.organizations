@@ -21,13 +21,52 @@ i18n:domain="cirb.organizations">
 <body>
 
 <div metal:fill-slot="main"  tal:attributes="data-lang context/Language; data-x context/x; data-y context/y" class="data">
-    <h1 i18n:translate="Fiche">Fiche</h1>
-    <div class="content-left">
+    <a href="javascript:this.print();" class="printlink"><img src="#" alt="Print" class="print" /></a>
+    <h1 i18n:translate="Fiche" class="documentFirstHeading">Fiche</h1>
+    <div class="content-left"> 
+<!-- Code used in template HTML/CSS -->
+<!--
+            <img src="fiche-1.jpg" alt="Lorem ipsum" class="fiche-img" />
+            <h2>Espace Senghor</h2>
+            <p class="coord">Chaussée de Wavre<br />
+              02 230 31 40<br />
+              <a href="#">info@senghor.be</a><br />
+              <a href="#">www.senghor.be</a></p>
+            <div class="visualClear"></div>
+            <div class="infos-sup">
+              <h3>Responsable de l'organisme</h3>
+              <p>Nom : Mme Lorem<br />
+                Fonction : Présidente</p>
+              <h3>Personne de contact</h3>
+              <p>Nom : Mme Ipsum<br />
+                Fonction : Secrétaire<br />
+                Adresse de correspondance : Avenue d'Auderghem 10 - 1040 Etterbeek<br />
+                Numéro de téléphone : 02 123 45 67<br />
+                Numéro de fax : 02 123 45 67<br />
+                E-mail : <a href="#">dipsum@senghor.be</a><br />
+                Lieu(x) où se déroule(nt) les activités : Espace Senghor</p>
+              <h3>Catégories d'activités</h3>
+              <p>emploi, culture, informatique, jeunesse</p>
+              <h3>Objectifs de l'organisme, type d'activités et public-cible</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do elusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisit ut aliquip ex ea commodo consequat.</p>
+              <h3>Commentaires</h3>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+-->
         <img tal:replace="structure context/@@images/logo" width="200px" />
         <h2 class="name" tal:content="context/name"></h2>
-        <div class="address">
+        <p class="coord">
             <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
-            <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span>
+            <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
+            <span i18n:translate="Tél.">tel</span><span tal:content="context/person_contact/phone">phone</span><br />
+            <span tal:content="context/person_contact/email">email</span><br />
+            <span tal:content="context/website">website</span>
+        </p>
+        <div class="visualClear"></div>
+        <div class="infos-sup">
+            <h3 i18n:translate="Responsable de l'organisme">Responsable de l'organisme</h3>
+            <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span><br />
+            <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_incharge/function"></span></p>
+            <h3 i18n:translate="Personne de contact">Personne de contact</h3>
         </div>
 
         <div><span i18n:translate="Tél.">tel</span><span tal:content="context/person_contact/phone">phone</span></div>

@@ -2,6 +2,8 @@
 <div class="manage-orga">
     <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form"><tal:block i18n:translate="add_orga"> add orga</tal:block></a>&nbsp;&nbsp;&nbsp;
     <a href="" tal:attributes="href string:${context/absolute_url}/organizations_manage"><tal:block i18n:translate="maange_orga">manage orga</tal:block></a>
+
+<div id="search-box"></div>
 </div>
 
 <input type="submit" name="A" />
@@ -12,7 +14,7 @@
 <div tal:condition="view/get_results" class="orga_search">
     <ul>
         <li class="orga" tal:repeat="orga view/results">
-            <img tal:attributes="src python:view.img('logo', orga.organization_id)" width="150px" />
+            <img tal:attributes="src python:view.img('logo', orga.organization_id)" width="150px" class="fiche-img"/>
             <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview" ><div tal:content="orga/name">name</div></a>
             <div class="address">
                 <span tal:content="orga/address/num">num</span>,&nbsp;<span tal:content="orga/address/street">street</span><br />
