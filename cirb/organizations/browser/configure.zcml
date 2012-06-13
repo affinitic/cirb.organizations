@@ -8,6 +8,13 @@
         directory="scripts"
         layer=".interfaces.IOrganizationsLayer"
         />
+    
+    <browser:resourceDirectory
+        name="cirb.organizations.img"
+        directory="img"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
 
     <include package="Products.CMFCore" 
         file="permissions.zcml" />

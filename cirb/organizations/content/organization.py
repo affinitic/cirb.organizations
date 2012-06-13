@@ -110,7 +110,7 @@ class Category(ORMBase):
     accomodation = Column(Boolean, default=False)
     music = Column(Boolean, default=False)
     social_restaurant = Column(Boolean, default=False)
-    mental_health = Column(Boolean, default=False)
+    #mental_health = Column(Boolean, default=False)
     health = Column(Boolean, default=False)
     solidarity = Column(Boolean, default=False)
     tutoring = Column(Boolean, default=False)

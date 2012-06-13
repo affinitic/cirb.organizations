@@ -6,7 +6,7 @@ from plone.app.z3cform.layout import FormWrapper
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from cirb.organizations import organizationsMessageFactory as _
-from cirb.organizations.content.organization import Organization
+from cirb.organizations.content.organization import Organization, Category
 from cirb.organizations.browser.interfaces import ISearch
 
 import json
@@ -17,6 +17,7 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 
 from zope.interface import implements
 SESSION_JSON = "search_json"
+SESSION_SEARCH = "search_term"
 
 
 class Search(form.Form):
@@ -39,9 +40,14 @@ class Search(form.Form):
                 self.request.SESSION.delete(SESSION_JSON)
 
             self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id, 'name':orga.name, 'x': orga.x, 'y':orga.y}} for orga in self.results])
+            self.request.SESSION.set(SESSION_SEARCH, search)
     
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
+
+    def get_categories(self):
+        categories = [cat for cat in dir(Category) if not cat.startswith("_") and not cat[-3:] == "_id"]
+        return categories
 
     @button.buttonAndHandler(_(u'Search'))
     def handleSubmit(self, action):
@@ -55,23 +61,14 @@ class Search(form.Form):
 
             self.search(search_text)
     
-    @button.buttonAndHandler(u'A')
-    def handleSubmit(self, action):
-        data, errors = self.extractData()
-        if not errors:
-            self.search('a%')
-    
-    @button.buttonAndHandler(u'B')
-    def handleSubmit(self, action):
-        data, errors = self.extractData()
-        if not errors:
-            self.search('b%')
-    
-    @button.buttonAndHandler(u'C')
-    def handleSubmit(self, action):
-        data, errors = self.extractData()
-        if not errors:
-            self.search('c%')
+    def js(self):
+        return """
+            $(document).ready(function() {
+                $('.letters').click(function () {
+                    $('form').submit();
+                });
+            });
+            """
 
     def get_results(self):
         if len(self.results) == 0:
@@ -80,7 +77,6 @@ class Search(form.Form):
 
     def folder_url(self):
         return self.context.absolute_url()
-
 
     def img(self, name, orga_id):
         session = Session()
@@ -93,9 +89,69 @@ class Search(form.Form):
             src = "{0}/org/{1}/@@images/{2}.{3}".format(self.context.absolute_url(), orga.organization_id, name, extension)
         return src
 
+    @button.buttonAndHandler(u'A')
+    def handleSubmit(self, action):
+        self.search('a%')
+    
+    @button.buttonAndHandler(u'B')
+    def handleSubmit(self, action):
+        self.search('b%')
+    
+    @button.buttonAndHandler(u'C')
+    def handleSubmit(self, action):
+        self.search('c%')
+    
+    @button.buttonAndHandler(u'D')
+    def handleSubmit(self, action):
+        self.search('d%')
+
+    @button.buttonAndHandler(u'E')
+    def handleSubmit(self, action):
+        self.search('e%')
+
+    @button.buttonAndHandler(u'F')
+    def handleSubmit(self, action):
+        self.search('f%')
+
+    @button.buttonAndHandler(u'G')
+    def handleSubmit(self, action):
+        self.search('g%')
+
+    @button.buttonAndHandler(u'H')
+    def handleSubmit(self, action):
+        self.search('h%')
+
+    @button.buttonAndHandler(u'I')
+    def handleSubmit(self, action):
+        self.search('i%')
+
+    @button.buttonAndHandler(u'J')
+    def handleSubmit(self, action):
+        self.search('j%')
+    
+    @button.buttonAndHandler(u'K')
+    def handleSubmit(self, action):
+        self.search('k%')
+
+    @button.buttonAndHandler(u'L')
+    def handleSubmit(self, action):
+        self.search('l%')
+    
+    @button.buttonAndHandler(u'M')
+    def handleSubmit(self, action):
+        self.search('m%')
+
+    @button.buttonAndHandler(u'N')
+    def handleSubmit(self, action):
+        self.search('n%')
+
 
 class SearchView(FormWrapper):
     form = Search
+    
+    def __call__(self):
+        
+        return super(SearchView, self).__call__()
 
     def json(self):
         ids = self.request.SESSION.get(SESSION_JSON)
