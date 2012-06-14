@@ -3,7 +3,7 @@
     <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form"><tal:block i18n:translate="add_orga"> add orga</tal:block></a>&nbsp;&nbsp;&nbsp;
     <a href="" tal:attributes="href string:${context/absolute_url}/organizations_manage"><tal:block i18n:translate="maange_orga">manage orga</tal:block></a>
 
-<div id="search-box"></div>
+<div id="search"></div>
 </div>
 
 <input type="submit" name="A" />
