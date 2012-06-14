@@ -21,6 +21,7 @@ i18n:domain="cirb.organizations">
 <body>
 
 <div metal:fill-slot="main"  tal:attributes="data-lang context/Language; data-x context/x; data-y context/y" class="data">
+<div id="oview"></div>
     <a href="javascript:this.print();" class="printlink"><img src="#" alt="Print" class="print" /></a>
     <h1 i18n:translate="Fiche" class="documentFirstHeading">Fiche</h1>
     <div class="content-left"> 
@@ -51,6 +52,7 @@ i18n:domain="cirb.organizations">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do elusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisit ut aliquip ex ea commodo consequat.</p>
               <h3>Commentaires</h3>
               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
 -->
         <img tal:replace="structure context/@@images/logo" width="200px" />
         <h2 class="name" tal:content="context/name"></h2>
@@ -66,42 +68,38 @@ i18n:domain="cirb.organizations">
             <h3 i18n:translate="Responsable de l'organisme">Responsable de l'organisme</h3>
             <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span><br />
             <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_incharge/function"></span></p>
+
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
-        </div>
+            <p><span i18n:translate="Tél.">tel</span><span tal:content="context/person_contact/phone">phone</span><<br />
+            <span tal:content="context/person_contact/email">email</span><br />
+            <span tal:content="context/website">website</span>
 
-        <div><span i18n:translate="Tél.">tel</span><span tal:content="context/person_contact/phone">phone</span></div>
-        <div tal:content="context/person_contact/email">email</div>
-        <div tal:content="context/website">website</div>
-
-
-        <h3 i18n:translate="Responsable de l'organisme">Responsable de l'organisme</h3>
-        <div><span i18n:translate="Nom :">Nom :</span><span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span></div>
-        <div><span i18n:translate="Fonction :">Fonction :</span><span tal:content="context/person_incharge/function"></span></div>
+            <h3 i18n:translate="Responsable de l'organisme">Responsable de l'organisme</h3>
+            <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span><br />
+            <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_incharge/function"></span></p>
         
-        <h3 i18n:translate="Personne de contact">Personne de contact</h3>
-        <div>
-            <span i18n:translate="Nom :">Nom :</span>
-            <span tal:content="context/person_contact/first_name"></span>&nbsp;
-            <span tal:content="context/person_contact/second_name"></span>
+            <h3 i18n:translate="Personne de contact">Personne de contact</h3>
+            <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_contact/first_name"></span>&nbsp;<span tal:content="context/person_contact/second_name"></span><br />
+            <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_contact/function"></span><br />
+            <span i18n:translate="Numéro de téléphone :">phone : </span><span tal:content="context/person_contact/phone"></span><br />
+            <span i18n:translate="Numéro de fax :">fax : </span><span tal:content="context/person_contact/fax"></span><br />
+            <span i18n:translate="E-mail :">mail : </span><span tal:content="context/person_contact/email"></span></p>
+            <span i18n:translate="Lieux ou se déroulent les activités">lieux</span>
+            <span class="address">
+                <span tal:content="context/person_contact/address/num">num</span>,&nbsp;<span tal:content="context/person_contact/address/street">street</span><br />
+                <span tal:content="context/person_contact/address/post_code">post_code</span>&nbsp;<span tal:content="context/person_contact/address/municipality"></span>
+            </span>
+
+            <h3 i18n:translate="Catégorie d'activités">Catégorie d'activités</h3>
+
+
+            <h3 i18n:translate="Objectifs de l'organisme">Catégorie d'activités</h3>
+            <p tal:content="context/additionalinfo/objectif"></p>
+
+            <h3 i18n:translate="Commentaires">Commentaires</h3>
+            <p tal:content="context/additionalinfo/comments"></p>
+
         </div>
-        <div><span i18n:translate="Fonction :">Fonction :</span><span tal:content="context/person_contact/function"></span></div>
-        <div><span i18n:translate="Numéro de téléphone :">phone :</span><span tal:content="context/person_contact/phone"></span></div>
-        <div><span i18n:translate="Numéro de fax :">fax :</span><span tal:content="context/person_contact/fax"></span></div>
-        <div><span i18n:translate="E-mail :">mail :</span><span tal:content="context/person_contact/email"></span></div>
-        <div i18n:translate="Lieux ou se déroulent les activités">lieux</div>
-        <div class="address">
-            <span tal:content="context/person_contact/address/num">num</span>,&nbsp;<span tal:content="context/person_contact/address/street">street</span><br />
-            <span tal:content="context/person_contact/address/post_code">post_code</span>&nbsp;<span tal:content="context/person_contact/address/municipality"></span>
-        </div>
-
-        <h3 i18n:translate="Catégorie d'activités">Catégorie d'activités</h3>
-
-
-        <h3 i18n:translate="Objectifs de l'organisme">Catégorie d'activités</h3>
-        <div tal:content="context/additionalinfo/objectif"></div>
-
-        <h3 i18n:translate="Commentaires">Commentaires</h3>
-        <div tal:content="context/additionalinfo/comments"></div>
 
     </div>
 
