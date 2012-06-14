@@ -104,7 +104,7 @@ i18n:domain="cirb.organizations">
     </div>
 
     <div class="content-right">
-        <div id="urbis_map" style="width:350px; height:250px; border: solid #000 1px;"></div>
+        <div class="map-right"><div id="urbis_map" style="width:305px; height:304px; margin-left:auto !important; margin-right:auto !important;"></div></div>
         <div class="picture"><img tal:replace="structure context/@@images/picture" width="200px" /></div>
     </div>
 
