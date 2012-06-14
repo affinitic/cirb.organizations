@@ -18,6 +18,15 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 from zope.interface import implements
 SESSION_JSON = "search_json"
 SESSION_SEARCH = "search_term"
+ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+
+class LetterButton(button.Button):
+    pass
+   
+
+class CategoryButton(button.ImageButton):
+    pass
 
 
 class Search(form.Form):
@@ -33,21 +42,39 @@ class Search(form.Form):
     def search(self, search):
         session = Session()
         self.results = session.query(Organization).filter(func.lower(Organization.name).like('{0}'.format(search))).filter(Organization.language == self.context.Language()).all()
-
-        # add result in a session variable for the GIS Service
-        if 'SESSION' in self.request.keys():
-            if SESSION_JSON in self.request.SESSION.keys():
-                self.request.SESSION.delete(SESSION_JSON)
-
-            self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id, 'name':orga.name, 'x': orga.x, 'y':orga.y}} for orga in self.results])
-            self.request.SESSION.set(SESSION_SEARCH, search)
-    
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
 
     def get_categories(self):
         categories = [cat for cat in dir(Category) if not cat.startswith("_") and not cat[-3:] == "_id"]
+        categories.remove('metadata')
+        categories.remove('other')
+        if 'organization' in categories:
+            categories.remove('organization')
         return categories
+
+    def update(self):
+        for letter in ALPHABET:
+            letterbutton = LetterButton(letter, unicode(letter))
+            self.buttons = button.Buttons(self.buttons, letterbutton)
+        self.handlers.addHandler(LetterButton, button.Handler(LetterButton, self.handleLettersButton))
+        for cat in self.get_categories():
+            categorybutton = CategoryButton(name=cat, title=unicode(cat),
+                                            image=u"{0}.png".format(cat))
+            self.buttons = button.Buttons(self.buttons, categorybutton)
+        self.handlers.addHandler(CategoryButton, button.Handler(CategoryButton, self.handleCategoriesButton))
+        super(Search, self).update()
+    
+    def handleLettersButton(self, form, action):
+        self.search("{0}%".format(action.value.lower()))
+
+    def handleCategoriesButton(self, form, action):
+        print action.value
+        session = Session()
+        self.results = session.query(Organization).filter(Organization.category.has(getattr(Category, action.value) == True)).filter(Organization.language == self.context.Language()).all()
+        if len(self.results) == 0:
+            self.status = _(u"No organization found.")
+
 
     @button.buttonAndHandler(_(u'Search'))
     def handleSubmit(self, action):
@@ -61,18 +88,17 @@ class Search(form.Form):
 
             self.search(search_text)
     
-    def js(self):
-        return """
-            $(document).ready(function() {
-                $('.letters').click(function () {
-                    $('form').submit();
-                });
-            });
-            """
-
     def get_results(self):
+        if not 'SESSION' in self.request.keys():
+            return None
+        
+        if SESSION_JSON in self.request.SESSION.keys():
+            self.request.SESSION.delete(SESSION_JSON)
+         
         if len(self.results) == 0:
             return None
+
+        self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id, 'name':orga.name, 'x': orga.x, 'y':orga.y}} for orga in self.results])
         return self.results
 
     def folder_url(self):
@@ -88,63 +114,7 @@ class Search(form.Form):
             extension = namedimage.contentType.split('/')[-1].lower()
             src = "{0}/org/{1}/@@images/{2}.{3}".format(self.context.absolute_url(), orga.organization_id, name, extension)
         return src
-
-    @button.buttonAndHandler(u'A')
-    def handleSubmit(self, action):
-        self.search('a%')
     
-    @button.buttonAndHandler(u'B')
-    def handleSubmit(self, action):
-        self.search('b%')
-    
-    @button.buttonAndHandler(u'C')
-    def handleSubmit(self, action):
-        self.search('c%')
-    
-    @button.buttonAndHandler(u'D')
-    def handleSubmit(self, action):
-        self.search('d%')
-
-    @button.buttonAndHandler(u'E')
-    def handleSubmit(self, action):
-        self.search('e%')
-
-    @button.buttonAndHandler(u'F')
-    def handleSubmit(self, action):
-        self.search('f%')
-
-    @button.buttonAndHandler(u'G')
-    def handleSubmit(self, action):
-        self.search('g%')
-
-    @button.buttonAndHandler(u'H')
-    def handleSubmit(self, action):
-        self.search('h%')
-
-    @button.buttonAndHandler(u'I')
-    def handleSubmit(self, action):
-        self.search('i%')
-
-    @button.buttonAndHandler(u'J')
-    def handleSubmit(self, action):
-        self.search('j%')
-    
-    @button.buttonAndHandler(u'K')
-    def handleSubmit(self, action):
-        self.search('k%')
-
-    @button.buttonAndHandler(u'L')
-    def handleSubmit(self, action):
-        self.search('l%')
-    
-    @button.buttonAndHandler(u'M')
-    def handleSubmit(self, action):
-        self.search('m%')
-
-    @button.buttonAndHandler(u'N')
-    def handleSubmit(self, action):
-        self.search('n%')
-
 
 class SearchView(FormWrapper):
     form = Search
@@ -157,11 +127,7 @@ class SearchView(FormWrapper):
         ids = self.request.SESSION.get(SESSION_JSON)
         self.request.response.setHeader('Content-Type', "application/json")
         return list_to_json(ids)
-    
+
 
 def list_to_json(ids):
     return json.dumps(ids)
-
-from zope.component import provideAdapter
-from zope.publisher.interfaces.browser import IBrowserRequest
-provideAdapter(adapts=(ISearch, IBrowserRequest), provides=ISearch, factory=SearchView, name="organizations_search")

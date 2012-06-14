@@ -1,0 +1,182 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="cirb.organizations">
+
+    <browser:resource
+        name="youth.png"
+        image="img/youth.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="accomodation.png"
+        image="img/accomodation.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="body_language.png"
+        image="img/body_language.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="childhood.png"
+        image="img/childhood.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="culture.png"
+        image="img/culture.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="danse.png"
+        image="img/danse.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="employment.png"
+        image="img/employment.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="enseignement formation.png"
+        image="img/enseignement formation.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="envrironment.png"
+        image="img/envrironment.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="familly.png"
+        image="img/familly.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="handicap.png"
+        image="img/handicap.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="health.png"
+        image="img/health.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="information.png"
+        image="img/information.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="it.png"
+        image="img/it.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="language_training.png"
+        image="img/language_training.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="legal_advice.png"
+        image="img/legal_advice.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="music.png"
+        image="img/music.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="plastic_art.png"
+        image="img/plastic_art.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="scenic_art.png"
+        image="img/scenic_art.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="social_cohesion.png"
+        image="img/social_cohesion.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="social_restaurant.png"
+        image="img/social_restaurant.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="solidarity.png"
+        image="img/solidarity.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="sport.png"
+        image="img/sport.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="sustainable_development.png"
+        image="img/sustainable_development.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="third_age.png"
+        image="img/third_age.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="welcome.png"
+        image="img/welcome.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="education.png"
+        image="img/bibliotheque.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="training.png"
+        image="img/bibliotheque.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="tutoring.png"
+        image="img/bibliotheque.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+
+
+</configure>

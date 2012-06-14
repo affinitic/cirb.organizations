@@ -6,8 +6,6 @@
 <div id="search-box"></div>
 </div>
 
-<input type="submit" name="A" />
-<a class="letters" tal:attributes="href string:${context/absolute_url}/">A</a>
 
 
 <metal:use use-macro="context/@@ploneform-macros/titlelessform" />
@@ -33,9 +31,5 @@
     <div id="urbis_map" style="width:350px; height:250px; border: solid #000 1px;"></div>
 </div>
 
-<div>
-    <tal:block tal:repeat="cat view/get_categories">
-        <input type="image" tal:attributes="src string:${context/portal_url}/++resource++cirb.organizations.img/${cat}.png; alt cat" />
-    </tal:block>
-    <script type="text/javascript" tal:content="structure view/js"></script>
+<div class="categories">
 </div>

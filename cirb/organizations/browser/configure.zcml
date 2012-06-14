@@ -3,18 +3,19 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="cirb.organizations">
 
+    <include file="resources.zcml" />
+
     <browser:resourceDirectory
         name="cirb.organizations.scripts"
         directory="scripts"
         layer=".interfaces.IOrganizationsLayer"
         />
-    
+
     <browser:resourceDirectory
         name="cirb.organizations.img"
         directory="img"
         layer=".interfaces.IOrganizationsLayer"
         />
-
 
     <include package="Products.CMFCore" 
         file="permissions.zcml" />
@@ -96,5 +97,11 @@
         class=".translate.CreateOrganizationTranslation"
         permission="cmf.AddPortalContent"
         />
+
+    
+    <!--adapter for="zope.publisher.interfaces.browser.IBrowserRequest"
+        provides=".organizationssearch.ISearch"
+        factory=".organizationssearch.SearchView" 
+        /-->
 
 </configure>
