@@ -74,6 +74,17 @@ class Organization(ORMBase):
 
         return session.query(Organization).get(getattr(trans_orga, attr))
 
+    def get_categories(self):
+        session = Session()
+        cat = session.query(Category).filter(Category.organization_id == self.organization_id).all()
+        if len(cat) != 1:
+            raise IndexError('Only one Category class by organization is possible.')
+        categories = cat[0].get_list()
+        if cat[0].other:
+            categories.append(cat[0].other)
+
+        return ", ".join(categories)
+
 
 class Address(ORMBase):
     __tablename__ = 'address'
@@ -118,6 +129,18 @@ class Category(ORMBase):
     third_age = Column(Boolean, default=False)
     other = Column(String(255))
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
+    
+    attributes = ['welcome','language_training', 'plastic_art','scenic_art', 'social_cohesion', 'legal_advice', 'culture', 'danse', 'sustainable_development', 'employment', 'childhood',
+           'education', 'envrironment', 'body_language', 'familly', 'training', 'handicap', 'information', 'it', 'youth', 'accomodation', 'music', 'social_restaurant', 'health', 
+           'solidarity', 'tutoring', 'sport', 'third_age']
+
+    def get_list(self):
+        """ return true attributes (without other attribut."""
+        categories = []
+        for attribut in self.attributes:
+            if getattr(self, attribut) is True:
+                categories.append(attribut)
+        return categories
 
 
 class Person(AbstractConcreteBase, ORMBase):

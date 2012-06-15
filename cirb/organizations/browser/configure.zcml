@@ -81,15 +81,6 @@
         permission="zope.Public"
         />
 
-    <browser:viewlet
-        name="plone.app.i18n.locales.languageselector"
-        for="*"
-        layer=".interfaces.IOrganizationsLayer"
-        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-        class=".viewlets.LanguageSelector"
-        permission="zope.Public"
-        />
-
     <browser:page
         for="..interfaces.IOrganization"
         layer=".interfaces.IOrganizationsLayer"

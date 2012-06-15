@@ -10,6 +10,8 @@ from cirb.organizations import organizationsMessageFactory as _
 import transaction
 import logging
 #from zope.interface import implements
+from zope.interface import implements
+from plone.namedfile.interfaces import IImageScaleTraversable
 
 
 class ManageView(BrowserView):
@@ -86,21 +88,9 @@ def delete_association(ids):
         logger.error("There are {0} association with ids {1} and {2}").format(len(assoc), ids[0], ids[1])
         session.delete(query.first())
 
-from zope.interface import implements
-from plone.namedfile.interfaces import IImageScaleTraversable
-
 
 class OView(BrowserView):
     implements(IImageScaleTraversable)
-
-    def __call__(self, *args, **kwargs):
-        lang = self.request.get("set_language")
-        if lang:
-            #redirect = self.context.getTranslation(lang)
-            #return self.request.RESPONSE.redirect(redirect)
-            pass
-
-        return super(OView, self).__call__(args, kwargs)
 
     def __init__(self, context, request):
         self.context = context

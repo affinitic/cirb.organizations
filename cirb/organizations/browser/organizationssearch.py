@@ -46,12 +46,7 @@ class Search(form.Form):
             self.status = _(u"No organization found.")
 
     def get_categories(self):
-        categories = [cat for cat in dir(Category) if not cat.startswith("_") and not cat[-3:] == "_id"]
-        categories.remove('metadata')
-        categories.remove('other')
-        if 'organization' in categories:
-            categories.remove('organization')
-        return categories
+        return Category.attributes
 
     def update(self):
         for letter in ALPHABET:

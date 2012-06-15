@@ -104,17 +104,22 @@ class OrganizationWrapper(Implicit):
         """Returns a dict of {lang : [object, wf_state]}.
           If review_state is False, returns a dict of {lang : object}
         """
-        translation = self._wrapOrganization(self._organization.get_translation())
-        if review_state:
-            return {translation.language: [translation, None]}
-        else:
-            return {translation.language: translation}
+        trans = self._organization.get_translation()
+        if trans:
+            translation = self._wrapOrganization(trans)
+            if review_state:
+                return {translation.language: [translation, None]}
+            else:
+                return {translation.language: translation}
+        return {self._organization.language: self}
 
     def hasTranslation(self, language):
         return bool(self._organization.get_translation())
 
     def addTranslation(self, language):
-        organization = Organization(address=Address(), category=Category(), person_incharge=InCharge(), person_contact=Contact(), additionalinfo=AdditionalInformation())
+        organization = Organization(address=Address(), category=Category(),
+                                    person_incharge=InCharge(), person_contact=Contact(),
+                                    additionalinfo=AdditionalInformation())
         organization.name = self._organization.name
         organization.language = language
         session = Session()
@@ -126,7 +131,6 @@ class OrganizationWrapper(Implicit):
         assoc.canonical_id = canonical_id
         session.add(assoc)
         session.flush()
-
 
 
 from AccessControl.class_init import InitializeClass
