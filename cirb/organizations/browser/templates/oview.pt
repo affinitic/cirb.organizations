@@ -30,7 +30,7 @@ i18n:domain="cirb.organizations">
         <p class="coord">
             <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
             <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
-            <span i18n:translate="Tél.">tel</span><span tal:content="context/person_contact/phone">phone</span><br />
+            <span i18n:translate="Tel.">tel</span><span tal:content="context/person_contact/phone">phone</span><br />
             <span tal:content="context/person_contact/email">email</span><br />
             <span tal:content="context/website">website</span>
         </p>
@@ -41,7 +41,7 @@ i18n:domain="cirb.organizations">
             <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_incharge/function"></span></p>
 
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
-            <p><span i18n:translate="Tél.">tel</span><span tal:content="context/person_contact/phone">phone</span><br />
+            <p><span i18n:translate="Tel.">tel</span><span tal:content="context/person_contact/phone">phone</span><br />
             <span tal:content="context/person_contact/email">email</span><br />
             <span tal:content="context/website">website</span>
 
@@ -52,16 +52,16 @@ i18n:domain="cirb.organizations">
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
             <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_contact/first_name"></span>&nbsp;<span tal:content="context/person_contact/second_name"></span><br />
             <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_contact/function"></span><br />
-            <span i18n:translate="Numéro de téléphone :">phone : </span><span tal:content="context/person_contact/phone"></span><br />
-            <span i18n:translate="Numéro de fax :">fax : </span><span tal:content="context/person_contact/fax"></span><br />
+            <span i18n:translate="Numero de telephone :">phone : </span><span tal:content="context/person_contact/phone"></span><br />
+            <span i18n:translate="Numero de fax :">fax : </span><span tal:content="context/person_contact/fax"></span><br />
             <span i18n:translate="E-mail :">mail : </span><span tal:content="context/person_contact/email"></span></p>
-            <span i18n:translate="Lieux ou se déroulent les activités">lieux</span>
+            <span i18n:translate="Lieux ou se deroulent les activites">lieux</span>
             <span class="address">
                 <span tal:content="context/person_contact/address/num">num</span>,&nbsp;<span tal:content="context/person_contact/address/street">street</span><br />
                 <span tal:content="context/person_contact/address/post_code">post_code</span>&nbsp;<span tal:content="context/person_contact/address/municipality"></span>
             </span>
 
-            <h3 i18n:translate="Catégorie d'activités">Catégorie d'activités</h3>
+            <h3 i18n:translate="Categorie d'activites">Catégorie d'activités</h3>
             <p tal:content="context/get_categories"></p>
 
             <h3 i18n:translate="Objectifs de l'organisme">Objectifs de l'organisme</h3>
@@ -79,7 +79,7 @@ i18n:domain="cirb.organizations">
         <div class="picture"><img tal:replace="structure context/@@images/picture" width="200px" /></div>
         <div class="categories">
             <tal:block tal:repeat="cat python:context.category.get_list()">
-                <img tal:attributes="src string:{portal_url}/++resource++/${cat}.png" />
+                <img tal:attributes="src string:${portal_url}/++resource++${cat}.png" />
             </tal:block>
         </div>
     </div>

@@ -3,7 +3,7 @@
     <a href="" tal:attributes="href string:${context/absolute_url}/organizations_form"><tal:block i18n:translate="add_orga"> add orga</tal:block></a>&nbsp;&nbsp;&nbsp;
     <a href="" tal:attributes="href string:${context/absolute_url}/organizations_manage"><tal:block i18n:translate="maange_orga">manage orga</tal:block></a>
 
-<div id="search"></div>
+<div id="search">
 </div>
 
 
@@ -19,7 +19,7 @@
                 <span tal:content="orga/address/post_code">post_code</span>&nbsp;<span tal:content="orga/address/municipality"></span>
             </div>
 
-            <div><span i18n:translate="Tél.">tel</span><span tal:content="orga/person_contact/phone">phone</span></div>
+            <div><span i18n:translate="Tel.">tel</span><span tal:content="orga/person_contact/phone">phone</span></div>
             <div tal:content="orga/person_contact/email">email</div>
             <div tal:content="orga/website">website</div>
         </li>

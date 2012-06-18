@@ -111,7 +111,7 @@ class OrganizationWrapper(Implicit):
                 return {translation.language: [translation, None]}
             else:
                 return {translation.language: translation}
-        return {self._organization.language: self}
+        return {self.Language: self}
 
     def hasTranslation(self, language):
         return bool(self._organization.get_translation())

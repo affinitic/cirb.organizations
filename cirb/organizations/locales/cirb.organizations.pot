@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Wed Jun  6 16:13:01 2012\n"
+"POT-Creation-Date: Mon Jun 18 09:58:57 2012\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -54,7 +54,7 @@ msgid "Comments"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:18
-#: cirb.organizations:/browser/organizationssearch.py:40
+#: cirb.organizations:/browser/organizationssearch.py:74
 msgid "Search"
 msgstr ""
 
@@ -127,94 +127,117 @@ msgid "Municipality"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:65
+#: cirb.organizations:/content/organization.py:134
 msgid "welcome"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:66
+#: cirb.organizations:/content/organization.py:134
 msgid "language_training"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:67
+#: cirb.organizations:/content/organization.py:134
 msgid "plastic_art"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:68
+#: cirb.organizations:/content/organization.py:134
 msgid "scenic_art"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:69
+#: cirb.organizations:/content/organization.py:134
 msgid "social_cohesion"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:70
+#: cirb.organizations:/content/organization.py:134
 msgid "legal_advice"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:71
+#: cirb.organizations:/content/organization.py:134
 msgid "culture"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:72
+#: cirb.organizations:/content/organization.py:135
 msgid "danse"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:73
+#: cirb.organizations:/content/organization.py:135
 msgid "sustainable_development"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:74
+#: cirb.organizations:/content/organization.py:135
 msgid "employment"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:75
+#: cirb.organizations:/content/organization.py:135
 msgid "childhood"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:76
+#: cirb.organizations:/content/organization.py:135
 msgid "education"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:77
+#: cirb.organizations:/content/organization.py:135
 msgid "envrironment"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:78
+#: cirb.organizations:/content/organization.py:135
 msgid "body_language"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:79
+#: cirb.organizations:/content/organization.py:135
 msgid "familly"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:80
+#: cirb.organizations:/content/organization.py:136
 msgid "training"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:81
+#: cirb.organizations:/content/organization.py:136
 msgid "handicap"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:82
+#: cirb.organizations:/content/organization.py:136
 msgid "information"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:83
+#: cirb.organizations:/content/organization.py:136
 msgid "it"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:84
+#: cirb.organizations:/content/organization.py:136
 msgid "youth"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:85
+#: cirb.organizations:/content/organization.py:136
 msgid "accomodation"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:86
+#: cirb.organizations:/content/organization.py:136
 msgid "music"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:87
+#: cirb.organizations:/content/organization.py:136
 msgid "social_restaurant"
 msgstr ""
 
@@ -223,22 +246,27 @@ msgid "mental_health"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:89
+#: cirb.organizations:/content/organization.py:136
 msgid "health"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:90
+#: cirb.organizations:/content/organization.py:137
 msgid "solidarity"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:91
+#: cirb.organizations:/content/organization.py:137
 msgid "tutoring"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:92
+#: cirb.organizations:/content/organization.py:137
 msgid "sport"
 msgstr ""
 
 #: cirb.organizations:/browser/interfaces.py:93
+#: cirb.organizations:/content/organization.py:137
 msgid "third_age"
 msgstr ""
 
@@ -256,43 +284,44 @@ msgstr ""
 msgid "first_name"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:105
+#: cirb.organizations:/browser/organizationsform.py:106
 msgid "Category"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:121
+#: cirb.organizations:/browser/organizationsform.py:122
 msgid "Descritpion and comments"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:136
+#: cirb.organizations:/browser/organizationsform.py:137
 msgid "Organization"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:21
+#: cirb.organizations:/browser/organizationsform.py:22
 msgid "Address"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:27
+#: cirb.organizations:/browser/organizationsform.py:28
 msgid "Organization Information"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:66
+#: cirb.organizations:/browser/organizationsform.py:67
 msgid "Person in charge"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsform.py:82
+#: cirb.organizations:/browser/organizationsform.py:83
 msgid "Person for contact"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationsmanage.py:51
+#: cirb.organizations:/browser/organizationsmanage.py:53
 msgid "The organization {0} is deleted"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationssearch.py:20
+#: cirb.organizations:/browser/organizationssearch.py:35
 msgid "Organization search"
 msgstr ""
 
-#: cirb.organizations:/browser/organizationssearch.py:38
+#: cirb.organizations:/browser/organizationssearch.py:46
+#: cirb.organizations:/browser/organizationssearch.py:71
 msgid "No organization found."
 msgstr ""
 
@@ -315,5 +344,70 @@ msgstr ""
 #: cirb.organizations:/browser/templates/manage.pt:48
 #. Default: "Are you sure about this?"
 msgid "do-you-want-to-delete-this-organization"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:26
+msgid "Fiche"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:33
+#: cirb.organizations:/browser/templates/oview.pt:44
+#. Default: "tel"
+msgid "Tel."
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:39
+#: cirb.organizations:/browser/templates/oview.pt:48
+msgid "Responsable de l'organisme"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:40
+#: cirb.organizations:/browser/templates/oview.pt:49
+#: cirb.organizations:/browser/templates/oview.pt:53
+msgid "Nom :"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:41
+#: cirb.organizations:/browser/templates/oview.pt:50
+#: cirb.organizations:/browser/templates/oview.pt:54
+msgid "Fonction :"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:43
+#: cirb.organizations:/browser/templates/oview.pt:52
+msgid "Personne de contact"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:55
+#. Default: "phone :"
+msgid "Numero de telephone :"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:56
+#. Default: "fax :"
+msgid "Numero de fax :"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:57
+#. Default: "mail :"
+msgid "E-mail :"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:58
+#. Default: "lieux"
+msgid "Lieux ou se deroulent les activites"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:64
+#. Default: "Cat\303\251gorie d'activit\303\251s"
+msgid "Categorie d'activites"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:67
+msgid "Objectifs de l'organisme"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/oview.pt:70
+msgid "Commentaires"
 msgstr ""
 

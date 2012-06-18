@@ -54,8 +54,8 @@ class Search(form.Form):
             self.buttons = button.Buttons(self.buttons, letterbutton)
         self.handlers.addHandler(LetterButton, button.Handler(LetterButton, self.handleLettersButton))
         for cat in self.get_categories():
-            categorybutton = CategoryButton(name=cat, title=unicode(cat),
-                                            image=u"{0}.png".format(cat))
+            categorybutton = CategoryButton(name=str(cat), title=cat,
+                                            image=u"{0}.png".format(str(cat)))
             self.buttons = button.Buttons(self.buttons, categorybutton)
         self.handlers.addHandler(CategoryButton, button.Handler(CategoryButton, self.handleCategoriesButton))
         super(Search, self).update()

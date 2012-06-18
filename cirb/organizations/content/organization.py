@@ -6,6 +6,7 @@ from z3c.saconfig import Session
 from zope.interface import implements
 from cirb.organizations import ORMBase
 from cirb.organizations.interfaces import IOrganization
+from cirb.organizations import organizationsMessageFactory as _
 
 
 class Association(ORMBase):
@@ -130,9 +131,10 @@ class Category(ORMBase):
     other = Column(String(255))
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
     
-    attributes = ['welcome','language_training', 'plastic_art','scenic_art', 'social_cohesion', 'legal_advice', 'culture', 'danse', 'sustainable_development', 'employment', 'childhood',
-           'education', 'envrironment', 'body_language', 'familly', 'training', 'handicap', 'information', 'it', 'youth', 'accomodation', 'music', 'social_restaurant', 'health', 
-           'solidarity', 'tutoring', 'sport', 'third_age']
+    attributes = [_(u'welcome'), _(u'language_training'), _(u'plastic_art'), _(u'scenic_art'), _(u'social_cohesion'),  _('legal_advice'), _(u'culture'),
+                  _(u'danse'), _(u'sustainable_development'), _(u'employment'), _(u'childhood'), _(u'education'), _(u'envrironment'), _(u'body_language'), _(u'familly'), 
+                  _(u'training'), _(u'handicap'), _(u'information'), _(u'it'), _(u'youth'), _(u'accomodation'), _(u'music'), _(u'social_restaurant'), _(u'health'),
+                  _(u'solidarity'), _(u'tutoring'), _(u'sport'), _(u'third_age')]
 
     def get_list(self):
         """ return true attributes (without other attribut."""

@@ -3,7 +3,9 @@ import unittest2 as unittest
 import tempfile
 
 from sqlalchemy import create_engine
+from sqlalchemy.orm import clear_mappers
 from cirb.organizations import ORMBase
+#from cirb.organizations.testing import ORGA_FIXTURE
 from cirb.organizations.browser.organizationsmanage import delete_orga
 from cirb.organizations.content.organization import Organization, Association
 from zope.component import getGlobalSiteManager
@@ -17,6 +19,7 @@ from z3c.saconfig import Session
 
 class TestOrmbase(unittest.TestCase):
 
+    #layer = ORGA_FIXTURE
     def setUp(self):
         super(TestOrmbase, self).setUp()
         gsm = getGlobalSiteManager()
@@ -37,6 +40,7 @@ class TestOrmbase(unittest.TestCase):
         gsm = getGlobalSiteManager()
         gsm.unregisterUtility(self.engine, name=u"ftesting", provided=IEngineFactory)
         gsm.unregisterUtility(self.session, provided=IScopedSession)
+        clear_mappers()
 
     def test_add(self):
         session = Session()
