@@ -7,6 +7,14 @@ $(window).bind("load", function(){
             getaddresses(address);
         }
     });
+    
+    $("#localize input[type='button']").click(function(){
+        address = check_address();
+        if (address) {
+            getaddresses(address);
+        }
+    });
+
     readonlyHiddenXY();
 });
 
@@ -41,7 +49,7 @@ function readonlyHiddenXY() {
     for (i=0; i < xy.length; i++) {
         $(xy[i]+' input[type=text]').attr('readonly', 'readonly');
         if ($(xy[i]+' input[type=text]').val() == '') {
-            $(xy[i]).attr('style', 'visibility:hidden');
+            //$(xy[i]).attr('style', 'visibility:hidden');
         }
     }
 }

@@ -84,7 +84,7 @@ class Organization(ORMBase):
         if cat[0].other:
             categories.append(cat[0].other)
 
-        return ", ".join(categories)
+        return categories
 
 
 class Address(ORMBase):

@@ -2,12 +2,13 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="collective.z3cform.wizard"
+      i18n:domain="cirb.organizations"
       tal:omit-tag="">
   
 <tal:widgets repeat="widget view/widgets/values">
     <metal:field use-macro="context/@@ploneform-macros/field" />
 </tal:widgets>
+
 
 <div tal:attributes="data-gis-service view/get_gis_service" class="data">
 </div>
@@ -19,6 +20,8 @@
 		</tal:widgets>
   </fieldset>
 </tal:groups>
+
+<input type="button" value="Localiser" id="localize" />
 
 <metal:use use-macro="context/@@ploneform-macros/actions" />
 <div tal:repeat="form view/subforms"

@@ -27,6 +27,7 @@ form#cat div{
 
 .orga_search li.orga {
     display: block;
+    clear: both;
 }
 
 .content-left img {

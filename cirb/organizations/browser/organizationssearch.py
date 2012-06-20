@@ -26,7 +26,9 @@ class LetterButton(button.Button):
    
 
 class CategoryButton(button.ImageButton):
-    pass
+
+    def render(self):
+        return "hello"
 
 
 class Search(form.Form):
@@ -64,7 +66,6 @@ class Search(form.Form):
         self.search("{0}%".format(action.value.lower()))
 
     def handleCategoriesButton(self, form, action):
-        print action.value
         session = Session()
         self.results = session.query(Organization).filter(Organization.category.has(getattr(Category, action.value) == True)).filter(Organization.language == self.context.Language()).all()
         if len(self.results) == 0:

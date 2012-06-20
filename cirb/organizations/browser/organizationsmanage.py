@@ -1,17 +1,16 @@
+import logging
+import transaction
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 #from Products.LinguaPlone.interfaces import ITranslatable
 from Products.statusmessages.interfaces import IStatusMessage
 
-from z3c.saconfig import Session
 from cirb.organizations.content.organization import Organization, Association
 from cirb.organizations import organizationsMessageFactory as _
 #from cirb.organizations.browser.interfaces import IOrganizationsLayer
-import transaction
-import logging
-#from zope.interface import implements
-from zope.interface import implements
 from plone.namedfile.interfaces import IImageScaleTraversable
+from z3c.saconfig import Session
+from zope.interface import implements
 
 
 class ManageView(BrowserView):
@@ -86,7 +85,8 @@ def delete_association(ids):
     assoc = query.all()
     if len(assoc) > 1:
         logger.error("There are {0} association with ids {1} and {2}").format(len(assoc), ids[0], ids[1])
-        session.delete(query.first())
+
+    session.delete(query.first())
 
 
 class OView(BrowserView):
@@ -96,3 +96,11 @@ class OView(BrowserView):
         self.context = context
         self.request = request
         self.logger = logging.getLogger('cirb.organizations.browser.organizationmanage')
+
+    def get_categories(self):
+        translations = []
+        for cat in self.context.get_categories():
+            translations.append(self.context.translate(cat))
+        return ", ".join(translations)
+
+

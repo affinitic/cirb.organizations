@@ -23,6 +23,7 @@ i18n:domain="cirb.organizations">
 <div metal:fill-slot="main" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y" class="data">
 <div id="oview"></div>
     <a href="javascript:this.print();" class="printlink"><img src="#" alt="Print" class="print" /></a>
+    <a tal:condition="python:'Authenticated' in user.getRoles()" tal:attributes="href string:${context/absolute_url}/organizations_form">Edit</a>
     <h1 i18n:translate="Fiche" class="documentFirstHeading">Fiche</h1>
     <div class="content-left"> 
         <img tal:replace="structure context/@@images/logo" width="200px" />
@@ -62,7 +63,7 @@ i18n:domain="cirb.organizations">
             </span>
 
             <h3 i18n:translate="Categorie d'activites">Catégorie d'activités</h3>
-            <p tal:content="context/get_categories"></p>
+            <p tal:content="view/get_categories"></p>
 
             <h3 i18n:translate="Objectifs de l'organisme">Objectifs de l'organisme</h3>
             <p tal:content="context/additionalinfo/objectif"></p>
