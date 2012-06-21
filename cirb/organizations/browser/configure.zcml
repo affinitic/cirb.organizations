@@ -89,7 +89,15 @@
         permission="cmf.AddPortalContent"
         />
 
-    
+   <browser:viewlet
+        name="plone.app.i18n.locales.languageselector"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".selector.FormTranslatableLanguageSelector"
+        permission="zope2.View"
+        layer=".interfaces.IOrganizationsLayer"
+        template="templates/selector.pt"
+        />
+   
     <!--adapter for="zope.publisher.interfaces.browser.IBrowserRequest"
         provides=".organizationssearch.ISearch"
         factory=".organizationssearch.SearchView" 

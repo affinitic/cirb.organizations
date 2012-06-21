@@ -2,9 +2,9 @@
 import re
 from zope.publisher.interfaces.http import IHTTPRequest
 from zope.publisher.interfaces import IPublishTraverse
-#from zope.publisher.interfaces.browser import IBrowserRequest
+from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.interface import implements
-#from zope.component import adapts
+from zope.component import adapts
 from five import grok
 from z3c.saconfig import Session
 
@@ -160,7 +160,7 @@ def getOrganizationsTraversable(context):
 #import zope.component
 #import zope.interface
 #import z3c.form
-#from collective.z3cform.wizard.interfaces import IWizard
+from collective.z3cform.wizard.interfaces import IWizard
 #class WizardWidgets(FieldWidgets): #, grok.MultiAdapter):
 #
 #    zope.component.adapts(
@@ -172,20 +172,38 @@ def getOrganizationsTraversable(context):
 #        self.form = self.form.currentStep
 
 
-#from plone.z3cform.traversal import FormWidgetTraversal
-#from Acquisition import aq_base
-#
-#
-#class WizardWidgetTraversal(FormWidgetTraversal):
-#    adapts(IWizard, IBrowserRequest)
-#
-#    def _form_traverse(self, form, name):
-#        print '_form_traverse'
-#        if name in form.widgets:
-#            return form.widgets.get(name)
-#        # If there are no groups, give up now
-#        if getattr(aq_base(form), 'groups', None) is None:
-#            return None
-#        for group in form.groups:
-#            if group.widgets and name in group.widgets:
-#                return group.widgets.get(name)
+from plone.z3cform.traversal import FormWidgetTraversal, WrapperWidgetTraversal
+from Acquisition import aq_base
+from cirb.organizations.browser.organizationsform import WizardView
+
+class WizardWidgetTraversal(FormWidgetTraversal):
+    adapts(WizardView, IBrowserRequest)
+
+    def _form_traverse(self, form, name):
+        import pdb; pdb.set_trace()
+        print '_form_traverse'
+        if name in form.widgets:
+            return form.widgets.get(name)
+        # If there are no groups, give up now
+        if getattr(aq_base(form), 'groups', None) is None:
+            return None
+        for group in form.groups:
+            if group.widgets and name in group.widgets:
+                return group.widgets.get(name)
+
+class WizardWrapperWidgetTraversal(WrapperFormWidgetTraversal):
+    adapts(OrganizationWrapper, IBrowserRequest)
+
+    def _prepareForm(self):
+        form = self.context.form_instance
+        z2.switch_on(self.context, request_layer=self.context.request_layer)
+        return form
+
+
+    def _form_traverse(self, form, name):
+        import pdb; pdb.set_trace()
+        super(WizardWrapperWidgetTraversal, self)._form_traverse(self, form, name)
+        #form = self.context.form_instance
+        #z2.switch_on(self.context, request_layer=self.context.request_layer)
+        #return form
+

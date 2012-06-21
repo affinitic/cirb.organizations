@@ -34,6 +34,13 @@ class ManageView(BrowserView):
             absolute_url = "{0}/organizations_form?set_language=fr".format(view.absolute_url())
             return absolute_url
 
+    def new_language(self):
+        if self.context.Language() == "fr":
+            return 'nl'
+        else:
+            return 'fr'
+
+
 
 class DeleteView(BrowserView):
     def __init__(self, context, request, session=''):
@@ -102,5 +109,12 @@ class OView(BrowserView):
         for cat in self.context.get_categories():
             translations.append(self.context.translate(cat))
         return ", ".join(translations)
-
-
+    
+    def translate_url(self):
+        lang = self.context.Language()
+        trans = [u'fr', u'nl']
+        trans.remove(lang)
+        if not self.context.hasTranslation(lang[0]):
+            return "{0}/@@translate?newlanguage={1}".format(self.context.absolute_url(), lang[0])
+        else:
+            return False

@@ -8,7 +8,6 @@ from plone.z3cform.fieldsets import group
 from plone.namedfile.field import NamedImage
 from plone.namedfile import file
 #from plone.formwidget.namedfile import NamedFileWidget
-from cirb.organizations.traversal import OrganizationWrapper
 from cirb.organizations import organizationsMessageFactory as _
 from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, AdditionalInformation, Association
 from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations, IAdditionalInformation
@@ -138,6 +137,7 @@ class Wizard(wizard.Wizard):
     steps = OrganizationsStep, InChargeStep, ContactStep, CategoryStep, AdditionalInformationStep
 
     def initialize(self):
+        from cirb.organizations.traversal import OrganizationWrapper
         if isinstance(self.context, OrganizationWrapper):
             orga = Session().query(Organization).get(self.context.organization_id)
             self.loadSteps(orga)
@@ -148,7 +148,6 @@ class Wizard(wizard.Wizard):
         self.session['canonical_id'] = self.request.get('canonical_id')
 
     def finish(self):
-        #super(Wizard, self).finish()
         self.applySteps(self.context)
         sqlalsession = Session()
         sqlalsession.flush()
@@ -166,27 +165,19 @@ class Wizard(wizard.Wizard):
                 assoc.canonical_id = canonical_id
                 sqlalsession.add(assoc)
         
+        from cirb.organizations.traversal import OrganizationWrapper
         transaction.commit()
         self.request.SESSION.clear()
+        orga_page = "{0}/org/{1}/oview".format(self.context.absolute_url(), organization.organization_id)
+        if isinstance(self.context, OrganizationWrapper):
+            orga_page = "{0}/oview".format(self.context.absolute_url(), organization.organization_id)
+        self.request.response.redirect(orga_page)
 
     @property
     def absolute_url(self):
         return self.action
         #return self.context.absolute_url() + '/' + self.__name__
 
-    #def translate_url(self):
-    #    from Acquisition import aq_inner
-    #    context = aq_inner(self.context)
-    #    if context.getLanguage() == 'fr':
-    #        view = context.getTranslation('nl')
-    #        absolute_url = "{0}/organizations_form?set_language=nl".format(view.absolute_url())
-    #    else:
-    #        view = context.getTranslation('fr')
-    #        absolute_url = "{0}/organizations_form?set_language=fr".format(view.absolute_url())
-
-    #    return absolute_url
 
 class WizardView(FormWrapper):
     form = Wizard
-
-    

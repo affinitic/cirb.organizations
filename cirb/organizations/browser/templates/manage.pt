@@ -18,18 +18,22 @@ i18n:domain="cirb.organizations">
     <tbody>
         <tr>
             <th i18n:translate="Name">Name</th>
-            <th i18n:translate="Trans">Trans</th>
+            <th i18n:translate="Trans">Trans ?</th>
             <th i18n:translate="Del">Del</th>
         </tr>
         <tr tal:repeat="orga view/manage">
             <td>
-                    <a href="" tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/organizations_form">
+                <a href="" tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview">
                     <span><tal:block tal:content="orga/name">name</tal:block></span>
                 </a>
+                &nbsp; &nbsp; &nbsp;
+                <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/organizations_form">E</a>
             </td>
             <td>
                 <span tal:condition="not: python:orga.get_translation()">
-                   <a href="" tal:attributes="href string:${view/translate_url}&canonical_id=${orga/organization_id}"> trans </a>
+                    <a href="" tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/@@translate?newlanguage=${view/new_language}">
+                        <tal:block i18n:translate="Add translation">Add translation</tal:block>
+                    </a>
                 </span>
 
                     <tal:block tal:condition="python:orga.get_translation()" tal:define="trans python:orga.get_translation()">

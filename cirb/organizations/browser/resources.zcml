@@ -177,6 +177,12 @@
         layer=".interfaces.IOrganizationsLayer"
         />
 
+    <browser:resource
+        name="bibliotheque.png"
+        image="img/bibliotheque.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
 
 
 </configure>

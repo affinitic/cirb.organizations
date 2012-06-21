@@ -63,6 +63,7 @@ class IAddress(Interface):
 
 class ICategory(Interface):
     welcome = schema.Bool(title=_(u"welcome"))
+    bibliotheque = schema.Bool(title=_(u"bibliotheque"))
     language_training = schema.Bool(title=_(u"language_training"))
     plastic_art = schema.Bool(title=_(u"plastic_art"))
     scenic_art = schema.Bool(title=_(u"scenic_art"))

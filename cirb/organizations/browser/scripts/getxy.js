@@ -1,22 +1,38 @@
 var urlService;
+var map
 $(window).bind("load", function(){
+    map = new OpenLayers.UrbisMap({div:"urbis_map_form", lang: $('html').attr('lang')});
     urlService = $('div.data').data('gis-service');
     $("#fieldset-addr input[type='text']").focus(function(){
         address = check_address();
         if (address) {
-            getaddresses(address);
+            updatemap(address);
         }
     });
     
     $("#localize input[type='button']").click(function(){
         address = check_address();
         if (address) {
-            getaddresses(address);
+            updatemap(address);
         }
     });
-
     readonlyHiddenXY();
+    updatemap('');
 });
+
+function updatemap(address){
+    if (address) {getaddresses(address);}
+    x = $('#orga-widgets-x').val();
+    y = $('#orga-widgets-y').val();
+    title = $('#orga-widgets-name').val();
+    if (x && y && title){
+        var color = "#00f";
+        points = [];
+        points.push(add_point(x, y, title, color));
+        map.addPoints(points);
+        map.setCenter(new OpenLayers.LonLat(x, y), 2);
+    }
+}
 
 function getaddresses(addr){
     var language = $('html').attr('lang');
