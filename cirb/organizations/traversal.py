@@ -160,7 +160,7 @@ def getOrganizationsTraversable(context):
 #import zope.component
 #import zope.interface
 #import z3c.form
-from collective.z3cform.wizard.interfaces import IWizard
+#from collective.z3cform.wizard.interfaces import IWizard
 #class WizardWidgets(FieldWidgets): #, grok.MultiAdapter):
 #
 #    zope.component.adapts(
@@ -172,11 +172,11 @@ from collective.z3cform.wizard.interfaces import IWizard
 #        self.form = self.form.currentStep
 
 
-from plone.z3cform.traversal import FormWidgetTraversal, WrapperWidgetTraversal
+from plone.z3cform.traversal import WrapperWidgetTraversal
 from Acquisition import aq_base
 from cirb.organizations.browser.organizationsform import WizardView
 
-class WizardWidgetTraversal(FormWidgetTraversal):
+class WizardWidgetTraversal(WrapperWidgetTraversal):
     adapts(WizardView, IBrowserRequest)
 
     def _form_traverse(self, form, name):
@@ -190,20 +190,3 @@ class WizardWidgetTraversal(FormWidgetTraversal):
         for group in form.groups:
             if group.widgets and name in group.widgets:
                 return group.widgets.get(name)
-
-class WizardWrapperWidgetTraversal(WrapperFormWidgetTraversal):
-    adapts(OrganizationWrapper, IBrowserRequest)
-
-    def _prepareForm(self):
-        form = self.context.form_instance
-        z2.switch_on(self.context, request_layer=self.context.request_layer)
-        return form
-
-
-    def _form_traverse(self, form, name):
-        import pdb; pdb.set_trace()
-        super(WizardWrapperWidgetTraversal, self)._form_traverse(self, form, name)
-        #form = self.context.form_instance
-        #z2.switch_on(self.context, request_layer=self.context.request_layer)
-        #return form
-
