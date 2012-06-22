@@ -114,7 +114,7 @@ class OView(BrowserView):
         lang = self.context.Language()
         trans = [u'fr', u'nl']
         trans.remove(lang)
-        if not self.context.hasTranslation(lang[0]):
-            return "{0}/@@translate?newlanguage={1}".format(self.context.absolute_url(), lang[0])
+        if not self.context.hasTranslation(trans[0]):
+            return "{0}/@@translate?newlanguage={1}".format(self.context.absolute_url(), trans[0])
         else:
             return False

@@ -120,6 +120,7 @@ class OrganizationWrapper(Implicit):
         organization = Organization(address=Address(), category=Category(),
                                     person_incharge=InCharge(), person_contact=Contact(),
                                     additionalinfo=AdditionalInformation())
+        organization.person_contact.address = Address()
         organization.name = self._organization.name
         organization.language = language
         session = Session()
@@ -246,7 +247,6 @@ class WizardWidgetTraversal(WrapperWidgetTraversal):
         raise TraversalError(name)
 
     def _form_traverse(self, form, name):
-        print name
         step = getattr(form, 'currentStep', None)
         if step:
             if name in step.widgets:
