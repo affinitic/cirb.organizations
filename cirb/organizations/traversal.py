@@ -156,32 +156,102 @@ def getOrganizationsTraversable(context):
     return OrganizationTraversable("org")
 
 
-#from z3c.form.field import FieldWidgets
-#import zope.component
-#import zope.interface
-#import z3c.form
-#from collective.z3cform.wizard.interfaces import IWizard
-#class WizardWidgets(FieldWidgets): #, grok.MultiAdapter):
-#
-#    zope.component.adapts(
-#        IWizard, z3c.form.interfaces.IFormLayer, zope.interface.Interface)
-#
-#    def __init__(self, form, request, content):
-#        print 'WizardWidgets'
-#        super(WizardWidgets, self).__init__(form, request, content)
-#        self.form = self.form.currentStep
-
-
 from plone.z3cform.traversal import WrapperWidgetTraversal
 from Acquisition import aq_base
 from cirb.organizations.browser.organizationsform import WizardView
 
+from zope.traversing.interfaces import TraversalError
+from zope.interface import noLongerProvides
+from zope.interface import alsoProvides
+
+from z3c.form import util
+from plone.z3cform.interfaces import IDeferSecurityCheck
+
+from Acquisition import aq_inner
+
+
 class WizardWidgetTraversal(WrapperWidgetTraversal):
     adapts(WizardView, IBrowserRequest)
 
+    def traverse(self, name, ignored):
+
+        form = self._prepareForm()
+
+        # Since we cannot check security during traversal,
+        # we delegate the check to the widget view.
+        alsoProvides(self.request, IDeferSecurityCheck)
+        form.update()
+        noLongerProvides(self.request, IDeferSecurityCheck)
+
+        # If name begins with form.widgets., remove it
+        form_widgets_prefix = util.expandPrefix(form.prefix) + util.expandPrefix(form.widgets.prefix)
+        if name.startswith(form_widgets_prefix):
+            name = name[len(form_widgets_prefix):]
+
+        # Split string up into dotted segments and work through
+        target = aq_base(form)
+        parts = name.split('.')
+        while len(parts) > 0:
+            part = parts.pop(0)
+            if type(getattr(target, 'widgets', None)) is list:  # i.e. a z3c.form.widget.MultiWidget
+                try:
+                    # part should be integer index in list, look it up
+                    target = target.widgets[int(part)]
+                except IndexError:
+                    raise TraversalError("'" + part + "' not in range")
+                except ValueError:
+                    #HACK: part isn't integer. Iterate through widgets to
+                    # find matching name. This is required for
+                    # DataGridField, which appends 'AA' and 'TT' rows to
+                    # it's widget list.
+                    full_name = util.expandPrefix(target.prefix) + part
+                    filtered = [w for w in target.widgets
+                                        if w.name == full_name]
+                    if len(filtered) == 1:
+                        target = filtered[0]
+                    else:
+                        raise TraversalError("'" + part + "' not valid index")
+            elif hasattr(target, 'widgets'):  # Either base form, or subform
+                # Check to see if we can find a "Behaviour.widget"
+                new_target = None
+                if len(parts) > 0:
+                    new_target = self._form_traverse(target, parts[-1])  # HACK bsuttor, before : (target,part+'.'+parts[0])
+
+                if new_target is not None:
+                    # Remove widget name from stack too
+                    parts.pop(0)
+                else:
+                    # Find widget in form without behaviour prefix
+                    new_target = self._form_traverse(target, part)
+
+                target = new_target
+            elif hasattr(target, 'subform'):  # subform-containing widget, only option is to go into subform
+                if part == 'widgets':
+                    target = target.subform
+                else:
+                    target = None
+            else:
+                # HACK bsuttor
+                if not target:
+                    raise TraversalError('Cannot traverse through ' + target.__repr__())
+
+            # Could not traverse from target to part
+            if target is None: raise TraversalError(part)
+
+        # Make the parent of the widget the traversal parent.
+        # This is required for security to work in Zope 2.12
+        if target is not None:
+            target.__parent__ = aq_inner(self.context)
+            return target
+        raise TraversalError(name)
+
     def _form_traverse(self, form, name):
-        import pdb; pdb.set_trace()
-        print '_form_traverse'
+        print name
+        step = getattr(form, 'currentStep', None)
+        if step:
+            if name in step.widgets:
+                return step.widgets.get(name)
+
         if name in form.widgets:
             return form.widgets.get(name)
         # If there are no groups, give up now
