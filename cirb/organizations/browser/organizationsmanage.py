@@ -1,12 +1,11 @@
 import logging
-import transaction
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 #from Products.LinguaPlone.interfaces import ITranslatable
 from Products.statusmessages.interfaces import IStatusMessage
 
 from cirb.organizations.content.organization import Organization, Association
-from cirb.organizations import organizationsMessageFactory as _
+#from cirb.organizations import organizationsMessageFactory as _
 #from cirb.organizations.browser.interfaces import IOrganizationsLayer
 from plone.namedfile.interfaces import IImageScaleTraversable
 from z3c.saconfig import Session
@@ -39,7 +38,6 @@ class ManageView(BrowserView):
             return 'nl'
         else:
             return 'fr'
-
 
 
 class DeleteView(BrowserView):
@@ -75,10 +73,10 @@ def delete_orga(session, id):
         delete_association(assoc)
 
     session.delete(del_orga)
-   
+
     if translated_orga:
         session.delete(translated_orga)
-    
+
     return True
 
 
@@ -111,7 +109,7 @@ class OView(BrowserView):
         for cat in self.context.get_categories():
             translations.append(self.context.translate(cat))
         return ", ".join(translations)
-    
+
     def translate_url(self):
         lang = self.context.Language()
         trans = [u'fr', u'nl']
