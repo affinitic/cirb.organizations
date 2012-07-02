@@ -52,7 +52,7 @@ class IOrganizations(Interface):
 
     activite_language_fr = schema.Bool(title=_(u"Activité en francais"))
     activite_language_nl = schema.Bool(title=_(u"Activité en neerlandais"))
-    activite_language_other = schema.Bool(title=_(u"Activité en une autre langue"))
+    activite_language_other = schema.Bool(title=_(u"Activité dans une autre langue"))
 
     status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
     status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 

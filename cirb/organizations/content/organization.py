@@ -65,7 +65,8 @@ class Organization(ORMBase):
     translated_organization = relationship(Association,
                                         primaryjoin=organization_id == Association.canonical_id,
                                         secondaryjoin=and_(organization_id == Association.translated_id, Association.association_type == "lang"),
-                                        secondary="association")
+                                        secondary="association",  
+                                        cascade="all, delete-orphan")
 
     def get_translation(self):
         session = Session()

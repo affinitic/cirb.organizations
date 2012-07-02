@@ -56,7 +56,7 @@ class DeleteView(BrowserView):
             self.logger.info(msg)
             IStatusMessage(self.request).add(msg, type="error")
             return self.request.response.redirect(self.context.absolute_url())
-        msg = _(u"The organization {0} is deleted".format(self.session.query(Organization).get(id_del_orga)))
+        msg = u"The organization {0} is deleted".format(self.session.query(Organization).get(id_del_orga).name)
         IStatusMessage(self.request).add(msg, type="info")
         return self.request.response.redirect(self.context.absolute_url())
 
@@ -69,14 +69,16 @@ def delete_orga(session, id):
     translated_orga = del_orga.get_translation()
     if translated_orga:
         assoc.append(translated_orga.organization_id)
-        session.delete(translated_orga)
 
     assoc.append(del_orga.organization_id)
-    session.delete(del_orga)
-    transaction.commit()
     if len(assoc) > 1:
         delete_association(assoc)
 
+    session.delete(del_orga)
+   
+    if translated_orga:
+        session.delete(translated_orga)
+    
     return True
 
 
