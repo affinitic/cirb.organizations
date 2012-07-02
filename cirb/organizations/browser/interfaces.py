@@ -48,8 +48,6 @@ class IOrganizations(Interface):
     website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
 
-    welcome = schema.Bool(title=_(u"welcome"))
-
     activite_language_fr = schema.Bool(title=_(u"Activité en francais"))
     activite_language_nl = schema.Bool(title=_(u"Activité en neerlandais"))
     activite_language_other = schema.Bool(title=_(u"Activité dans une autre langue"))
