@@ -388,7 +388,7 @@ msgstr "Fonction :"
 #: cirb.organizations:/browser/templates/oview.pt:47
 #: cirb.organizations:/browser/templates/oview.pt:56
 msgid "Personne de contact"
-msgstr "Personne de contact"
+msgstr "Contact"
 
 #. Default: "phone :"
 #: cirb.organizations:/browser/templates/oview.pt:59

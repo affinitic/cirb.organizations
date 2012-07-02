@@ -47,6 +47,13 @@ class IOrganizations(Interface):
 
     website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
     language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
+
+    welcome = schema.Bool(title=_(u"welcome"))
+
+    activite_language_fr = schema.Bool(title=_(u"Activité en francais"))
+    activite_language_nl = schema.Bool(title=_(u"Activité en neerlandais"))
+    activite_language_other = schema.Bool(title=_(u"Activité en une autre langue"))
+
     status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
     status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 
     # auto generate field, it could be hidden for user :
@@ -108,7 +115,7 @@ class IContact(Interface):
     second_name = schema.TextLine(title=_(u"second_name"), max_length=255)
     function = schema.TextLine(title=_(u"function"), required=False)
     phone = schema.TextLine(title=_(u"phone"), max_length=255)
-    fax = schema.TextLine(title=_(u"fax"), max_length=255)
+    fax = schema.TextLine(title=_(u"fax"), max_length=255, required=False)
     email = schema.TextLine(title=_(u"email"), 
                         max_length=255, 
                         constraint=re.compile('^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE).match)
@@ -116,5 +123,5 @@ class IContact(Interface):
 
 
 class IAdditionalInformation(Interface):
-    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=1024) 
+    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=2048) 
     comments = schema.Text(title=_(u"Comments"), required=False, max_length=1024)

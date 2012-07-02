@@ -39,6 +39,10 @@ class Organization(ORMBase):
     website = Column(String(255))
     language = Column(String(2))
 
+    activite_language_fr = Column(Boolean, default=False)
+    activite_language_nl = Column(Boolean, default=False)
+    activite_language_other = Column(Boolean, default=False)
+
     #used to geolocalisation
     x = Column(String(255))
     y = Column(String(255))
@@ -178,6 +182,6 @@ class AdditionalInformation(ORMBase):
     additionalinformation_id = Column(Integer,
                              Sequence('additionalinformation_seq'),
                              primary_key=True, autoincrement=True)
-    objectif = Column(String(1024))
+    objectif = Column(String(2048))
     comments = Column(String(1024))
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
