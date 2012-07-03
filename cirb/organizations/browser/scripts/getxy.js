@@ -1,6 +1,6 @@
 var urlService;
 var map
-$(window).bind("load", function(){
+$(document).ready(function(){
     map = new OpenLayers.UrbisMap({div:"urbis_map_form", lang: $('html').attr('lang')});
     urlService = $('div.data').data('gis-service');
     $("#fieldset-addr input[type='text']").focus(function(){

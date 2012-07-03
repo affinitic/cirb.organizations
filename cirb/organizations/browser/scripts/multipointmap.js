@@ -2,7 +2,7 @@ function add_point(x, y, title, color){
     return {'point': {'x': x , 'y': y }, 'title': title, 'color': color}
 }
 
-$(window).bind("load", function(){
+$(document).ready(function(){
     if ($('div.multidata').data('lang')) {
         var map = new OpenLayers.UrbisMap({div:"urbis_map", lang: $('div.multidata').data('lang')});
         //map.addControls([new OpenLayers.Control.UrbisPanel({controls:["address","switch"]})]);

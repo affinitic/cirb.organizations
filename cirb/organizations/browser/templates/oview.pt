@@ -20,7 +20,7 @@ i18n:domain="cirb.organizations">
 
 <body>
 
-<div metal:fill-slot="main" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y" class="data">
+<div metal:fill-slot="main" class="data">
 <div id="oview"></div>
     <a href="javascript:this.print();" class="printlink"><img src="#" alt="Print" class="print" /></a>
     <div tal:condition="python:'Authenticated' in user.getRoles()" class="manage">
@@ -31,19 +31,22 @@ i18n:domain="cirb.organizations">
     <div class="content-left"> 
         <img tal:replace="structure context/@@images/logo" width="200px" />
         <h2 class="name" tal:content="context/name"></h2>
-        <p class="coord">
+        <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y" >
             <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
             <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
             <span i18n:translate="Tel.">tel</span><span tal:content="context/person_contact/phone">phone</span><br />
+            <span i18n:translate="Responsable">Responsable</span> : 
+                <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span>, 
+                &nbsp;<span tal:content="context/person_incharge/function"></span><br />
             <span tal:content="context/person_contact/email">email</span><br />
             <span tal:content="context/website">website</span>
         </p>
         <div class="visualClear"></div>
         <div class="infos-sup">
-            <h3 i18n:translate="Responsable de l'organisme">Responsable de l'organisme</h3>
-            <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span><br />
-            <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_incharge/function"></span></p>
-        
+            
+            <h3 i18n:translate="Objectifs">Objectifs</h3>
+            <p tal:content="context/additionalinfo/objectif"></p>
+
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
             <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_contact/first_name"></span>&nbsp;<span tal:content="context/person_contact/second_name"></span><br />
             <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_contact/function"></span><br />
@@ -59,9 +62,6 @@ i18n:domain="cirb.organizations">
 
             <h3 i18n:translate="Categorie d'activites">Catégorie d'activités</h3>
             <p tal:content="view/get_categories"></p>
-
-            <h3 i18n:translate="Objectifs de l'organisme">Objectifs de l'organisme</h3>
-            <p tal:content="context/additionalinfo/objectif"></p>
 
             <!--h3 i18n:translate="Commentaires">Commentaires</h3>
             <p tal:content="context/additionalinfo/comments"></p-->

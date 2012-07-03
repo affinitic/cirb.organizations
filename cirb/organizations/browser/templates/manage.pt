@@ -6,6 +6,13 @@ i18n:domain="cirb.organizations">
 <tal:js metal:fill-slot="javascript_head_slot">    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"> </script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/++resource++cirb.organizations.scripts/confirm.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.manage_orga').dataTable();
+    });
+
+    </script>
 </tal:js>
 <tal:css metal:fill-slot="style_slot">
     <link rel="stylesheet" href=" http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" type="text/css"/>
@@ -15,13 +22,15 @@ i18n:domain="cirb.organizations">
 
 <div metal:fill-slot="main">
     <table class="manage_orga">
-    <tbody>
+    <thead>
         <tr>
             <th i18n:translate="Name">Name</th>
             <th i18n:translate="Edit">Edit</th>
             <th i18n:translate="Trans">Trans ?</th>
             <th i18n:translate="Del">Del</th>
         </tr>
+    </thead>
+    <tbody>
         <tr tal:repeat="orga view/manage">
             <td>
                 <a href="" tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview">
