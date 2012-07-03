@@ -4,7 +4,8 @@ from Products.Five import BrowserView
 #from Products.LinguaPlone.interfaces import ITranslatable
 from Products.statusmessages.interfaces import IStatusMessage
 
-from cirb.organizations.content.organization import Organization, Association
+from cirb.organizations.content.organization import Organization, Association, Category
+from cirb.organizations.browser.organizationssearch import renderCategoryButton
 #from cirb.organizations import organizationsMessageFactory as _
 #from cirb.organizations.browser.interfaces import IOrganizationsLayer
 from plone.namedfile.interfaces import IImageScaleTraversable
@@ -109,6 +110,17 @@ class OView(BrowserView):
         for cat in self.context.get_categories():
             translations.append(self.context.translate(cat))
         return ", ".join(translations)
+
+    def input_categories(self):
+        categories = []
+        for cat in Category.attributes:
+            if cat in self.context.get_categories():
+                categories.append(renderCategoryButton(self.context, cat))
+        return categories
+
+    def organizations_search_url(self):
+        url = self.context.aq_parent.aq_parent.absolute_url()
+        return "{0}/organizations_search".format(url)
 
     def translate_url(self):
         lang = self.context.Language()

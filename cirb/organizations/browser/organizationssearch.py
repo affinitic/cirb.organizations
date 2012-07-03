@@ -18,7 +18,8 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 from zope.interface import implements
 SESSION_JSON = "search_json"
 SESSION_SEARCH = "search_term"
-ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
 class LetterButton(button.Button):
@@ -27,8 +28,16 @@ class LetterButton(button.Button):
 
 class CategoryButton(button.ImageButton):
 
-    def render(self):
-        return "hello"
+    def __init__(self, *args, **kwargs):
+        super(CategoryButton, self).__init__(*args, **kwargs)
+
+
+    def update(self):
+        super(CategoryButton, self)
+
+def renderCategoryButton(context, name):
+    render = u'\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/>\n\n'.format(name, context.portal_url(), context.translate(name))
+    return render
 
 
 class Search(form.Form):
@@ -61,6 +70,8 @@ class Search(form.Form):
             self.buttons = button.Buttons(self.buttons, categorybutton)
         self.handlers.addHandler(CategoryButton, button.Handler(CategoryButton, self.handleCategoriesButton))
         super(Search, self).update()
+        for cat in self.get_categories():
+            self.actions[cat].render = renderCategoryButton(self.context, cat)
     
     def handleLettersButton(self, form, action):
         self.search("{0}%".format(action.value.lower()))

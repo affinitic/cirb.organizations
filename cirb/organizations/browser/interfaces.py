@@ -41,7 +41,6 @@ class IOrganizations(Interface):
     Organizations view interface
     """
     name = schema.TextLine(title=_(u"Organization name"), max_length=255)
-    # TODO 
     logo = field.NamedImage(title=_(u"Logo"), required=False)
     picture = field.NamedImage(title=_(u"Picture"), required=False)
 
