@@ -55,7 +55,7 @@ class DeleteView(BrowserView):
             self.logger.info(msg)
             IStatusMessage(self.request).add(msg, type="error")
             return self.request.response.redirect(self.context.absolute_url())
-        msg = u"The organization {0} is deleted".format(self.session.query(Organization).get(id_del_orga).name)
+        msg = u"The organization is deleted"
         IStatusMessage(self.request).add(msg, type="info")
         return self.request.response.redirect(self.context.absolute_url())
 
