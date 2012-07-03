@@ -2,6 +2,7 @@ from z3c.saconfig import Session
 from z3c.form import form, field, button
 from plone.app.z3cform.layout import FormWrapper
 #from collective.z3cform.wizard.wizard import WIZARD_SESSION_KEY
+from sqlalchemy import or_
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -78,7 +79,13 @@ class Search(form.Form):
 
     def handleCategoriesButton(self, form, action):
         session = Session()
-        self.results = session.query(Organization).filter(Organization.category.has(getattr(Category, action.value) == True)).filter(Organization.language == self.context.Language()).all()
+        if action.value == 'enseignement_formation':
+            self.results = session.query(Organization).filter(or_(Organization.category.has(getattr(Category, 'tutoring') == True),
+                                                   Organization.category.has(getattr(Category, 'training') == True),
+                                                   Organization.category.has(getattr(Category, 'education') == True) )).filter(Organization.language == self.context.Language()).all()
+
+        else:
+            self.results = session.query(Organization).filter(Organization.category.has(getattr(Category, action.value) == True)).filter(Organization.language == self.context.Language()).all()
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
 

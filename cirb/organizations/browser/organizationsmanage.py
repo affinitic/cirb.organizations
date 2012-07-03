@@ -113,9 +113,17 @@ class OView(BrowserView):
 
     def input_categories(self):
         categories = []
-        for cat in Category.attributes:
-            if cat in self.context.get_categories():
-                categories.append(renderCategoryButton(self.context, cat))
+        already_enseignement_formation = False
+        for cat in self.context.get_categories():
+            attr = getattr(Category, cat, False)
+            if attr:
+                if cat == "education" or cat == "training" or cat == "tutoring":
+                    if not already_enseignement_formation:
+                        categories.append(renderCategoryButton(self.context, 'enseignement_formation'))
+                        already_enseignement_formation = True
+                else:
+                    categories.append(renderCategoryButton(self.context, cat))
+
         return categories
 
     def organizations_search_url(self):

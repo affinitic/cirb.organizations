@@ -46,8 +46,8 @@
         />
 
     <browser:resource
-        name="enseignement formation.png"
-        image="img/enseignement formation.png"
+        name="enseignement_formation.png"
+        image="img/enseignement_formation.png"
         layer=".interfaces.IOrganizationsLayer"
         />
 

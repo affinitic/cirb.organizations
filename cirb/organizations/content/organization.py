@@ -42,6 +42,7 @@ class Organization(ORMBase):
     activite_language_fr = Column(Boolean, default=False)
     activite_language_nl = Column(Boolean, default=False)
     activite_language_other = Column(Boolean, default=False)
+    activite_language_other_text = Column(String(255))
 
     #used to geolocalisation
     x = Column(String(255))
@@ -137,16 +138,24 @@ class Category(ORMBase):
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
 
     attributes = [_(u'welcome'), _('bibliotheque'), _(u'language_training'), _(u'plastic_art'), _(u'scenic_art'), _(u'social_cohesion'),  _('legal_advice'), _(u'culture'),
-                  _(u'danse'), _(u'sustainable_development'), _(u'employment'), _(u'childhood'), _(u'education'), _(u'envrironment'), _(u'body_language'), _(u'familly'),
-                  _(u'training'), _(u'handicap'), _(u'information'), _(u'it'), _(u'youth'), _(u'accomodation'), _(u'music'), _(u'social_restaurant'), _(u'health'),
-                  _(u'solidarity'), _(u'tutoring'), _(u'sport'), _(u'third_age')]
+                  _(u'danse'), _(u'sustainable_development'), _(u'employment'), _(u'childhood'), _(u'enseignement_formation'), _(u'envrironment'), _(u'body_language'), _(u'familly'),
+                  _(u'handicap'), _(u'information'), _(u'it'), _(u'youth'), _(u'accomodation'), _(u'music'), _(u'social_restaurant'), _(u'health'),
+                  _(u'solidarity'), _(u'sport'), _(u'third_age')]
 
     def get_list(self):
-        """ return true attributes (without other attribut."""
+        """ return a list with the true attributes (without other attribut.)"""
         categories = []
         for attribut in self.attributes:
-            if getattr(self, attribut) is True:
+            attr = getattr(self, attribut, False)
+            if attr is True:
                 categories.append(attribut)
+        if getattr(self, 'education') is True:
+            categories.append(_(u'education'))
+        if getattr(self, 'training') is True:
+            categories.append(_(u'training'))
+        if getattr(self, 'tutoring') is True:
+            categories.append(_(u'tutoring'))
+
         return categories
 
 
