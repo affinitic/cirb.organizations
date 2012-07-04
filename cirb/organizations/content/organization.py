@@ -91,6 +91,15 @@ class Organization(ORMBase):
 
         return categories
 
+    def get_categories_without_other(self):
+        session = Session()
+        cat = session.query(Category).filter(Category.organization_id == self.organization_id).all()
+        if len(cat) != 1:
+            raise IndexError('Only one Category class by organization is possible.')
+        categories = cat[0].get_list()
+        return categories
+
+
 
 class Address(ORMBase):
     __tablename__ = 'address'

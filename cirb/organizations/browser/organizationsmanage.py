@@ -114,7 +114,7 @@ class OView(BrowserView):
     def input_categories(self):
         categories = []
         already_enseignement_formation = False
-        for cat in self.context.get_categories():
+        for cat in self.context.get_categories_without_other():
             attr = getattr(Category, cat, False)
             if attr:
                 if cat == "education" or cat == "training" or cat == "tutoring":

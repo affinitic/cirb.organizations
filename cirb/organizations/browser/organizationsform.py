@@ -45,11 +45,12 @@ class OrganizationsStep(wizard.GroupStep):
     def apply(self, context):
         data = self.getContent()
         for field in self.fields:
-            if isinstance(data[field], file.NamedImage):
-                blob = data[field].data
-                setattr(self.wizard.session['organization'], field, blob)
-            else:
-                setattr(self.wizard.session['organization'], field, data[field])
+            if getattr(data, field, False):
+                if isinstance(data[field], file.NamedImage):
+                    blob = data[field].data
+                    setattr(self.wizard.session['organization'], field, blob)
+                else:
+                    setattr(self.wizard.session['organization'], field, data[field])
         for group in self.groups:
             for field in group.fields:
                 setattr(self.wizard.session['organization'].address, field, data[field])
