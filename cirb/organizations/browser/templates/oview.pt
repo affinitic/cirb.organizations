@@ -38,7 +38,8 @@ i18n:domain="cirb.organizations">
             <span i18n:translate="Responsable">Responsable</span> : 
                 <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span>, 
                 &nbsp;<span tal:content="context/person_incharge/function"></span><br />
-            <span tal:content="context/person_contact/email">email</span><br />
+
+                <a tal:content="context/person_contact/email" tal:attributes="href string:mailto:${context/person_contact/email}"></a><br />
             <span tal:content="context/website">website</span>
         </p>
         <div class="visualClear"></div>
@@ -50,9 +51,12 @@ i18n:domain="cirb.organizations">
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
             <p><span i18n:translate="Nom :">Nom : </span><span tal:content="context/person_contact/first_name"></span>&nbsp;<span tal:content="context/person_contact/second_name"></span><br />
             <span i18n:translate="Fonction :">Fonction : </span><span tal:content="context/person_contact/function"></span><br />
-            <span i18n:translate="Numero de telephone :">phone : </span><span tal:content="context/person_contact/phone"></span><br />
-            <span i18n:translate="Numero de fax :">fax : </span><span tal:content="context/person_contact/fax"></span><br />
-            <span i18n:translate="E-mail :">mail : </span><span tal:content="context/person_contact/email"></span></p>
+            <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" /><span tal:content="context/person_contact/phone"></span><br />
+            <tal:block tal:condition="context/person_contact/fax">
+                <img tal:attributes="src string:${portal_url}/++resource++printer.png" i18n:attributes="alt fax; title fax" class="icon" /><span tal:content="context/person_contact/fax"></span><br />
+            </tal:block>
+            <img tal:attributes="src string:${portal_url}/++resource++mail.png" i18n:attributes="alt email; title email" class="icon" />
+                <a tal:content="context/person_contact/email" tal:attributes="href string:mailto:${context/person_contact/email}"></a></p>
 
             <h3 i18n:translate="Lieux ou se deroulent les activites">lieux</h3>
             <span class="address">

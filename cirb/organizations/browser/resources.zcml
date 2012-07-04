@@ -183,6 +183,24 @@
         layer=".interfaces.IOrganizationsLayer"
         />
 
+    <browser:resource
+        name="phone.png"
+        image="img/phone.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="printer.png"
+        image="img/printer.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="mail.png"
+        image="img/mail.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
 
 
 </configure>

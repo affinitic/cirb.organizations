@@ -9,7 +9,9 @@ i18n:domain="cirb.organizations">
     <script type="text/javascript">
 
     $(document).ready(function() {
-        $('.manage_orga').dataTable();
+        $('.manage_orga').dataTable({
+            'iDisplayLength':50
+            });
     });
 
     </script>

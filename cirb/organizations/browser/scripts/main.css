@@ -36,3 +36,16 @@ form#cat div{
     float: left;
     padding-right: 15px;
 }
+
+#fiche-box img.icon {
+    width: 20px;
+    height: 20px;
+    border: none;
+    float: none;
+    padding: 0 15px 0 0;
+    margin: 0px;
+}
+
+#fiche-box h3 {
+    clear: both;
+}
