@@ -201,6 +201,12 @@
         layer=".interfaces.IOrganizationsLayer"
         />
 
+    <browser:resource
+        name="map_pin.png"
+        image="img/map_pin.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
 
 
 </configure>

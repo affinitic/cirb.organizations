@@ -112,7 +112,11 @@ class Search(form.Form):
         if len(self.results) == 0:
             return None
 
-        self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id, 'name':orga.name, 'x': orga.x, 'y':orga.y}} for orga in self.results])
+        self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id, 
+                                                          'name':orga.name, 
+                                                          'x': orga.x, 
+                                                          'y':orga.y, 
+                                                          'url': "{0}/org/{1}/oview".format(self.context.absolute_url(), orga.organization_id)}} for orga in self.results])
         return self.results
 
     def folder_url(self):
