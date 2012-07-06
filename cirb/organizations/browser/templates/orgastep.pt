@@ -10,7 +10,7 @@
 </tal:widgets>
 
 
-<div tal:attributes="data-gis-service view/get_gis_service" class="data">
+<div tal:attributes="data-gis-service view/get_gis_service; data-portal_url context/portal_url" class="data">
 </div>
 <tal:groups define="groups nocall:view/groups|nothing" repeat="group groups">
 	<fieldset class="group" tal:condition="group/widgets" tal:attributes="id string:fieldset-${group/prefix}">

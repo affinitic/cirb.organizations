@@ -31,7 +31,7 @@ i18n:domain="cirb.organizations">
     <div class="content-left"> 
         <img tal:replace="structure context/@@images/logo" width="200px" />
         <h2 class="name" tal:content="context/name"></h2>
-        <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y" >
+        <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y; data-portal_url context/portal_url" >
             <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
             <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
             <span i18n:translate="Tel.">tel</span><span tal:content="context/person_contact/phone">phone</span><br />
