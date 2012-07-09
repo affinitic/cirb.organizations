@@ -29,7 +29,7 @@ $(document).ready(function(){
         lon_current = $(this).data('lonorga');
         for (i in json) {
             mark = json[i];
-            if (mark.orga.y == lat_current) {
+            if (mark.orga.y == lat_current && mark.orga.x == lon_current) {
                 icon_blue_url = '/++resource++map_blue_pin.png';
                 icon_blue_url = portal_url+icon_blue_url;
                 mark.orga.icon = icon_blue_url;
