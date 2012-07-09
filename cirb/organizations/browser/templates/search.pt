@@ -14,9 +14,10 @@
 <metal:use use-macro="context/@@ploneform-macros/titlelessform" />
 <div tal:condition="view/get_results" class="orga_search">
     <ul>
-        <li class="orga" tal:repeat="orga view/results">
+        <tal:block tal:repeat="orga view/results">
+        <li class="orga" tal:attributes="data-idorga orga/organization_id; data-lonorga orga/x; data-latorga orga/y;">
             <img tal:attributes="src python:view.img('logo', orga.organization_id)" width="150px" class="fiche-img"/>
-            <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview" ><div tal:content="orga/name">name</div></a>
+            <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview" ><div tal:content="orga/name" class="organame">name</div></a>
             <div class="address">
                 <span tal:content="orga/address/num">num</span>,&nbsp;<span tal:content="orga/address/street">street</span><br />
                 <span tal:content="orga/address/post_code">post_code</span>&nbsp;<span tal:content="orga/address/municipality"></span>
@@ -26,6 +27,7 @@
             <div tal:content="orga/person_contact/email">email</div>
             <div tal:content="orga/website">website</div>
         </li>
+        </tal:block>
     </ul>
 
     <div class="multidata" tal:attributes="data-lang string:${context/Language}; data-absolute_url string:${view/folder_url}; data-portal_url string:${context/portal_url}">

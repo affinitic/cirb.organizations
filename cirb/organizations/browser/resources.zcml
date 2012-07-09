@@ -207,6 +207,12 @@
         layer=".interfaces.IOrganizationsLayer"
         />
 
+    <browser:resource
+        name="map_blue_pin.png"
+        image="img/map_blue_pin.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
 
 
 </configure>

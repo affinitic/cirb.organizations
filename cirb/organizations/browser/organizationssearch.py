@@ -116,7 +116,8 @@ class Search(form.Form):
                                                           'name':orga.name, 
                                                           'x': orga.x, 
                                                           'y':orga.y, 
-                                                          'url': "{0}/org/{1}/oview".format(self.context.absolute_url(), orga.organization_id)}} for orga in self.results])
+                                                          'url': "{0}/org/{1}/oview".format(self.context.absolute_url(), orga.organization_id),
+                                                          'icon': "{0}/++resource++map_pin.png".format(self.context.portal_url())}} for orga in self.results])
         return self.results
 
     def folder_url(self):
