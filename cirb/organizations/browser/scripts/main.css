@@ -37,9 +37,9 @@ form#cat div{
     padding-right: 15px;
 }
 
-#fiche-box img.icon {
-    width: 20px;
-    height: 20px;
+#fiche-box img.icon, #search-fiche-box .search-fiche img.icon {
+    width: 15px;
+    height: 15px;
     border: none;
     float: none;
     padding: 0 15px 0 0;

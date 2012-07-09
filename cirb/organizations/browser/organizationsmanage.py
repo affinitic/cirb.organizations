@@ -6,7 +6,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 
 from cirb.organizations.content.organization import Organization, Association, Category
 from cirb.organizations.browser.organizationssearch import renderCategoryButton
-#from cirb.organizations import organizationsMessageFactory as _
+from cirb.organizations import organizationsMessageFactory as _
 #from cirb.organizations.browser.interfaces import IOrganizationsLayer
 from plone.namedfile.interfaces import IImageScaleTraversable
 from z3c.saconfig import Session
@@ -51,13 +51,13 @@ class DeleteView(BrowserView):
     def delete(self):
         id_del_orga = self.request.form.get('del')
         if not delete_orga(self.session, id_del_orga):
-            msg = u'no id fund for delete a organization'
+            msg = _(u'no id fund for delete a organization')
             self.logger.info(msg)
             IStatusMessage(self.request).add(msg, type="error")
-            return self.request.response.redirect(self.context.absolute_url())
-        msg = u"The organization is deleted"
+            return self.request.response.redirect("{0}/organizations_manage".format(self.context.absolute_url()))
+        msg = _(u"The organization is deleted")
         IStatusMessage(self.request).add(msg, type="info")
-        return self.request.response.redirect(self.context.absolute_url())
+        return self.request.response.redirect("{0}/organizations_manage".format(self.context.absolute_url()))
 
 
 def delete_orga(session, id):

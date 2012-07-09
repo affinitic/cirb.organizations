@@ -45,7 +45,7 @@ class OrganizationsStep(wizard.GroupStep):
     def apply(self, context):
         data = self.getContent()
         for field in self.fields:
-            if getattr(data, field, False):
+            if data.get(field, False):
                 if isinstance(data[field], file.NamedImage):
                     blob = data[field].data
                     setattr(self.wizard.session['organization'], field, blob)
@@ -167,11 +167,11 @@ class Wizard(wizard.Wizard):
                 sqlalsession.add(assoc)
         
         from cirb.organizations.traversal import OrganizationWrapper
-        transaction.commit()
+        #transaction.commit()
         self.request.SESSION.clear()
-        orga_page = "{0}/org/{1}/oview".format(self.context.absolute_url(), organization.organization_id)
+        orga_page = "{0}/organizations_manage".format(self.context.absolute_url())
         if isinstance(self.context, OrganizationWrapper):
-            orga_page = "{0}/oview".format(self.context.absolute_url(), organization.organization_id)
+            orga_page = "{0}/organizations_manage".format(self.context.__parent__.__parent__.absolute_url())
         self.request.response.redirect(orga_page)
 
     @property

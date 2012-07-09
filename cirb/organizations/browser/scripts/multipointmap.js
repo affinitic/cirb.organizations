@@ -14,7 +14,7 @@ $(document).ready(function(){
     icon_url = portal_url+icon_url;
 
     marker_layer = new OpenLayers.Layer.Markers( "Markers" );
-    map = new OpenLayers.UrbisMap({div:"urbis_map", lang: $('div.multidata').data('lang')});
+    map = new OpenLayers.UrbisMap({div:"urbis_multi_map", lang: $('div.multidata').data('lang')});
 
     json_url = $('div.multidata').data('absolute_url')+"/json";
     $.getJSON(json_url, function(data){

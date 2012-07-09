@@ -40,20 +40,22 @@ class IOrganizations(Interface):
     """
     Organizations view interface
     """
+    language = schema.Choice(title=_(u"Language d'encodage"), required=True, vocabulary=LANG) 
     name = schema.TextLine(title=_(u"Organization name"), max_length=255)
+
+    status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
+    status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 
+
     logo = field.NamedImage(title=_(u"Logo"), required=False)
     picture = field.NamedImage(title=_(u"Picture"), required=False)
 
     website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
-    language = schema.Choice(title=_(u"Language"), required=True, vocabulary=LANG) 
 
     activite_language_fr = schema.Bool(title=_(u"Activité en francais"))
     activite_language_nl = schema.Bool(title=_(u"Activité en neerlandais"))
     activite_language_other = schema.Bool(title=_(u"Activité dans une autre langue"))
     activite_language_other_text = schema.TextLine(title=_(u"Autre(s) langue(s) de l'activité"), required=False, max_length=255)
 
-    status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
-    status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 
     # auto generate field, it could be hidden for user :
     x = schema.TextLine(title=u"x", required=True)
     y = schema.TextLine(title=u"y", required=True)

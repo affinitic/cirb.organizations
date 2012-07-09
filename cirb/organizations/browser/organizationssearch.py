@@ -36,8 +36,11 @@ class CategoryButton(button.ImageButton):
     def update(self):
         super(CategoryButton, self)
 
-def renderCategoryButton(context, name):
-    render = u'\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/>\n\n'.format(name, context.portal_url(), context.translate(name))
+def renderCategoryButton(context, name, selected=None):
+    if selected:
+        render = u'\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field selected" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><span class="bottominputcategory">{2}</span>\n\n'.format(name, context.portal_url(), context.translate(name))
+    else:
+        render = u'\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><span class="bottominputcategory">{2}</span>\n\n'.format(name, context.portal_url(), context.translate(name))
     return render
 
 
@@ -48,6 +51,7 @@ class Search(form.Form):
     ignoreContext = True
     fields = field.Fields(ISearch)
 
+    cat_search = ''
     template = ViewPageTemplateFile('templates/search.pt')
     results = []
 
@@ -72,13 +76,19 @@ class Search(form.Form):
         self.handlers.addHandler(CategoryButton, button.Handler(CategoryButton, self.handleCategoriesButton))
         super(Search, self).update()
         for cat in self.get_categories():
-            self.actions[cat].render = renderCategoryButton(self.context, cat)
+            if cat == self.cat_search:
+                self.actions[cat].render = renderCategoryButton(self.context, cat, 'selected')
+            else:
+                self.actions[cat].render = renderCategoryButton(self.context, cat)
     
     def handleLettersButton(self, form, action):
         self.search("{0}%".format(action.value.lower()))
 
     def handleCategoriesButton(self, form, action):
         session = Session()
+        # add selected class
+        self.cat_search = action.value
+        #import pdb; pdb.set_trace()
         if action.value == 'enseignement_formation':
             self.results = session.query(Organization).filter(or_(Organization.category.has(getattr(Category, 'tutoring') == True),
                                                    Organization.category.has(getattr(Category, 'training') == True),

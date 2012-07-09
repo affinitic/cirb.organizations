@@ -16,22 +16,28 @@
     <ul>
         <tal:block tal:repeat="orga view/results">
         <li class="orga" tal:attributes="data-idorga orga/organization_id; data-lonorga orga/x; data-latorga orga/y;">
-            <img tal:attributes="src python:view.img('logo', orga.organization_id)" width="150px" class="fiche-img"/>
-            <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview" ><div tal:content="orga/name" class="organame">name</div></a>
+            <!--img tal:attributes="src python:view.img('logo', orga.organization_id)" width="150px" class="fiche-img"/-->
+            <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview" ><h3 tal:content="orga/name" class="organame">name</h3></a>
             <div class="address">
                 <span tal:content="orga/address/num">num</span>,&nbsp;<span tal:content="orga/address/street">street</span><br />
                 <span tal:content="orga/address/post_code">post_code</span>&nbsp;<span tal:content="orga/address/municipality"></span>
             </div>
 
-            <div><span i18n:translate="Tel.">tel</span><span tal:content="orga/person_contact/phone">phone</span></div>
-            <div tal:content="orga/person_contact/email">email</div>
-            <div tal:content="orga/website">website</div>
+            <div>
+                <img tal:attributes="src string:${context/portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
+                <span tal:content="orga/person_contact/phone">phone</span>
+            </div>
+            <a tal:attributes="href string:mailto:${orga/person_contact/email}">
+                <img tal:attributes="src string:${context/portal_url}/++resource++mail.png" i18n:attributes="alt email; title email" class="icon" />
+                <span tal:content="orga/person_contact/email">email</span>
+            </a>
+            <a tal:attributes="href orga/website" target="_blank"><div tal:content="orga/website">website</div></a>
         </li>
         </tal:block>
     </ul>
 
     <div class="multidata" tal:attributes="data-lang string:${context/Language}; data-absolute_url string:${view/folder_url}; data-portal_url string:${context/portal_url}">
-        <div id="urbis_map" style="width:550px; height:350px; border: solid #000 1px;"></div>
+        <div id="urbis_multi_map" style="width:550px; height:350px; border: solid #000 1px;"></div>
     </div>
 
 </div>
