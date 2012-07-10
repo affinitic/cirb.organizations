@@ -42,7 +42,7 @@ class ManageView(BrowserView):
 
 
 class DeleteView(BrowserView):
-    def __init__(self, context, request, session=''):
+    def __init__(self, context, request):
         self.context = context
         self.request = request
         self.session = Session()

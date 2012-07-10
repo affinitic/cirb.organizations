@@ -237,7 +237,8 @@ class WizardWidgetTraversal(WrapperWidgetTraversal):
                     raise TraversalError('Cannot traverse through ' + target.__repr__())
 
             # Could not traverse from target to part
-            if target is None: raise TraversalError(part)
+            if target is None:
+                raise TraversalError(part)
 
         # Make the parent of the widget the traversal parent.
         # This is required for security to work in Zope 2.12

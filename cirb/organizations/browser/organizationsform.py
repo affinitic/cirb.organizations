@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from z3c.form import field
 from z3c.saconfig import Session
-import transaction
 from plone.app.z3cform.layout import FormWrapper
 from collective.z3cform.wizard import wizard
 from plone.z3cform.fieldsets import group
