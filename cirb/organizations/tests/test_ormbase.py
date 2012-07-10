@@ -3,7 +3,6 @@ import unittest2 as unittest
 import tempfile
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import clear_mappers
 from cirb.organizations import ORMBase
 #from cirb.organizations.testing import ORGA_FIXTURE
 from cirb.organizations.browser.organizationsmanage import delete_orga
@@ -21,8 +20,6 @@ class TestOrmbase(unittest.TestCase):
     #layer = ORGA_FIXTURE
     def setUp(self):
         super(TestOrmbase, self).setUp()
-        engine = None
-        global engine
         fileno, self.dbFileName = tempfile.mkstemp(suffix='.db')
         dbURI = 'sqlite:///{0}'.format(self.dbFileName)
         dbEngine = create_engine(dbURI)
@@ -35,9 +32,6 @@ class TestOrmbase(unittest.TestCase):
 
     def tearDown(self):
         super(TestOrmbase, self).tearDown()
-        #import os
-        #os.unlink(self.dbFileName)
-        #ORMBase.metadata.clear()
         Session().close_all()
 
     def test_add(self):
