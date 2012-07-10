@@ -22,11 +22,11 @@ from plone.app.testing import TEST_USER_ID
 from plone.testing.z2 import Browser
 
 
-class TestOrmbase(unittest.TestCase):
+class TestForms(unittest.TestCase):
     layer = ORGA_FUNCTIONAL
 
     def setUp(self):
-        super(TestOrmbase, self).setUp()
+        super(TestForms, self).setUp()
         self.portal = self.layer['portal']
         self.app = self.layer['app']
 
@@ -54,7 +54,7 @@ class TestOrmbase(unittest.TestCase):
         transaction.commit()
 
     def tearDown(self):
-        super(TestOrmbase, self).tearDown()
+        super(TestForms, self).tearDown()
         Session().close_all()
 
     def test_empty_search(self):
@@ -64,17 +64,19 @@ class TestOrmbase(unittest.TestCase):
         browser.open(testURL)
         browser.getControl(name='form.widgets.search').value = u'A'
         browser.getControl(name='form.buttons.search').click()
-        self.assertTrue('<dd>Pas d\'organisme trouv\xc3\xa9.</dd>' in  browser.contents)
+        print browser.contents
+        self.assertTrue('<dl class="portalMessage info">' in  browser.contents)
 
     def test_not_empty_search(self):
         session = Session()
-        session.add(Organization(name=u"Vin", language="fr"))
+        session.add(Organization(name=u"Vin sur vin", language="fr"))
+        session.flush()
 
         browser = Browser(self.app)
         testURL = self.folder_fr.absolute_url()
         browser.open(testURL)
         browser.getControl(name='form.widgets.search').value = u'in'
-        #browser.getControl(name='form.buttons.search').click()
+        browser.getControl(name='form.buttons.search').click()
 
         #self.assertFalse('<dd>Pas d\'organisme trouv\xc3\xa9.</dd>' in  browser.contents)
-        #self.assertTrue('Organisme du vin de liege' in  browser.contents)
+        #self.assertTrue('Vin sur vin' in  browser.contents)
