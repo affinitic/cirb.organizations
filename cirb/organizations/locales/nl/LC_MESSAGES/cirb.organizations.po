@@ -28,85 +28,85 @@ msgstr ""
 #: cirb.organizations:/browser/interfaces.py:100
 #: cirb.organizations:/content/organization.py:152
 msgid "sport"
-msgstr ""
+msgstr "Sport"
 
 #: cirb.organizations:/browser/interfaces.py:101
 #: cirb.organizations:/content/organization.py:152
 msgid "third_age"
-msgstr ""
+msgstr "Derde leeftijd"
 
 #: cirb.organizations:/browser/interfaces.py:102
 msgid "other"
-msgstr ""
+msgstr "Andere"
 
 #: cirb.organizations:/browser/interfaces.py:106
 #: cirb.organizations:/browser/interfaces.py:113
 msgid "title"
-msgstr ""
+msgstr "Titel"
 
 #: cirb.organizations:/browser/interfaces.py:107
 #: cirb.organizations:/browser/interfaces.py:114
 msgid "first_name"
-msgstr ""
+msgstr "Voornaam"
 
 #: cirb.organizations:/browser/interfaces.py:108
 #: cirb.organizations:/browser/interfaces.py:115
 msgid "second_name"
-msgstr ""
+msgstr "Naam"
 
 #: cirb.organizations:/browser/interfaces.py:109
 #: cirb.organizations:/browser/interfaces.py:116
 msgid "function"
-msgstr ""
+msgstr "Functie"
 
 #: cirb.organizations:/browser/interfaces.py:117
 #: cirb.organizations:/browser/templates/oview.pt:37
 #: cirb.organizations:/browser/templates/oview.pt:60
 msgid "phone"
-msgstr ""
+msgstr "Telefoon"
 
 #: cirb.organizations:/browser/interfaces.py:118
 #: cirb.organizations:/browser/templates/oview.pt:62
 msgid "fax"
-msgstr ""
+msgstr "Fax"
 
 #: cirb.organizations:/browser/interfaces.py:119
 #: cirb.organizations:/browser/templates/oview.pt:64
 msgid "email"
-msgstr ""
+msgstr "E-mail"
 
 #: cirb.organizations:/browser/interfaces.py:126
 msgid "Objectif"
-msgstr ""
+msgstr "Doel van de organisatie, aard van de activiteiten en doelgroep"
 
 #: cirb.organizations:/browser/interfaces.py:127
 msgid "Comments"
-msgstr ""
+msgstr "Kommentaar"
 
 #: cirb.organizations:/browser/interfaces.py:18
 #: cirb.organizations:/browser/organizationssearch.py:103
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: cirb.organizations:/browser/interfaces.py:27
 msgid "ASBL"
-msgstr ""
+msgstr "VZW"
 
 #: cirb.organizations:/browser/interfaces.py:28
 msgid "SPRL"
-msgstr ""
+msgstr "BVBA"
 
 #: cirb.organizations:/browser/interfaces.py:29
 msgid "Pouvoir Publique"
-msgstr ""
+msgstr "Openbaar Bestuur"
 
 #: cirb.organizations:/browser/interfaces.py:30
 msgid "Autres"
-msgstr ""
+msgstr "Andere"
 
 #: cirb.organizations:/browser/interfaces.py:34
 msgid "Français"
-msgstr "French"
+msgstr "Frans"
 
 #: cirb.organizations:/browser/interfaces.py:35
 msgid "Néerlandais"
@@ -114,230 +114,230 @@ msgstr "Nederlands"
 
 #: cirb.organizations:/browser/interfaces.py:43
 msgid "Language d'encodage"
-msgstr ""
+msgstr "Taal"
 
 #: cirb.organizations:/browser/interfaces.py:44
 msgid "Organization name"
-msgstr ""
+msgstr "Naam van de organisatie"
 
 #: cirb.organizations:/browser/interfaces.py:46
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: cirb.organizations:/browser/interfaces.py:47
 msgid "Other status"
-msgstr ""
+msgstr "Andere status"
 
 #: cirb.organizations:/browser/interfaces.py:49
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: cirb.organizations:/browser/interfaces.py:50
 msgid "Picture"
-msgstr ""
+msgstr "Afbeelding"
 
 #: cirb.organizations:/browser/interfaces.py:52
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 #: cirb.organizations:/browser/interfaces.py:54
 msgid "Activité en francais"
-msgstr ""
+msgstr "Activiteit in het Frans"
 
 #: cirb.organizations:/browser/interfaces.py:55
 msgid "Activité en neerlandais"
-msgstr ""
+msgstr "Activiteit in het Nederlands"
 
 #: cirb.organizations:/browser/interfaces.py:56
 msgid "Activité dans une autre langue"
-msgstr ""
+msgstr "Activiteit in een andere taal"
 
 #: cirb.organizations:/browser/interfaces.py:57
 msgid "Autre(s) langue(s) de l'activité"
-msgstr ""
+msgstr "Andere ta(a)l(en) van de activiteit"
 
 #: cirb.organizations:/browser/interfaces.py:65
 msgid "Street"
-msgstr ""
+msgstr "Straat"
 
 #: cirb.organizations:/browser/interfaces.py:66
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #: cirb.organizations:/browser/interfaces.py:67
 msgid "Post Code"
-msgstr ""
+msgstr "Postcode"
 
 #: cirb.organizations:/browser/interfaces.py:68
 msgid "Municipality"
-msgstr ""
+msgstr "Gemeente"
 
 #: cirb.organizations:/browser/interfaces.py:72
 #: cirb.organizations:/content/organization.py:149
 msgid "welcome"
-msgstr ""
+msgstr "Welkom nieuwkomer"
 
 #: cirb.organizations:/browser/interfaces.py:73
 #: cirb.organizations:/content/organization.py:149
 msgid "bibliotheque"
-msgstr ""
+msgstr "Bibliotheek"
 
 #: cirb.organizations:/browser/interfaces.py:74
 #: cirb.organizations:/content/organization.py:149
 msgid "language_training"
-msgstr ""
+msgstr "Taalonderwijs"
 
 #: cirb.organizations:/browser/interfaces.py:75
 #: cirb.organizations:/content/organization.py:149
 msgid "plastic_art"
-msgstr ""
+msgstr "Plastische kunsten"
 
 #: cirb.organizations:/browser/interfaces.py:76
 #: cirb.organizations:/content/organization.py:149
 msgid "scenic_art"
-msgstr ""
+msgstr "Podiumkunsten"
 
 #: cirb.organizations:/browser/interfaces.py:77
 #: cirb.organizations:/content/organization.py:149
 msgid "social_cohesion"
-msgstr ""
+msgstr "Sociale cohesie"
 
 #: cirb.organizations:/browser/interfaces.py:78
 #: cirb.organizations:/content/organization.py:149
 msgid "legal_advice"
-msgstr ""
+msgstr "Juridisch advies"
 
 #: cirb.organizations:/browser/interfaces.py:79
 #: cirb.organizations:/content/organization.py:149
 msgid "culture"
-msgstr ""
+msgstr "Cultuur"
 
 #: cirb.organizations:/browser/interfaces.py:80
 #: cirb.organizations:/content/organization.py:150
 msgid "danse"
-msgstr ""
+msgstr "Dans"
 
 #: cirb.organizations:/browser/interfaces.py:81
 #: cirb.organizations:/content/organization.py:150
 msgid "sustainable_development"
-msgstr ""
+msgstr "Duurzame ontwikkeling"
 
 #: cirb.organizations:/browser/interfaces.py:82
 #: cirb.organizations:/content/organization.py:150
 msgid "employment"
-msgstr ""
+msgstr "Werk"
 
 #: cirb.organizations:/browser/interfaces.py:83
 #: cirb.organizations:/content/organization.py:150
 msgid "childhood"
-msgstr ""
+msgstr "Kinderen"
 
 #: cirb.organizations:/browser/interfaces.py:84
 #: cirb.organizations:/content/organization.py:162
 msgid "education"
-msgstr ""
+msgstr "Onderwijs"
 
 #: cirb.organizations:/browser/interfaces.py:85
 #: cirb.organizations:/content/organization.py:150
 msgid "envrironment"
-msgstr ""
+msgstr "Milieu"
 
 #: cirb.organizations:/browser/interfaces.py:86
 #: cirb.organizations:/content/organization.py:150
 msgid "body_language"
-msgstr ""
+msgstr "Lichaamsexpressie"
 
 #: cirb.organizations:/browser/interfaces.py:87
 #: cirb.organizations:/content/organization.py:150
 msgid "familly"
-msgstr ""
+msgstr "Familie"
 
 #: cirb.organizations:/browser/interfaces.py:88
 #: cirb.organizations:/content/organization.py:164
 msgid "training"
-msgstr ""
+msgstr "Opleiding"
 
 #: cirb.organizations:/browser/interfaces.py:89
 #: cirb.organizations:/content/organization.py:151
 msgid "handicap"
-msgstr ""
+msgstr "Handicap"
 
 #: cirb.organizations:/browser/interfaces.py:90
 #: cirb.organizations:/content/organization.py:151
 msgid "information"
-msgstr ""
+msgstr "Informatie en documentatie"
 
 #: cirb.organizations:/browser/interfaces.py:91
 #: cirb.organizations:/content/organization.py:151
 msgid "it"
-msgstr ""
+msgstr "Informatica"
 
 #: cirb.organizations:/browser/interfaces.py:92
 #: cirb.organizations:/content/organization.py:151
 msgid "youth"
-msgstr ""
+msgstr "Jeugd"
 
 #: cirb.organizations:/browser/interfaces.py:93
 #: cirb.organizations:/content/organization.py:151
 msgid "accomodation"
-msgstr ""
+msgstr "Huisvesting"
 
 #: cirb.organizations:/browser/interfaces.py:94
 #: cirb.organizations:/content/organization.py:151
 msgid "music"
-msgstr ""
+msgstr "Muziek"
 
 #: cirb.organizations:/browser/interfaces.py:95
 #: cirb.organizations:/content/organization.py:151
 msgid "social_restaurant"
-msgstr ""
+msgstr "Sociaal restaurant"
 
 #: cirb.organizations:/browser/interfaces.py:96
 msgid "mental_health"
-msgstr ""
+msgstr "Geestelijke gezondheidszorg"
 
 #: cirb.organizations:/browser/interfaces.py:97
 #: cirb.organizations:/content/organization.py:151
 msgid "health"
-msgstr ""
+msgstr "Gezondheid"
 
 #: cirb.organizations:/browser/interfaces.py:98
 #: cirb.organizations:/content/organization.py:152
 msgid "solidarity"
-msgstr ""
+msgstr "Solidariteit / Derde wereld"
 
 #: cirb.organizations:/browser/interfaces.py:99
 #: cirb.organizations:/content/organization.py:166
 msgid "tutoring"
-msgstr ""
+msgstr "Schoolopvang"
 
 #: cirb.organizations:/browser/organizationsform.py:105
 msgid "Category"
-msgstr ""
+msgstr "Categorie"
 
 #: cirb.organizations:/browser/organizationsform.py:121
 msgid "Descritpion and comments"
-msgstr ""
+msgstr "Beschrijving en kommentaren"
 
 #: cirb.organizations:/browser/organizationsform.py:136
 msgid "Organization"
-msgstr ""
+msgstr "Organisatie"
 
 #: cirb.organizations:/browser/organizationsform.py:20
 msgid "Address"
-msgstr ""
+msgstr "Adress"
 
 #: cirb.organizations:/browser/organizationsform.py:26
 msgid "Organization Information"
-msgstr ""
+msgstr "Informatie over de organisatie"
 
 #: cirb.organizations:/browser/organizationsform.py:66
 msgid "Person in charge"
-msgstr ""
+msgstr "Verantwoordelijke"
 
 #: cirb.organizations:/browser/organizationsform.py:82
 msgid "Person for contact"
-msgstr ""
+msgstr "Contact"
 
 #: cirb.organizations:/browser/organizationsmanage.py:54
 msgid "no id fund for delete a organization"
@@ -345,58 +345,58 @@ msgstr ""
 
 #: cirb.organizations:/browser/organizationsmanage.py:58
 msgid "The organization is deleted"
-msgstr ""
+msgstr "De organisatie werd verwijderd"
 
 #: cirb.organizations:/browser/organizationssearch.py:50
 msgid "Organization search"
-msgstr ""
+msgstr "Zoek organisatie"
 
 #: cirb.organizations:/browser/organizationssearch.py:62
 #: cirb.organizations:/browser/organizationssearch.py:100
 msgid "No organization found."
-msgstr ""
+msgstr "Geen organisatie gevonden"
 
 #: cirb.organizations:/browser/templates/manage.pt:29
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: cirb.organizations:/browser/templates/manage.pt:30
 msgid "Edit"
-msgstr ""
+msgstr "Wijzig"
 
 #. Default: "Trans ?"
 #: cirb.organizations:/browser/templates/manage.pt:31
 msgid "Trans"
-msgstr ""
+msgstr "Vertaling"
 
 #: cirb.organizations:/browser/templates/manage.pt:32
 msgid "Del"
-msgstr ""
+msgstr "Verwijderen"
 
 #: cirb.organizations:/browser/templates/manage.pt:48
 msgid "Add translation"
-msgstr ""
+msgstr "Voeg een vertaling toe"
 
 #: cirb.organizations:/browser/templates/manage.pt:64
 msgid "confirmation-required"
-msgstr ""
+msgstr "Bevestiging vereist"
 
 #. Default: "Are you sure about this?"
 #: cirb.organizations:/browser/templates/manage.pt:65
 msgid "do-you-want-to-delete-this-organization"
-msgstr ""
+msgstr "Wilt u deze organisatie verwijderen uit de gegevensbank"
 
 #: cirb.organizations:/browser/templates/oview.pt:30
 msgid "Fiche"
-msgstr ""
+msgstr "Steekkaart"
 
 #: cirb.organizations:/browser/templates/oview.pt:41
 msgid "Responsable"
-msgstr ""
+msgstr "Verantwoordelijke"
 
 #: cirb.organizations:/browser/templates/oview.pt:49
 msgid "Objectifs"
-msgstr ""
+msgstr "Doelstellingen"
 
 #. Default: "Lieux d'activit\303\251"
 #: cirb.organizations:/browser/templates/oview.pt:52
@@ -409,20 +409,20 @@ msgstr ""
 
 #: cirb.organizations:/browser/templates/oview.pt:67
 msgid "Langue(s) de l'activite"
-msgstr ""
+msgstr "Plaats van activiteit"
 
 #: cirb.organizations:/browser/templates/oview.pt:68
 msgid "francais"
-msgstr ""
+msgstr "Frans"
 
 #: cirb.organizations:/browser/templates/oview.pt:69
 msgid "neerlandais"
-msgstr ""
+msgstr "Nederlands"
 
 #: cirb.organizations:/browser/templates/oview.pt:73
 msgid "Categorie d'activites"
-msgstr ""
+msgstr "Categorie van activiteit"
 
 #: cirb.organizations:/content/organization.py:150
 msgid "enseignement_formation"
-msgstr ""
+msgstr "Onderwijs en opleiding"
