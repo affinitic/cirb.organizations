@@ -64,6 +64,12 @@ i18n:domain="cirb.organizations">
             <img tal:attributes="src string:${portal_url}/++resource++mail.png" i18n:attributes="alt email; title email" class="icon" />
             <a tal:content="context/person_contact/email" tal:attributes="href string:mailto:${context/person_contact/email}"></a></p>
 
+            <h3 i18n:translate="Langue(s) de l'activité">Langue(s) de l'activité</h3>
+            <tal:block tal:condition="context/activite_language_fr"><span i18n:translate="français">français</span>, </tal:block> 
+            <tal:block tal:condition="context/activite_language_nl"><span i18n:translate="néérlandais">néérlandais</span>, </tal:block>
+            <tal:block tal:condition="context/activite_language_other"><span tal:content="context/activite_language_other_text"></span></tal:block>
+            
+
             <h3 i18n:translate="Categorie d'activites">Catégorie d'activités</h3>
             <p tal:content="view/get_categories"></p>
 
