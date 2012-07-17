@@ -215,4 +215,189 @@
 
 
 
+
+
+
+    <browser:resource
+        name="youth-select.png"
+        image="img/youth-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="accomodation-select.png"
+        image="img/accomodation-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="body_language-select.png"
+        image="img/body_language-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="childhood-select.png"
+        image="img/childhood-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="culture-select.png"
+        image="img/culture-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="danse-select.png"
+        image="img/danse-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="employment-select.png"
+        image="img/employment-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="enseignement_formation-select.png"
+        image="img/enseignement_formation-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="envrironment-select.png"
+        image="img/envrironment-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="familly-select.png"
+        image="img/familly-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="handicap-select.png"
+        image="img/handicap-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="health-select.png"
+        image="img/health-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="information-select.png"
+        image="img/information-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="it-select.png"
+        image="img/it-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="language_training-select.png"
+        image="img/language_training-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="legal_advice-select.png"
+        image="img/legal_advice-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="music-select.png"
+        image="img/music-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="plastic_art-select.png"
+        image="img/plastic_art-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="scenic_art-select.png"
+        image="img/scenic_art-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="social_cohesion-select.png"
+        image="img/social_cohesion-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="social_restaurant-select.png"
+        image="img/social_restaurant-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="solidarity-select.png"
+        image="img/solidarity-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="sport-select.png"
+        image="img/sport-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="sustainable_development-select.png"
+        image="img/sustainable_development-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="third_age-select.png"
+        image="img/third_age-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="welcome-select.png"
+        image="img/welcome-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="education-select.png"
+        image="img/bibliotheque-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="training-select.png"
+        image="img/bibliotheque-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="tutoring-select.png"
+        image="img/bibliotheque-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="bibliotheque-select.png"
+        image="img/bibliotheque-select.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+
+
 </configure>

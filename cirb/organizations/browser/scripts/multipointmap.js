@@ -20,11 +20,17 @@ $(document).ready(function(){
         json = data;
         create_points();
     });
-    map.setCenter(new OpenLayers.LonLat(149642,171451), 1); 
+    map.setCenter(new OpenLayers.LonLat(149642, 171451), 1); 
 
     $('li.orga').hover(function(){
         change_marker_color(this);
     });
+
+    //selected category
+    if ($('.categorybutton-field.selected').length > 0) {
+        src = $('.categorybutton-field.selected').attr('src').replace('.png', '-select.png');
+        $('.categorybutton-field.selected').attr('src', src);
+    }
 });
 
 function change_marker_color(elem) {

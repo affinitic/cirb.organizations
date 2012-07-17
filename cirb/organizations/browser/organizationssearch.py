@@ -38,9 +38,9 @@ class CategoryButton(button.ImageButton):
 
 def renderCategoryButton(context, name, selected=None):
     if selected:
-        render = u'\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field selected" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><span class="bottominputcategory">{2}</span>\n\n'.format(name, context.portal_url(), context.translate(name))
+        render = u'<div class="categorie-inputs">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field selected" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><div class="bottominputcategory">{2}</div>\n</div>\n'.format(name, context.portal_url(), context.translate(name))
     else:
-        render = u'\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><span class="bottominputcategory">{2}</span>\n\n'.format(name, context.portal_url(), context.translate(name))
+        render = u'<div class="categorie-inputs">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><div class="bottominputcategory">{2}</div></div>\n\n'.format(name, context.portal_url(), context.translate(name))
     return render
 
 

@@ -32,6 +32,7 @@
                 <span tal:content="orga/person_contact/email">email</span>
             </a>
             <a tal:attributes="href orga/website" target="_blank"><div tal:content="orga/website">website</div></a>
+            <hr class="end-of-orga">
         </li>
         </tal:block>
     </ul>
@@ -45,7 +46,7 @@
 
 <div tal:condition="view/get_results" class="map-on-right">
     <div class="multidata" tal:attributes="data-lang string:${context/Language}; data-absolute_url string:${view/folder_url}; data-portal_url string:${context/portal_url}">
-        <div id="urbis_multi_map" style="width:550px; height:350px; border: solid #000 1px;"></div>
+        <div id="urbis_multi_map" style="width:550px; height:550px; border: solid #000 1px;"></div>
     </div>
 </div>
 

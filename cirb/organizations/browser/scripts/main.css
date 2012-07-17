@@ -49,3 +49,8 @@ form#cat div{
 #fiche-box h3 {
     clear: both;
 }
+
+.end-of-orga {
+    margin-top: 1em;
+    width: 90%;
+}
