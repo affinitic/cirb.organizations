@@ -136,6 +136,8 @@ class Wizard(wizard.Wizard):
     label = _(u"Organization")
     steps = OrganizationsStep, InChargeStep, ContactStep, CategoryStep, AdditionalInformationStep
 
+    index = viewpagetemplatefile.ViewPageTemplateFile('templates/wizard.pt')
+
     def initialize(self):
         from cirb.organizations.traversal import OrganizationWrapper
         if isinstance(self.context, OrganizationWrapper):
@@ -144,6 +146,7 @@ class Wizard(wizard.Wizard):
         else:
             orga = Organization(address=Address(), category=Category(), person_incharge=InCharge(), person_contact=Contact(), additionalinfo=AdditionalInformation())
             orga.person_contact.address = Address()
+            self.loadSteps(orga)
         self.session['organization'] = orga
         self.session['canonical_id'] = self.request.get('canonical_id')
 
@@ -173,10 +176,10 @@ class Wizard(wizard.Wizard):
             orga_page = "{0}/organizations_manage".format(self.context.__parent__.__parent__.absolute_url())
         self.request.response.redirect(orga_page)
 
-    @property
-    def absolute_url(self):
-        return self.action
-        #return self.context.absolute_url() + '/' + self.__name__
+    #@property
+    #def absolute_url(self):
+    #    return self.action
+    #    #return self.context.absolute_url() + '/' + self.__name__
 
 
 class WizardView(FormWrapper):

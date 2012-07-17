@@ -36,12 +36,18 @@
         </tal:block>
     </ul>
 
-    <div class="multidata" tal:attributes="data-lang string:${context/Language}; data-absolute_url string:${view/folder_url}; data-portal_url string:${context/portal_url}">
-        <div id="urbis_multi_map" style="width:550px; height:350px; border: solid #000 1px;"></div>
-    </div>
 
 </div>
 
 
-<div class="categories">
+<div tal:condition="not: view/get_results" class="categories">
+</div>
+
+<div tal:condition="view/get_results" class="map-on-right">
+    <div class="multidata" tal:attributes="data-lang string:${context/Language}; data-absolute_url string:${view/folder_url}; data-portal_url string:${context/portal_url}">
+        <div id="urbis_multi_map" style="width:550px; height:350px; border: solid #000 1px;"></div>
+    </div>
+</div>
+
+<div tal:condition="view/get_results" class="categories-bottom">
 </div>
