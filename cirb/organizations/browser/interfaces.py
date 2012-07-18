@@ -114,10 +114,10 @@ class IContact(Interface):
     first_name = schema.TextLine(title=_(u"first_name"), max_length=255)
     second_name = schema.TextLine(title=_(u"second_name"), max_length=255)
     function = schema.TextLine(title=_(u"function"), required=False)
-    phone = schema.TextLine(title=_(u"phone"), max_length=255)
+    phone = schema.TextLine(title=_(u"phone"), max_length=255, required=False)
     fax = schema.TextLine(title=_(u"fax"), max_length=255, required=False)
     email = schema.TextLine(title=_(u"email"), 
-                        max_length=255, 
+                        max_length=255, required=False,
                         constraint=re.compile('^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE).match)
     # add address 
 

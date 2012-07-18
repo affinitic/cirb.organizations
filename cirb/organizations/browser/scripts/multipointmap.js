@@ -1,14 +1,14 @@
-$(document).ready(function(){
-    var size = new OpenLayers.Size(32,32);
-    var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-    var popup;
-    var marker_layer;
-    var map;
-    var icon_marker;
-    var json;
-    var icon_url;
-    var orga;
+var size = new OpenLayers.Size(32,32);
+var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+var popup;
+var marker_layer;
+var map;
+var icon_marker;
+var json;
+var icon_url;
+var orga;
 
+$(document).ready(function(){
     icon_url = '/++resource++map_pin.png';
     icon_url = portal_url+icon_url;
 
