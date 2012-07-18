@@ -22,3 +22,5 @@ report.html
 src/
 *.mo
 *.*~
+eggs
+lib64
