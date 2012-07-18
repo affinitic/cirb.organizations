@@ -398,6 +398,12 @@
         layer=".interfaces.IOrganizationsLayer"
         />
 
+    <browser:resource
+        name="noimage.jpg"
+        image="img/noimage.jpg"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
 
 
 </configure>

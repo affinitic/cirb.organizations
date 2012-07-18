@@ -24,12 +24,13 @@ i18n:domain="cirb.organizations">
 <div id="oview"></div>
     <a href="javascript:this.print();" class="printlink"><img src="#" alt="Print" class="print" /></a>
     <div tal:condition="python:'Authenticated' in user.getRoles()" class="manage">
-        <a tal:attributes="href string:${context/absolute_url}/organizations_form" class="edit">Edit</a>
-        <a tal:condition="view/translate_url" tal:attributes="href string:${view/translate_url}" class="translate">Translate</a>
+        <a tal:attributes="href string:${context/absolute_url}/organizations_form" class="edit" i18n:translate="Edit">Edit</a>
+        <a tal:condition="view/translate_url" tal:attributes="href string:${view/translate_url}" class="translate" i18n:translate="Translate">Translate</a>
     </div>
     <h1 i18n:translate="Fiche" class="documentFirstHeading">Fiche</h1>
     <div class="content-left"> 
-        <img tal:replace="structure context/@@images/logo" width="200px" />
+        <img tal:condition="python: view.has_image('logo')" tal:replace="structure context/@@images/logo" width="200px" />
+        <img tal:condition="python:not view.has_image('logo')" tal:attributes="src string:${context/portal_url}/++resource++noimage.jpg" i18n:attributes="alt noiamge; title noimage" width="200px" />
         <h2 class="name" tal:content="context/name"></h2>
         <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y; data-portal_url context/portal_url" >
             <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
@@ -65,8 +66,10 @@ i18n:domain="cirb.organizations">
             <a tal:content="context/person_contact/email" tal:attributes="href string:mailto:${context/person_contact/email}"></a></p>
 
             <h3 i18n:translate="Langue(s) de l'activite">Langue(s) de l'activite</h3>
-            <tal:block tal:condition="context/activite_language_fr"><span i18n:translate="francais">francais</span>, </tal:block> 
-            <tal:block tal:condition="context/activite_language_nl"><span i18n:translate="neerlandais">neerlandais</span>, </tal:block>
+            <tal:block tal:condition="context/activite_language_fr"><span i18n:translate="francais">francais</span></tal:block> 
+            <tal:block tal:condition="python: context.activite_language_fr and context.activite_language_nl">, </tal:block> 
+            <tal:block tal:condition="context/activite_language_nl"><span i18n:translate="neerlandais">neerlandais</span></tal:block>
+            <tal:block tal:condition="python: context.activite_language_other and context.activite_language_nl">, </tal:block> 
             <tal:block tal:condition="context/activite_language_other"><span tal:content="context/activite_language_other_text"></span></tal:block>
             
 
@@ -82,7 +85,10 @@ i18n:domain="cirb.organizations">
 
     <div class="content-right">
         <div class="map-right"><div id="urbis_map" style=""></div></div>
-        <div class="picture"><img tal:replace="structure context/@@images/picture" width="200px" /></div>
+        <div class="picture">
+            <img tal:condition="python: view.has_image('picture')" tal:replace="structure context/@@images/picture" width="200px" />
+            <img tal:condition="python:not view.has_image('picture')" tal:attributes="src string:${context/portal_url}/++resource++noimage.jpg" i18n:attributes="alt noiamge; title noimage" width="200px" />
+        </div>
         <div class="categories">
         <form class="MyClass searchorga rowlike enableUnloadProtection   kssattr-formname-organizations_search" 
             tal:attributes="action view/organizations_search_url" 

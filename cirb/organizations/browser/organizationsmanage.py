@@ -138,3 +138,11 @@ class OView(BrowserView):
             return "{0}/@@translate?newlanguage={1}".format(self.context.absolute_url(), trans[0])
         else:
             return False
+
+    def has_image(self, image_name):
+        named_image = getattr(self.context, image_name)
+        if named_image.contentType:
+            return True
+        else:
+            return False
+

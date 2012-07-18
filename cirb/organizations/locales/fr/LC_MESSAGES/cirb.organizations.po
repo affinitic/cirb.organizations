@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Tue Jul 17 16:35:45 2012\n"
+"POT-Creation-Date: Wed Jul 18 09:57:39 2012\n"
 "PO-Revision-Date: 2012-02-27 08:47+0100\n"
 "Last-Translator: bsuttor <bsuttor@cirb.irisnet.be>\n"
 "Language-Team: French\n"
@@ -60,18 +60,18 @@ msgid "function"
 msgstr "Fonction"
 
 #: cirb.organizations:/browser/interfaces.py:117
-#: cirb.organizations:/browser/templates/oview.pt:37
-#: cirb.organizations:/browser/templates/oview.pt:60
+#: cirb.organizations:/browser/templates/oview.pt:38
+#: cirb.organizations:/browser/templates/oview.pt:61
 msgid "phone"
 msgstr "Téléphone"
 
 #: cirb.organizations:/browser/interfaces.py:118
-#: cirb.organizations:/browser/templates/oview.pt:62
+#: cirb.organizations:/browser/templates/oview.pt:63
 msgid "fax"
 msgstr "Fax"
 
 #: cirb.organizations:/browser/interfaces.py:119
-#: cirb.organizations:/browser/templates/oview.pt:64
+#: cirb.organizations:/browser/templates/oview.pt:65
 msgid "email"
 msgstr "E-mail"
 
@@ -146,7 +146,7 @@ msgstr "Activité en francais"
 
 #: cirb.organizations:/browser/interfaces.py:55
 msgid "Activité en neerlandais"
-msgstr Activité en néerlandais""
+msgstr "Activité en néerlandais"
 
 #: cirb.organizations:/browser/interfaces.py:56
 msgid "Activité dans une autre langue"
@@ -361,6 +361,7 @@ msgid "Name"
 msgstr "Nom"
 
 #: cirb.organizations:/browser/templates/manage.pt:30
+#: cirb.organizations:/browser/templates/oview.pt:27
 msgid "Edit"
 msgstr "Modifier"
 
@@ -386,44 +387,57 @@ msgstr "Confirmation demandée"
 msgid "do-you-want-to-delete-this-organization"
 msgstr "Voulez-vous supprimer cet organimse de la base de données"
 
+#: cirb.organizations:/browser/templates/oview.pt:28
+msgid "Translate"
+msgstr "Traduire"
+
 #: cirb.organizations:/browser/templates/oview.pt:30
 msgid "Fiche"
 msgstr "Fiche"
 
-#: cirb.organizations:/browser/templates/oview.pt:41
+#: cirb.organizations:/browser/templates/oview.pt:33
+#: cirb.organizations:/browser/templates/oview.pt:90
+msgid "noimage"
+msgstr "Pas d'image disponible"
+
+#: cirb.organizations:/browser/templates/oview.pt:33
+#: cirb.organizations:/browser/templates/oview.pt:90
+msgid "noiamge"
+msgstr "Pas d'image disponible"
+
+#: cirb.organizations:/browser/templates/oview.pt:42
 msgid "Responsable"
 msgstr "Responsable"
 
-#: cirb.organizations:/browser/templates/oview.pt:49
+#: cirb.organizations:/browser/templates/oview.pt:50
 msgid "Objectifs"
 msgstr "Objectifs"
 
 #. Default: "Lieux d'activit\303\251"
-#: cirb.organizations:/browser/templates/oview.pt:52
+#: cirb.organizations:/browser/templates/oview.pt:53
 msgid "Lieux d'activite"
 msgstr "Lieux d'activité"
 
-#: cirb.organizations:/browser/templates/oview.pt:58
+#: cirb.organizations:/browser/templates/oview.pt:59
 msgid "Personne de contact"
 msgstr "Contact"
 
-#: cirb.organizations:/browser/templates/oview.pt:67
-msgid "Langue(s) de l'activite"
-msgstr Langue(s) de l'activité""
-
 #: cirb.organizations:/browser/templates/oview.pt:68
+msgid "Langue(s) de l'activite"
+msgstr "Langue(s) de l'activité"
+
+#: cirb.organizations:/browser/templates/oview.pt:69
 msgid "francais"
 msgstr "français"
 
-#: cirb.organizations:/browser/templates/oview.pt:69
+#: cirb.organizations:/browser/templates/oview.pt:71
 msgid "neerlandais"
 msgstr "néerlandais"
 
-#: cirb.organizations:/browser/templates/oview.pt:73
+#: cirb.organizations:/browser/templates/oview.pt:76
 msgid "Categorie d'activites"
 msgstr "Categorie d'activités"
 
 #: cirb.organizations:/content/organization.py:150
 msgid "enseignement_formation"
 msgstr "Enseignement et formation"
-
