@@ -43,15 +43,24 @@ class ManageView(BrowserView):
     def has_completed(self, orga):
         html = ""
         if not orga.x or not orga.y:
-            html += "<span class='state-private'>Bad xy</span>"
+            if not orga.address.street:
+                html += "<span class='state-private'>No address</span>&nbsp;"
+            else:
+                html += "<span class='state-private'>Bad xy</span>"
         else: 
             for decimal in orga.x.split('.'):
                 if not decimal.isdecimal():
-                    html += "<span class='state-private'>x</span>&nbsp;"
+                    html += "<span class='state-private'>x</span>,&nbsp;"
 
             for decimal in orga.y.split('.'):
                 if not decimal.isdecimal():
-                    html += "<span class='state-private'>y</span>&nbsp;"
+                    html += "<span class='state-private'>y</span>,&nbsp;"
+
+        if not orga.person_incharge.second_name:
+            html += "<span class='state-private'>Person in charge</span>,&nbsp;"
+
+        if not orga.person_contact.second_name:
+            html += "<span class='state-private'>Contact</span>,&nbsp;"
 
         if not html:
             html = "<span class='state-published'>Ok</span>"
