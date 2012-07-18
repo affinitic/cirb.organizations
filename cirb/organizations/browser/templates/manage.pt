@@ -23,10 +23,15 @@ i18n:domain="cirb.organizations">
 <body>
 
 <div metal:fill-slot="main">
+     <a class="addOrga" href="" tal:attributes="href string:${context/absolute_url}/organizations_form">
+        <img src="" tal:attributes="src string:${context/portal_url}/++theme++plonetheme.gscetterbeek/images/ico-new.png" alt="Add orga" />
+    </a>
+
     <table class="manage_orga">
     <thead>
         <tr>
             <th i18n:translate="Name">Name</th>
+            <th i18n:translate="Completed">Completed</th>
             <th i18n:translate="Edit">Edit</th>
             <th i18n:translate="Trans">Trans ?</th>
             <th i18n:translate="Del">Del</th>
@@ -38,6 +43,9 @@ i18n:domain="cirb.organizations">
                 <a href="" tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview">
                     <span><tal:block tal:content="orga/name">name</tal:block></span>
                 </a>
+            </td>
+            <td>
+                <tal:block tal:content="structure python: view.has_completed(orga)"></tal:block>
             </td>
             <td>
                 <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/organizations_form">Edit</a>
@@ -64,7 +72,8 @@ i18n:domain="cirb.organizations">
     <div id="dialog" i18n:attributes="title confirmation-required">
         <tal:block i18n:translate="do-you-want-to-delete-this-organization"> Are you sure about this? </tal:block>
     </div>
-</div>
+
+   </div>
 </body>
 
 </html>

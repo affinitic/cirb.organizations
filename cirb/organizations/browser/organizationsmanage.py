@@ -40,6 +40,23 @@ class ManageView(BrowserView):
         else:
             return 'fr'
 
+    def has_completed(self, orga):
+        html = ""
+        if not orga.x or not orga.y:
+            html += "<span class='state-private'>Bad xy</span>"
+        else: 
+            for decimal in orga.x.split('.'):
+                if not decimal.isdecimal():
+                    html += "<span class='state-private'>x</span>&nbsp;"
+
+            for decimal in orga.y.split('.'):
+                if not decimal.isdecimal():
+                    html += "<span class='state-private'>y</span>&nbsp;"
+
+        if not html:
+            html = "<span class='state-published'>Ok</span>"
+        return html
+
 
 class DeleteView(BrowserView):
     def __init__(self, context, request):
