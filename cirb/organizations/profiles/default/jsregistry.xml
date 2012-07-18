@@ -2,18 +2,19 @@
 <object name="portal_javascripts">
 
     <javascript
-        id="++resource++cirb.organizations.scripts/getxy.js"
+        id="http://gis.irisnet.be/api/urbis.js"
         cacheable="False" compression="safe" cookable="False"
         enabled="True" expression=""  inline="False" />
-    
+
     <javascript
-        id="http://gis.irisnet.be/api/urbis.js"
+        id="++resource++cirb.organizations.scripts/getxy.js"
         cacheable="False" compression="safe" cookable="False"
         enabled="True" expression=""  inline="False" />
 
     <javascript
         id="++resource++cirb.organizations.scripts/multipointmap.js"
         cacheable="False" compression="safe" cookable="False"
-        enabled="True" expression=""  inline="False" />
+        enabled="True" expression="python:context.restrictedTraverse('@@plone_interface_info').provides('cirb.organizations.browser.interfaces.ISearch')"  inline="False" />
+
 
 </object>

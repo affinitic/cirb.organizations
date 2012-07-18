@@ -1,9 +1,19 @@
 var urlService;
-var map;
-var marker;
+var simplemap;
+var simplemarker;
+var size;
+var offset;
+var icon_marker;
+var simplemarker_layer;
+var icon_url = portal_url+'/++resource++map_pin.png';
 
 $(document).ready(function(){
-    map = new OpenLayers.UrbisMap({div:"urbis_map_form", lang: $('html').attr('lang')});
+
+    simplemarker_layer = new OpenLayers.Layer.Markers( "Markers" );
+    simplemap = new OpenLayers.UrbisMap({div:"urbis_map_form", lang: $('html').attr('lang')});
+    size = new OpenLayers.Size(32,32);
+    offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+
     urlService = $('div.data').data('gis-service');
     $("#fieldset-addr input[type='text']").focus(function(){
         updatexy();
@@ -13,7 +23,7 @@ $(document).ready(function(){
         updatexy();
     });
     readonlyHiddenXY();
-    updatemap();
+    updatexy();
 });
 
 function updatemap(){
@@ -21,22 +31,16 @@ function updatemap(){
     y = $('#orga-widgets-y').val();
     title = $('#orga-widgets-name').val();
     if (x && y){
-        if (marker) {marker.destroy();}
-        var portal_url = $('div.data').data('portal_url');
-        var icon_url = '/++resource++map_pin.png';
-        icon_url = portal_url+icon_url;
-        var size = new OpenLayers.Size(32,32);
-        var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-        var icon_marker = new OpenLayers.Icon(icon_url, size, offset);
-        var marker_layer = new OpenLayers.Layer.Markers( "Markers" );
+        if (simplemarker) {simplemarker.destroy();}
+        simplemarker_layer.clearMarkers();
+        icon_marker = new OpenLayers.Icon(icon_url, size, offset);
 
-        lonlat = new OpenLayers.LonLat(x, y);
-        marker = new OpenLayers.Marker(lonlat, icon_marker);
+        simplemarker = new OpenLayers.Marker(new OpenLayers.LonLat(x, y), icon_marker.clone());
 
-        marker_layer.addMarker(marker);
-        map.addLayer(marker_layer);
+        simplemarker_layer.addMarker(simplemarker);
+        simplemap.addLayer(simplemarker_layer);
 
-        map.setCenter(new OpenLayers.LonLat(x, y), 2);
+        simplemap.setCenter(new OpenLayers.LonLat(x, y), 2);
     }
 }
 
@@ -52,14 +56,19 @@ function updatexy(){
             url: urlService+'Rest/Localize/getaddresses',
             data: { language:language,address:address },
             success:function(address_data) {
-                var x =Number(address_data.result[0].point.x);
-                var y =Number(address_data.result[0].point.y);
-                if(!(isNaN(x) || isNaN(y))) {
-                    $('#orga-widgets-x').val(x);
-                    $('#orga-widgets-y').val(y);
-                    updatemap();
-                    //visible('orga-widgets-x');
-                    //visible('orga-widgets-y');
+                if (address_data.result.length != 0 ){
+                    var x =Number(address_data.result[0].point.x);
+                    var y =Number(address_data.result[0].point.y);
+                    if(!(isNaN(x) || isNaN(y))) {
+                        $('#orga-widgets-x').val(x);
+                        $('#orga-widgets-y').val(y);
+                        updatemap();
+                        //visible('orga-widgets-x');
+                        //visible('orga-widgets-y');
+                    }
+                }else {
+                    $('#orga-widgets-x').val('xxx');
+                    $('#orga-widgets-y').val('yyy');
                 }
             },
             error:function(){
