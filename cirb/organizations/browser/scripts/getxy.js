@@ -22,8 +22,10 @@ $(document).ready(function(){
     $("#localize").click(function(){
         updatexy();
     });
-    readonlyHiddenXY();
-    updatexy();
+    if ($("#localize")) {
+        readonlyHiddenXY();
+        updatexy();
+    }
 });
 
 function updatemap(){
