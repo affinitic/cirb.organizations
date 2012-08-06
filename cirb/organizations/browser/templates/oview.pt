@@ -31,19 +31,19 @@ i18n:domain="cirb.organizations">
     <div class="content-left"> 
         <img tal:condition="python: view.has_image('logo')" tal:replace="structure context/@@images/logo" width="200px" />
         <img tal:condition="python:not view.has_image('logo')" tal:attributes="src string:${context/portal_url}/++resource++noimage.jpg" i18n:attributes="alt noiamge; title noimage" width="200px" />
-        <h2 class="name" tal:content="context/name"></h2>
-        <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y; data-portal_url context/portal_url" >
-            <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
-            <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
-            <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
-            <span tal:content="context/person_contact/phone">phone</span><br />
-            
-            <a target="_blank" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
-            <span i18n:translate="Responsable">Responsable</span> : 
+        <div class="titre-infos">
+            <h2 class="name" tal:content="context/name"></h2>
+            <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y; data-portal_url context/portal_url" >
+                <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
+                <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
+                <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
+                <span tal:content="context/person_contact/phone">phone</span><br />    
+                <a target="_blank" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
+                <span i18n:translate="Responsable">Responsable</span> : 
                 <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span>, 
                 &nbsp;<span tal:content="context/person_incharge/function"></span><br />
-
-        </p>
+            </p>
+        </div>
         <div class="visualClear"></div>
         <div class="infos-sup">
             
