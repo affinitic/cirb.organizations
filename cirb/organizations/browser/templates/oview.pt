@@ -29,8 +29,10 @@ i18n:domain="cirb.organizations">
     </div>
     <h1 i18n:translate="Fiche" class="documentFirstHeading">Fiche</h1>
     <div class="content-left"> 
-        <img tal:condition="python: view.has_image('logo')" tal:replace="structure context/@@images/logo" width="200px" />
-        <img tal:condition="python:not view.has_image('logo')" tal:attributes="src string:${context/portal_url}/++resource++noimage.jpg" i18n:attributes="alt noiamge; title noimage" width="200px" />
+        <div class="logoorga">
+            <img tal:condition="python: view.has_image('logo')" tal:replace="structure context/@@images/logo" width="200px" />
+            <img tal:condition="python:not view.has_image('logo')" tal:attributes="src string:${context/portal_url}/++resource++noimage.jpg" i18n:attributes="alt noiamge; title noimage" width="200px" />
+        </div>
         <div class="titre-infos">
             <h2 class="name" tal:content="context/name"></h2>
             <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y; data-portal_url context/portal_url" >
