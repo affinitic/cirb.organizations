@@ -2,7 +2,7 @@
 <object name="portal_javascripts">
 
     <javascript
-        id="++resource++cirb.organizations.scripts/urbis.js"
+        id="http://gis.irisnet.be/api/urbis.js"
         cacheable="True" compression="None" cookable="True"
         enabled="True" expression=""  inline="False" />
 

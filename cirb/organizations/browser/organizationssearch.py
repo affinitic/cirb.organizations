@@ -11,7 +11,7 @@ from cirb.organizations.content.organization import Organization, Category
 from cirb.organizations.browser.interfaces import ISearch
 
 import json
-from sqlalchemy import func 
+from sqlalchemy import func
 from plone.namedfile import file
 from plone.namedfile.interfaces import IImageScaleTraversable
 #import logging
@@ -19,22 +19,22 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 from zope.interface import implements
 SESSION_JSON = "search_json"
 SESSION_SEARCH = "search_term"
-ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
 class LetterButton(button.Button):
     pass
-   
+
 
 class CategoryButton(button.ImageButton):
 
     def __init__(self, *args, **kwargs):
         super(CategoryButton, self).__init__(*args, **kwargs)
 
-
     def update(self):
         super(CategoryButton, self)
+
 
 def renderCategoryButton(context, name, selected=None):
     if selected:
@@ -122,10 +122,10 @@ class Search(form.Form):
         if len(self.results) == 0:
             return None
 
-        self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id, 
-                                                          'name':orga.name, 
-                                                          'x': orga.x, 
-                                                          'y':orga.y, 
+        self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id,
+                                                          'name':orga.name,
+                                                          'x': orga.x,
+                                                          'y':orga.y,
                                                           'street': u"{0}, {1}".format(orga.address.num, orga.address.street),
                                                           'city': u"{0} {1}".format(orga.address.post_code, orga.address.municipality),
                                                           'url': "{0}/org/{1}/oview".format(self.context.absolute_url(), orga.organization_id),
@@ -141,18 +141,14 @@ class Search(form.Form):
         blob = getattr(orga, name)
         src = ""
         if blob:
-            namedimage = file.NamedImage(data=blob) 
+            namedimage = file.NamedImage(data=blob)
             extension = namedimage.contentType.split('/')[-1].lower()
             src = "{0}/org/{1}/@@images/{2}.{3}".format(self.context.absolute_url(), orga.organization_id, name, extension)
         return src
-    
+
 
 class SearchView(FormWrapper):
     form = Search
-    
-    def __call__(self):
-        
-        return super(SearchView, self).__call__()
 
     def json(self):
         ids = self.request.SESSION.get(SESSION_JSON)

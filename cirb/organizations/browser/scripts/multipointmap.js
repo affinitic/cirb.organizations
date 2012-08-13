@@ -9,6 +9,8 @@ var icon_url;
 var orga;
 
 $(document).ready(function(){
+    if ($('body.template-organizations_search').length==0){return}
+    if ($('div.multidata').length==0){return}
     icon_url = '/++resource++map_pin.png';
     icon_url = portal_url+icon_url;
 

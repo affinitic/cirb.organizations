@@ -8,7 +8,7 @@ var simplemarker_layer;
 var icon_url = portal_url+'/++resource++map_pin.png';
 
 $(document).ready(function(){
-
+    if ($('body.template-organizations_form').length==0){return}
     simplemarker_layer = new OpenLayers.Layer.Markers( "Markers" );
     simplemap = new OpenLayers.UrbisMap({div:"urbis_map_form", lang: $('html').attr('lang')});
     size = new OpenLayers.Size(32,32);

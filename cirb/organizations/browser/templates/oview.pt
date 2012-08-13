@@ -40,10 +40,11 @@ i18n:domain="cirb.organizations">
                 <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
                 <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
                 <span tal:content="context/person_contact/phone">phone</span><br />    
-                <a target="_blank" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
+                <a target="_blank" tal:condition="context/website" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
                 <span i18n:translate="Responsable">Responsable</span> : 
-                <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span>, 
-                &nbsp;<span tal:content="context/person_incharge/function"></span><br />
+                <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span>
+                <tal:block tal:condition="context/person_incharge/function">,&nbsp;<span tal:content="context/person_incharge/function"></span></tal:block>
+                <br />
             </p>
         </div>
         <div class="visualClear"></div>
@@ -59,13 +60,19 @@ i18n:domain="cirb.organizations">
             </span>
 
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
-            <p><span tal:content="context/person_contact/second_name"></span>, <span tal:content="context/person_contact/function"></span><br />
-            <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" /><span tal:content="context/person_contact/phone"></span><br />
-            <tal:block tal:condition="context/person_contact/fax">
-                <img tal:attributes="src string:${portal_url}/++resource++printer.png" i18n:attributes="alt fax; title fax" class="icon" /><span tal:content="context/person_contact/fax"></span><br />
-            </tal:block>
-            <img tal:attributes="src string:${portal_url}/++resource++mail.png" i18n:attributes="alt email; title email" class="icon" />
-            <a tal:content="context/person_contact/email" tal:attributes="href string:mailto:${context/person_contact/email}"></a></p>
+            <p>
+            <span tal:content="context/person_contact/second_name"></span> <tal:block tal:condition="context/person_contact/function">,&nbsp;<span tal:content="context/person_contact/function"></span></tal:block><br />
+                <tal:block tal:condition="context/person_contact/phone">
+                    <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" /><span tal:content="context/person_contact/phone"></span><br />
+                </tal:block>
+                <tal:block tal:condition="context/person_contact/fax">
+                    <img tal:attributes="src string:${portal_url}/++resource++printer.png" i18n:attributes="alt fax; title fax" class="icon" /><span tal:content="context/person_contact/fax"></span><br />
+                </tal:block>
+                <tal:block tal:condition="context/person_contact/email">
+                    <img tal:attributes="src string:${portal_url}/++resource++mail.png" i18n:attributes="alt email; title email" class="icon" />
+                    <a tal:content="context/person_contact/email" tal:attributes="href string:mailto:${context/person_contact/email}"></a>
+                </tal:block>
+            </p>
 
             <h3 i18n:translate="Langue(s) de l'activite">Langue(s) de l'activite</h3>
             <tal:block tal:condition="context/activite_language_fr"><span i18n:translate="francais">francais</span></tal:block> 

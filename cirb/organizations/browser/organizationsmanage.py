@@ -62,6 +62,12 @@ class ManageView(BrowserView):
         if not orga.person_contact.second_name:
             html += "<span class='state-private'>Contact</span>,&nbsp;"
 
+        if orga.person_contact.fax == ' ':
+            html += "<span class='state-private'>Fax</span>,&nbsp;"
+        
+        if orga.website == ' ':
+            html += "<span class='state-private'>Website</span>,&nbsp;"
+
         if not html:
             html = "<span class='state-published'>Ok</span>"
         return html

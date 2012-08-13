@@ -49,7 +49,7 @@ class Organization(ORMBase):
     y = Column(String(255))
 
     address = relationship('Address', backref=backref('organization',
-                                                      uselist=False, cascade="all, delete-orphan"))
+                                 uselist=False, cascade="all, delete-orphan"))
     category = relationship('Category', uselist=False,
                             backref='organization',
                             cascade="all, delete-orphan")
