@@ -57,7 +57,7 @@ class Search(form.Form):
 
     def search(self, search):
         session = Session()
-        self.results = session.query(Organization).filter(func.lower(Organization.name).like('{0}'.format(search))).filter(Organization.language == self.context.Language()).all()
+        self.results = session.query(Organization).filter(func.lower(Organization.name).like('{0}'.format(search))).filter(Organization.language == self.context.Language()).order_by(Organization.name).all()
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
 

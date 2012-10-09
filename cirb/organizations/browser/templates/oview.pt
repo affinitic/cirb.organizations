@@ -39,8 +39,12 @@ i18n:domain="cirb.organizations">
                 <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
                 <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
                 <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
-                <span tal:content="context/person_contact/phone">phone</span><br />    
-                <a target="_blank" tal:condition="context/website" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
+
+                <tal:block tal:condition="context/person_contact/phone">
+                    <span tal:content="context/person_contact/phone">phone</span><br />    
+                    <a target="_blank" tal:condition="context/website" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
+                </tal:block>
+
                 <span i18n:translate="Responsable">Responsable</span> : 
                 <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span>
                 <tal:block tal:condition="context/person_incharge/function">,&nbsp;<span tal:content="context/person_incharge/function"></span></tal:block>

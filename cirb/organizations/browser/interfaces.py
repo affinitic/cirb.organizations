@@ -50,6 +50,7 @@ class IOrganizations(Interface):
     picture = field.NamedImage(title=_(u"Picture"), required=False)
 
     website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
+    activite_place =  schema.Text(title=_(u"Activite place"), required=False, max_length=511)
 
     activite_language_fr = schema.Bool(title=_(u"Activité en francais"))
     activite_language_nl = schema.Bool(title=_(u"Activité en neerlandais"))
@@ -124,4 +125,4 @@ class IContact(Interface):
 
 class IAdditionalInformation(Interface):
     objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=2048) 
-    comments = schema.Text(title=_(u"Comments"), required=False, max_length=1024)
+    comments = schema.Text(title=_(u"Comments"), required=False, max_length=2048)

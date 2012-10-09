@@ -38,6 +38,7 @@ class Organization(ORMBase):
     picture = Column(LargeBinary)
     website = Column(String(255))
     language = Column(String(2))
+    activite_place = Column(String(511))
 
     activite_language_fr = Column(Boolean, default=False)
     activite_language_nl = Column(Boolean, default=False)
@@ -146,10 +147,14 @@ class Category(ORMBase):
     other = Column(String(255))
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
 
-    attributes = [_(u'welcome'), _('bibliotheque'), _(u'language_training'), _(u'plastic_art'), _(u'scenic_art'), _(u'social_cohesion'),  _('legal_advice'), _(u'culture'),
-                  _(u'danse'), _(u'sustainable_development'), _(u'employment'), _(u'childhood'), _(u'enseignement_formation'), _(u'envrironment'), _(u'body_language'), _(u'familly'),
-                  _(u'handicap'), _(u'information'), _(u'it'), _(u'youth'), _(u'accomodation'), _(u'music'), _(u'social_restaurant'), _(u'health'),
-                  _(u'solidarity'), _(u'sport'), _(u'third_age')]
+    attributes = [
+        _(u'familly'), _(u'childhood'), _(u'youth'), _(u'third_age'),
+        _(u'culture'), _(u'music'), _(u'danse'), _(u'body_language'), _(u'sport'),
+        _(u'plastic_art'), _(u'scenic_art'), _('bibliotheque'),
+        _(u'enseignement_formation'), _(u'language_training'), _(u'it'), _(u'employment'),_(u'information'),
+        _(u'health'), _(u'handicap'), _(u'social_restaurant'), _(u'solidarity'), _(u'envrironment'),
+        _(u'sustainable_development'), _(u'welcome'), _(u'social_cohesion'), _(u'accomodation'), _('legal_advice'),                               
+    ]
 
     def get_list(self):
         """ return a list with the true attributes (without other attribut.)"""
@@ -201,5 +206,5 @@ class AdditionalInformation(ORMBase):
                              Sequence('additionalinformation_seq'),
                              primary_key=True, autoincrement=True)
     objectif = Column(String(2048))
-    comments = Column(String(1024))
+    comments = Column(String(4096))
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))
