@@ -59,7 +59,6 @@ class Search(form.Form):
         super(Search, self).__init__(context, request)
         organisations_serached = request.SESSION.get(SESSION_SEARCH)
         if organisations_serached:
-            session = Session()
             self.results = organisations_serached
 
 
@@ -129,7 +128,7 @@ class Search(form.Form):
             return None
 
         session = Session()
-        json = []
+        json_organisations = []
         sa_results = []
         for orga in self.results:
             sa_orga = session.query(Organization).get(orga.organization_id)
@@ -143,9 +142,9 @@ class Search(form.Form):
             dict_orga['city'] = u"{0} {1}".format(sa_orga.address.post_code, sa_orga.address.municipality)
             dict_orga['url'] = "{0}/org/{1}/oview".format(self.context.absolute_url(), sa_orga.organization_id)
             dict_orga['icon'] = "{0}/++resource++map_pin.png".format(self.context.portal_url())
-            json.append({'orga': dict_orga})
+            json_organisations.append({'orga': dict_orga})
 
-        self.request.SESSION.set(SESSION_JSON, json)
+        self.request.SESSION.set(SESSION_JSON, json_organisations)
         self.results = sa_results
         return sa_results
 
@@ -201,18 +200,19 @@ class AdvancedSearch(form.Form):
     @button.buttonAndHandler(_(u'Search'))
     def handleSubmit(self, action):
         data, errors = self.extractData()
-        session = Session()
-        searched_categories = data.get('categories')
-        request = session.query(Organization)
-        for categorie in searched_categories:
-            request = request.filter(Organization.category.has(getattr(Category, categorie) == True))
-        request = request.filter(Organization.language == self.context.Language())
-        self.results = request.all()
-        if len(self.results) == 0:
-            self.status = _(u"No organization found.")
-        else: 
-            self.request.SESSION.set(SESSION_SEARCH, self.results)
-            self.request.response.redirect('organizations_search')
+        if not errors:
+            session = Session()
+            searched_categories = data.get('categories')
+            request = session.query(Organization)
+            for categorie in searched_categories:
+                request = request.filter(Organization.category.has(getattr(Category, categorie) == True))
+            request = request.filter(Organization.language == self.context.Language())
+            self.results = request.all()
+            if len(self.results) == 0:
+                self.status = _(u"No organization found.")
+            else:
+                self.request.SESSION.set(SESSION_SEARCH, self.results)
+                self.request.response.redirect('organizations_search')
 
     def get_result(self):
         return self.results

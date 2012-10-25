@@ -4,8 +4,6 @@ import zope.interface
 from zope.interface import Interface
 from zope import schema
 from zope.schema import vocabulary
-from zope.schema import Set, Choice
-from plone.app.z3cform.queryselect import ArchetypesContentSourceBinder
 from plone.namedfile import field
 from cirb.organizations.content.organization import Category
 
@@ -35,6 +33,7 @@ class IAdvancedSearch(IOrganizationsLayer):
 
 class Terms(vocabulary.SimpleVocabulary):
     zope.interface.implements(interfaces.ITerms)
+
     def getValue(self, token):
         return self.getTermByToken(token).value
 
@@ -65,7 +64,7 @@ class IOrganizations(Interface):
     picture = field.NamedImage(title=_(u"Picture"), required=False)
 
     website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
-    activite_place =  schema.Text(title=_(u"Activite place"), required=False, max_length=511)
+    activite_place = schema.Text(title=_(u"Activite place"), required=False, max_length=511)
 
     activite_language_fr = schema.Bool(title=_(u"Activité en francais"))
     activite_language_nl = schema.Bool(title=_(u"Activité en neerlandais"))
@@ -132,10 +131,10 @@ class IContact(Interface):
     function = schema.TextLine(title=_(u"function"), required=False)
     phone = schema.TextLine(title=_(u"phone"), max_length=255, required=False)
     fax = schema.TextLine(title=_(u"fax"), max_length=255, required=False)
-    email = schema.TextLine(title=_(u"email"), 
+    email = schema.TextLine(title=_(u"email"),
                         max_length=255, required=False,
                         constraint=re.compile('^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,6}$', re.IGNORECASE).match)
-    # add address 
+    # add address
 
 
 class IAdditionalInformation(Interface):
