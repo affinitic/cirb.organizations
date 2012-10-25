@@ -4,7 +4,10 @@ import zope.interface
 from zope.interface import Interface
 from zope import schema
 from zope.schema import vocabulary
+from zope.schema import Set, Choice
+from plone.app.z3cform.queryselect import ArchetypesContentSourceBinder
 from plone.namedfile import field
+from cirb.organizations.content.organization import Category
 
 from cirb.organizations import organizationsMessageFactory as _
 from z3c.form import interfaces
@@ -16,6 +19,18 @@ class IOrganizationsLayer(Interface):
 
 class ISearch(IOrganizationsLayer):
     search = schema.TextLine(title=_(u'Search'), required=False)
+
+
+def categories():
+    return Category.attributes
+
+
+class IAdvancedSearch(IOrganizationsLayer):
+    #search = schema.TextLine(title=_(u'Search'), required=False)
+    categories = schema.List(
+            title=_(u"Categories"),
+            description=u"Categories des activites",
+            value_type=schema.Choice(values=categories()))
 
 
 class Terms(vocabulary.SimpleVocabulary):

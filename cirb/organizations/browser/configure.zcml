@@ -33,6 +33,16 @@
         for=".interfaces.ISearch"
         name="organizations_search" />
 
+    <!-- advanced_search -->
+    <browser:page
+        for=".interfaces.ISearch"
+        name="orga_advanced_search"
+        class=".organizationssearch.AdvancedSearchView"
+        allowed_interface=".interfaces.ISearch"
+        permission="zope.Public"
+        />
+
+
     <!-- CRUD -->
     <browser:page
         for="*"

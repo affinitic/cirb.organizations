@@ -8,7 +8,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from cirb.organizations import organizationsMessageFactory as _
 from cirb.organizations.content.organization import Organization, Category
-from cirb.organizations.browser.interfaces import ISearch
+from cirb.organizations.browser.interfaces import ISearch, IAdvancedSearch
 
 import json
 from sqlalchemy import func
@@ -55,6 +55,14 @@ class Search(form.Form):
     template = ViewPageTemplateFile('templates/search.pt')
     results = []
 
+    def __init__(self, context, request):
+        super(Search, self).__init__(context, request)
+        organisations_serached = request.SESSION.get(SESSION_SEARCH)
+        if organisations_serached:
+            session = Session()
+            self.results = organisations_serached
+
+
     def search(self, search):
         session = Session()
         self.results = session.query(Organization).filter(func.lower(Organization.name).like('{0}'.format(search))).filter(Organization.language == self.context.Language()).order_by(Organization.name).all()
@@ -88,7 +96,6 @@ class Search(form.Form):
         session = Session()
         # add selected class
         self.cat_search = action.value
-        #import pdb; pdb.set_trace()
         if action.value == 'enseignement_formation':
             self.results = session.query(Organization).filter(or_(Organization.category.has(getattr(Category, 'tutoring') == True),
                                                    Organization.category.has(getattr(Category, 'training') == True),
@@ -98,7 +105,6 @@ class Search(form.Form):
             self.results = session.query(Organization).filter(Organization.category.has(getattr(Category, action.value) == True)).filter(Organization.language == self.context.Language()).all()
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
-
 
     @button.buttonAndHandler(_(u'Search'))
     def handleSubmit(self, action):
@@ -111,26 +117,40 @@ class Search(form.Form):
                 search_text = "%{0}%".format(input_content.lower())
 
             self.search(search_text)
-    
+
     def get_results(self):
         if not 'SESSION' in self.request.keys():
             return None
-        
+
         if SESSION_JSON in self.request.SESSION.keys():
             self.request.SESSION.delete(SESSION_JSON)
-         
+
         if len(self.results) == 0:
             return None
 
-        self.request.SESSION.set(SESSION_JSON, [{'orga': {'id':orga.organization_id,
-                                                          'name':orga.name,
-                                                          'x': orga.x,
-                                                          'y':orga.y,
-                                                          'street': u"{0}, {1}".format(orga.address.num, orga.address.street),
-                                                          'city': u"{0} {1}".format(orga.address.post_code, orga.address.municipality),
-                                                          'url': "{0}/org/{1}/oview".format(self.context.absolute_url(), orga.organization_id),
-                                                          'icon': "{0}/++resource++map_pin.png".format(self.context.portal_url())}} for orga in self.results])
-        return self.results
+        session = Session()
+        json = []
+        sa_results = []
+        for orga in self.results:
+            sa_orga = session.query(Organization).get(orga.organization_id)
+            sa_results.append(sa_orga)
+            dict_orga = {}
+            dict_orga['id'] = sa_orga.organization_id
+            dict_orga['name'] = sa_orga.name
+            dict_orga['x'] = sa_orga.x
+            dict_orga['y'] = sa_orga.y
+            dict_orga['street'] = u"{0}, {1}".format(sa_orga.address.num, sa_orga.address.street)
+            dict_orga['city'] = u"{0} {1}".format(sa_orga.address.post_code, sa_orga.address.municipality)
+            dict_orga['url'] = "{0}/org/{1}/oview".format(self.context.absolute_url(), sa_orga.organization_id)
+            dict_orga['icon'] = "{0}/++resource++map_pin.png".format(self.context.portal_url())
+            json.append({'orga': dict_orga})
+
+        self.request.SESSION.set(SESSION_JSON, json)
+        self.results = sa_results
+        return sa_results
+
+    def set_results(self, results):
+        self.results = results
 
     def folder_url(self):
         return self.context.absolute_url()
@@ -143,8 +163,17 @@ class Search(form.Form):
         if blob:
             namedimage = file.NamedImage(data=blob)
             extension = namedimage.contentType.split('/')[-1].lower()
-            src = "{0}/org/{1}/@@images/{2}.{3}".format(self.context.absolute_url(), orga.organization_id, name, extension)
+            src = "{0}/org/{1}/@@images/{2}.{3}".format(
+                    self.context.absolute_url(),
+                    orga.organization_id,
+                    name,
+                    extension)
         return src
+
+    def get_advanced_search_url(self):
+        suffix = "orga_advanced_search"
+        url = "{0}/{1}".format(self.context.absolute_url(), suffix)
+        return url
 
 
 class SearchView(FormWrapper):
@@ -158,3 +187,36 @@ class SearchView(FormWrapper):
 
 def list_to_json(ids):
     return json.dumps(ids)
+
+
+class AdvancedSearch(form.Form):
+    implements(IImageScaleTraversable)
+
+    label = _(u'Organization advanced search')
+    ignoreContext = True
+    fields = field.Fields(IAdvancedSearch)
+    template = ViewPageTemplateFile('templates/advanced_search.pt')
+    results = []
+
+    @button.buttonAndHandler(_(u'Search'))
+    def handleSubmit(self, action):
+        data, errors = self.extractData()
+        session = Session()
+        searched_categories = data.get('categories')
+        request = session.query(Organization)
+        for categorie in searched_categories:
+            request = request.filter(Organization.category.has(getattr(Category, categorie) == True))
+        request = request.filter(Organization.language == self.context.Language())
+        self.results = request.all()
+        if len(self.results) == 0:
+            self.status = _(u"No organization found.")
+        else: 
+            self.request.SESSION.set(SESSION_SEARCH, self.results)
+            self.request.response.redirect('organizations_search')
+
+    def get_result(self):
+        return self.results
+
+
+class AdvancedSearchView(FormWrapper):
+    form = AdvancedSearch

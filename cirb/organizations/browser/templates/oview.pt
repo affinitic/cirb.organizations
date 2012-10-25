@@ -38,11 +38,14 @@ i18n:domain="cirb.organizations">
             <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y; data-portal_url context/portal_url" >
                 <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
                 <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
-                <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
 
                 <tal:block tal:condition="context/person_contact/phone">
+                    <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
                     <span tal:content="context/person_contact/phone">phone</span><br />    
-                    <a target="_blank" tal:condition="context/website" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
+                </tal:block>
+
+                <tal:block tal:condition="context/website">
+                    <a target="_blank" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
                 </tal:block>
 
                 <span i18n:translate="Responsable">Responsable</span> : 
@@ -58,10 +61,9 @@ i18n:domain="cirb.organizations">
             <p tal:content="context/additionalinfo/objectif"></p>
 
             <h3 i18n:translate="Lieux d'activite">Lieux d'activité</h3>
-            <span class="address">
-                <span tal:content="context/person_contact/address/num">num</span>,&nbsp;<span tal:content="context/person_contact/address/street">street</span><br />
-                <span tal:content="context/person_contact/address/post_code">post_code</span>&nbsp;<span tal:content="context/person_contact/address/municipality"></span>
-            </span>
+            <div class="address">
+                <span tal:content="context/activite_place">activite_place</span>            
+            </div>
 
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
             <p>

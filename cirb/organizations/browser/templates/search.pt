@@ -8,7 +8,9 @@
 </div>
 <div id="search">
 </div>
-
+<div id="advanced_search">
+    <a href="" tal:attributes="href view/get_advanced_search_url" i18n:translate="advanced_search">advanced_search</a>
+</div>
 
 
 <metal:use use-macro="context/@@ploneform-macros/titlelessform" />
@@ -23,15 +25,15 @@
                 <span tal:content="orga/address/post_code">post_code</span>&nbsp;<span tal:content="orga/address/municipality"></span>
             </div>
 
-            <div>
+            <div tal:condition="orga/person_contact/phone">
                 <img tal:attributes="src string:${context/portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" />
                 <span tal:content="orga/person_contact/phone">phone</span>
             </div>
-            <a tal:attributes="href string:mailto:${orga/person_contact/email}">
+            <a tal:condition="orga/person_contact/email" tal:attributes="href string:mailto:${orga/person_contact/email}">
                 <img tal:attributes="src string:${context/portal_url}/++resource++mail.png" i18n:attributes="alt email; title email" class="icon" />
                 <span tal:content="orga/person_contact/email">email</span>
             </a>
-            <a tal:attributes="href orga/website" target="_blank"><div tal:content="orga/website">website</div></a>
+            <a tal:condition="orga/website" tal:attributes="href orga/website" target="_blank"><div tal:content="orga/website">website</div></a>
             <hr class="end-of-orga">
         </li>
         </tal:block>
