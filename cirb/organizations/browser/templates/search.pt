@@ -3,12 +3,16 @@
     <a class="addOrga" href="" tal:attributes="href string:${context/absolute_url}/organizations_form"><tal:block i18n:translate="add_orga"> add orga</tal:block></a>&nbsp;&nbsp;&nbsp;
     <a class="manageOrga" href="" tal:attributes="href string:${context/absolute_url}/organizations_manage"><tal:block i18n:translate="maange_orga">manage orga</tal:block></a>
 -->
-    <a class="addOrga" href="" tal:attributes="href string:${context/absolute_url}/organizations_form"><img src="" tal:attributes="src string:${context/portal_url}/++theme++plonetheme.gscetterbeek/images/ico-new.png" alt="Add orga" /></a>&nbsp;&nbsp;&nbsp;
+<a class="addOrga" href="" tal:attributes="href string:${context/absolute_url}/organizations_form">
+        <img src="" tal:attributes="src string:${context/portal_url}/++theme++plonetheme.gscetterbeek/images/ico-new.png" alt="Add orga" />
+    </a>&nbsp;&nbsp;&nbsp;
     <a class="manageOrga" href="" tal:attributes="href string:${context/absolute_url}/organizations_manage"><img src="" tal:attributes="src string:${context/portal_url}/++theme++plonetheme.gscetterbeek/images/ico-modify.png" alt="Manage orga" /></a>
 </div>
 <div id="search">
 </div>
-<div id="advanced_search">
+
+
+<div id="advanced_search" i18n:domain="cirb.organizations">
     <a href="" tal:attributes="href view/get_advanced_search_url" i18n:translate="advanced_search">advanced_search</a>
 </div>
 

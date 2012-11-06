@@ -100,9 +100,8 @@ i18n:domain="cirb.organizations">
 
     <div class="content-right">
         <div class="map-right"><div id="urbis_map" style=""></div></div>
-        <div class="picture">
-            <img tal:condition="python: view.has_image('picture')" tal:replace="structure context/@@images/picture" width="200px" />
-            <img tal:condition="python:not view.has_image('picture')" tal:attributes="src string:${context/portal_url}/++resource++noimage.jpg" i18n:attributes="alt noiamge; title noimage" width="200px" />
+        <div class="picture" tal:condition="python: view.has_image('picture')" >
+            <img tal:replace="structure context/@@images/picture" width="200px" />
         </div>
         <div class="categories">
         <form class="MyClass searchorga rowlike enableUnloadProtection   kssattr-formname-organizations_search" 
