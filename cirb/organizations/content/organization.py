@@ -153,7 +153,7 @@ class Category(ORMBase):
         _(u'plastic_art'), _(u'scenic_art'), _('bibliotheque'),
         _(u'enseignement_formation'), _(u'language_training'), _(u'it'), _(u'employment'),_(u'information'),
         _(u'health'), _(u'handicap'), _(u'social_restaurant'), _(u'solidarity'), _(u'envrironment'),
-        _(u'sustainable_development'), _(u'welcome'), _(u'social_cohesion'), _(u'accomodation'), _('legal_advice'),                               
+        _(u'sustainable_development'), _(u'welcome'), _(u'social_cohesion'), _(u'accomodation'), _('legal_advice'),
     ]
 
     def get_list(self):
@@ -206,5 +206,5 @@ class AdditionalInformation(ORMBase):
                              Sequence('additionalinformation_seq'),
                              primary_key=True, autoincrement=True)
     objectif = Column(String(2048))
-    comments = Column(String(4096))
+    comments = Column(String(12000))
     organization_id = Column(Integer, ForeignKey('organization.organization_id'))

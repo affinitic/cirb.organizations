@@ -24,7 +24,7 @@ def categories():
 
 
 class IAdvancedSearch(IOrganizationsLayer):
-    #search = schema.TextLine(title=_(u'Search'), required=False)
+    search = schema.TextLine(title=_(u'Search'), required=False)
     categories = schema.List(
             title=_(u"Categories"),
             description=u"Categories des activites",
@@ -54,16 +54,16 @@ class IOrganizations(Interface):
     """
     Organizations view interface
     """
-    language = schema.Choice(title=_(u"Language d'encodage"), required=True, vocabulary=LANG) 
+    language = schema.Choice(title=_(u"Language d'encodage"), required=True, vocabulary=LANG)
     name = schema.TextLine(title=_(u"Organization name"), max_length=255)
 
-    status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS) 
-    status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255) 
+    status = schema.Choice(title=_(u"Status"), required=False, vocabulary=STATUS)
+    status_other = schema.TextLine(title=_(u"Other status"), required=False, max_length=255)
 
     logo = field.NamedImage(title=_(u"Logo"), required=False)
     picture = field.NamedImage(title=_(u"Picture"), required=False)
 
-    website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)    
+    website = schema.TextLine(title=_(u"Website"), required=False, max_length=255)
     activite_place = schema.Text(title=_(u"Activite place"), required=False, max_length=511)
 
     activite_language_fr = schema.Bool(title=_(u"Activité en francais"))
@@ -138,5 +138,5 @@ class IContact(Interface):
 
 
 class IAdditionalInformation(Interface):
-    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=2048) 
+    objectif = schema.Text(title=_(u"Objectif"), required=False, max_length=2048)
     comments = schema.Text(title=_(u"Comments"), required=False, max_length=2048)

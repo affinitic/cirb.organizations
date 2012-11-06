@@ -61,7 +61,6 @@ class Search(form.Form):
         if organisations_serached:
             self.results = organisations_serached
 
-
     def search(self, search):
         session = Session()
         self.results = session.query(Organization).filter(func.lower(Organization.name).like('{0}'.format(search))).filter(Organization.language == self.context.Language()).order_by(Organization.name).all()
@@ -87,7 +86,7 @@ class Search(form.Form):
                 self.actions[cat].render = renderCategoryButton(self.context, cat, 'selected')
             else:
                 self.actions[cat].render = renderCategoryButton(self.context, cat)
-    
+
     def handleLettersButton(self, form, action):
         self.search("{0}%".format(action.value.lower()))
 
@@ -203,7 +202,10 @@ class AdvancedSearch(form.Form):
         if not errors:
             session = Session()
             searched_categories = data.get('categories')
+            search = data.get('search')
             request = session.query(Organization)
+            if search:
+                request = request.filter(func.lower(Organization.name).like('%{0}%'.format(search)))
             for categorie in searched_categories:
                 request = request.filter(Organization.category.has(getattr(Category, categorie) == True))
             request = request.filter(Organization.language == self.context.Language())
