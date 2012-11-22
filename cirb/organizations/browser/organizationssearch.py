@@ -97,10 +97,10 @@ class Search(form.Form):
         if action.value == 'enseignement_formation':
             self.results = session.query(Organization).filter(or_(Organization.category.has(getattr(Category, 'tutoring') == True),
                                                    Organization.category.has(getattr(Category, 'training') == True),
-                                                   Organization.category.has(getattr(Category, 'education') == True) )).filter(Organization.language == self.context.Language()).all()
+                                                   Organization.category.has(getattr(Category, 'education') == True) )).filter(Organization.language == self.context.Language()).order_by(Organization.name).all()
 
         else:
-            self.results = session.query(Organization).filter(Organization.category.has(getattr(Category, action.value) == True)).filter(Organization.language == self.context.Language()).all()
+            self.results = session.query(Organization).filter(Organization.category.has(getattr(Category, action.value) == True)).filter(Organization.language == self.context.Language()).order_by(Organization.name).all()
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
 
@@ -209,6 +209,7 @@ class AdvancedSearch(form.Form):
             for categorie in searched_categories:
                 request = request.filter(Organization.category.has(getattr(Category, categorie) == True))
             request = request.filter(Organization.language == self.context.Language())
+            request = request.order_by(Organization.name)
             self.results = request.all()
             if len(self.results) == 0:
                 self.status = _(u"No organization found.")
