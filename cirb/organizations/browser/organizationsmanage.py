@@ -151,7 +151,7 @@ class OView(BrowserView):
             if attr:
                 if cat == "education" or cat == "training" or cat == "tutoring":
                     if not already_enseignement_formation:
-                        categories.append(renderCategoryButton(self.context, 'enseignement_formation'))
+                        categories.append(renderCategoryButton(self.context, _(u'enseignement_formation')))
                         already_enseignement_formation = True
                 else:
                     categories.append(renderCategoryButton(self.context, cat))
