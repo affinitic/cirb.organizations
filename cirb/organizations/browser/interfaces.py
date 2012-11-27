@@ -17,6 +17,7 @@ class IOrganizationsLayer(Interface):
 
 class ISearch(IOrganizationsLayer):
     search = schema.TextLine(title=_(u'Search'), required=False)
+    objectif = schema.TextLine(title=_(u'Objectif'), required=False)
 
 
 def categories():

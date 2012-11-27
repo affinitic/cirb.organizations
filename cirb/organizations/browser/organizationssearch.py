@@ -22,7 +22,7 @@ SESSION_JSON = "search_json"
 SESSION_SEARCH = "search_term"
 SESSION_CATEGORIES = "searched_categories"
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
 class LetterButton(button.Button):
@@ -67,12 +67,17 @@ class Search(form.Form):
         if searched_cat:
             self.searched_categories = searched_cat
 
-    def search(self, search):
+    def search(self, search, objectif=''):
         session = Session()
         request = session.query(Organization)
         request = request.filter(func.lower(Organization.name).like(u'{0}'.format(search)))
+        if objectif:
+            additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'%{0}%'.format(objectif).lower())).all()
+            request = request.filter(Organization.organization_id.in_([addit.organization_id for addit in additionalinformations]))
+
         request = request.filter(Organization.language == self.context.Language())
         request = request.order_by(Organization.name)
+
         self.results = request.all()
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
@@ -87,7 +92,7 @@ class Search(form.Form):
         self.handlers.addHandler(LetterButton, button.Handler(LetterButton, self.handleLettersButton))
         for cat in self.get_categories():
             categorybutton = CategoryButton(name=str(cat), title=cat,
-                                            image=u"{0}.png".format(str(cat)))
+                    image=u"{0}.png".format(str(cat)))
             self.buttons = button.Buttons(self.buttons, categorybutton)
         self.handlers.addHandler(CategoryButton, button.Handler(CategoryButton, self.handleCategoriesButton))
         super(Search, self).update()
@@ -118,13 +123,14 @@ class Search(form.Form):
     def handleSubmit(self, action):
         data, errors = self.extractData()
         if not errors:
-            input_content = data.get('search')
-            if not input_content:
+            input_search = data.get('search')
+            input_objectif = data.get('objectif')
+            if not input_search:
                 search_text = u"%"
             else:
-                search_text = u"%{0}%".format(input_content.lower())
+                search_text = u"%{0}%".format(input_search.lower())
 
-            self.search(search_text)
+            self.search(search_text, input_objectif)
 
     def get_results(self):
         if not 'SESSION' in self.request.keys():

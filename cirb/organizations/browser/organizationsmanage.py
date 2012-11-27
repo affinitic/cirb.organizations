@@ -47,7 +47,7 @@ class ManageView(BrowserView):
                 html += "<span class='state-private'>No address</span>&nbsp;"
             else:
                 html += "<span class='state-private'>Bad xy</span>"
-        else: 
+        else:
             for decimal in orga.x.split('.'):
                 if not decimal.isdecimal():
                     html += "<span class='state-private'>x</span>,&nbsp;"
@@ -64,7 +64,7 @@ class ManageView(BrowserView):
 
         if orga.person_contact.fax == ' ':
             html += "<span class='state-private'>Fax</span>,&nbsp;"
-        
+
         if orga.website == ' ':
             html += "<span class='state-private'>Website</span>,&nbsp;"
 
