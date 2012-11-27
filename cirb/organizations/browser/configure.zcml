@@ -1,6 +1,7 @@
 <configure 
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
     i18n_domain="cirb.organizations">
 
     <include file="resources.zcml" />
@@ -103,5 +104,12 @@
         provides=".organizationssearch.ISearch"
         factory=".organizationssearch.SearchView" 
         /-->
+
+    <z3c:widgetTemplate
+        mode="input"
+        widget="z3c.form.interfaces.IOrderedSelectWidget"
+        layer=".interfaces.IOrganizationsLayer"
+        template="templates/orderedselect_input.pt"
+        />
 
 </configure>

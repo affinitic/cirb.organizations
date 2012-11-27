@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from z3c.saconfig import Session
 from z3c.form import form, field, button
 from plone.app.z3cform.layout import FormWrapper
@@ -7,7 +8,7 @@ from sqlalchemy import or_
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from cirb.organizations import organizationsMessageFactory as _
-from cirb.organizations.content.organization import Organization, Category
+from cirb.organizations.content.organization import Organization, Category, AdditionalInformation
 from cirb.organizations.browser.interfaces import ISearch, IAdvancedSearch
 
 import json
@@ -19,6 +20,7 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 from zope.interface import implements
 SESSION_JSON = "search_json"
 SESSION_SEARCH = "search_term"
+SESSION_CATEGORIES = "searched_categories"
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
@@ -54,16 +56,24 @@ class Search(form.Form):
     cat_search = ''
     template = ViewPageTemplateFile('templates/search.pt')
     results = []
+    searched_categories = []
 
     def __init__(self, context, request):
         super(Search, self).__init__(context, request)
         organisations_serached = request.SESSION.get(SESSION_SEARCH)
         if organisations_serached:
             self.results = organisations_serached
+        searched_cat = request.SESSION.get(SESSION_CATEGORIES)
+        if searched_cat:
+            self.searched_categories = searched_cat
 
     def search(self, search):
         session = Session()
-        self.results = session.query(Organization).filter(func.lower(Organization.name).like('{0}'.format(search))).filter(Organization.language == self.context.Language()).order_by(Organization.name).all()
+        request = session.query(Organization)
+        request = request.filter(func.lower(Organization.name).like(u'{0}'.format(search)))
+        request = request.filter(Organization.language == self.context.Language())
+        request = request.order_by(Organization.name)
+        self.results = request.all()
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
 
@@ -82,7 +92,7 @@ class Search(form.Form):
         self.handlers.addHandler(CategoryButton, button.Handler(CategoryButton, self.handleCategoriesButton))
         super(Search, self).update()
         for cat in self.get_categories():
-            if cat == self.cat_search:
+            if cat in self.searched_categories:
                 self.actions[cat].render = renderCategoryButton(self.context, cat, 'selected')
             else:
                 self.actions[cat].render = renderCategoryButton(self.context, cat)
@@ -93,7 +103,7 @@ class Search(form.Form):
     def handleCategoriesButton(self, form, action):
         session = Session()
         # add selected class
-        self.cat_search = action.value
+        self.searched_categories = action.value
         if action.value == 'enseignement_formation':
             self.results = session.query(Organization).filter(or_(Organization.category.has(getattr(Category, 'tutoring') == True),
                                                    Organization.category.has(getattr(Category, 'training') == True),
@@ -110,9 +120,9 @@ class Search(form.Form):
         if not errors:
             input_content = data.get('search')
             if not input_content:
-                search_text = "%"
+                search_text = u"%"
             else:
-                search_text = "%{0}%".format(input_content.lower())
+                search_text = u"%{0}%".format(input_content.lower())
 
             self.search(search_text)
 
@@ -195,6 +205,7 @@ class AdvancedSearch(form.Form):
     fields = field.Fields(IAdvancedSearch)
     template = ViewPageTemplateFile('templates/advanced_search.pt')
     results = []
+    searched_categories = []
 
     @button.buttonAndHandler(_(u'Search'))
     def handleSubmit(self, action):
@@ -203,18 +214,30 @@ class AdvancedSearch(form.Form):
             session = Session()
             searched_categories = data.get('categories')
             search = data.get('search')
+            objectif = data.get('objectif')
             request = session.query(Organization)
             if search:
-                request = request.filter(func.lower(Organization.name).like('%{0}%'.format(search)))
+                request = request.filter(func.lower(Organization.name).like(u'%{0}%'.format(search).lower()))
+            if objectif:
+                additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'%{0}%'.format(objectif).lower())).all()
+                request = request.filter(Organization.organization_id.in_([addit.organization_id for addit in additionalinformations]))
             for categorie in searched_categories:
-                request = request.filter(Organization.category.has(getattr(Category, categorie) == True))
+                if categorie == 'enseignement_formation':
+                    request = request.filter(
+                                    or_(Organization.category.has(getattr(Category, 'tutoring') == True),
+                                    Organization.category.has(getattr(Category, 'training') == True),
+                                    Organization.category.has(getattr(Category, 'education') == True)))
+                else:
+                    request = request.filter(Organization.category.has(getattr(Category, categorie) == True))
             request = request.filter(Organization.language == self.context.Language())
             request = request.order_by(Organization.name)
+            self.searched_categories = searched_categories
             self.results = request.all()
             if len(self.results) == 0:
                 self.status = _(u"No organization found.")
             else:
                 self.request.SESSION.set(SESSION_SEARCH, self.results)
+                self.request.SESSION.set(SESSION_CATEGORIES, self.searched_categories)
                 self.request.response.redirect('organizations_search')
 
     def get_result(self):

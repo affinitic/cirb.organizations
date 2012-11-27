@@ -25,9 +25,10 @@ def categories():
 
 class IAdvancedSearch(IOrganizationsLayer):
     search = schema.TextLine(title=_(u'Search'), required=False)
+    objectif = schema.TextLine(title=_(u'Objectif'), required=False)
     categories = schema.List(
             title=_(u"Categories"),
-            description=u"Categories des activites",
+            description=_(u"Categorie d'activites"),
             value_type=schema.Choice(values=categories()))
 
 
