@@ -25,7 +25,7 @@
             <!--img tal:attributes="src python:view.img('logo', orga.organization_id)" width="150px" class="fiche-img"/-->
             <a tal:attributes="href string:${context/absolute_url}/org/${orga/organization_id}/oview" ><h3 tal:content="orga/name" class="organame">name</h3></a>
             <div class="address">
-                <span tal:content="orga/address/num">num</span>,&nbsp;<span tal:content="orga/address/street">street</span><br />
+                <span tal:content="orga/address/street">street</span>,&nbsp;<span tal:content="orga/address/num">num</span><br />
                 <span tal:content="orga/address/post_code">post_code</span>&nbsp;<span tal:content="orga/address/municipality"></span>
             </div>
 

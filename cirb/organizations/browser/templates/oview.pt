@@ -36,7 +36,7 @@ i18n:domain="cirb.organizations">
         <div class="titre-infos">
             <h2 class="name" tal:content="context/name"></h2>
             <p class="coord" tal:attributes="data-lang context/Language; data-x context/x; data-y context/y; data-portal_url context/portal_url" >
-                <span tal:content="context/address/num">num</span>,&nbsp;<span tal:content="context/address/street">street</span><br />
+                <span tal:content="context/address/street">street</span>, &nbsp;<span tal:content="context/address/num">num</span><br />
                 <span tal:content="context/address/post_code">post_code</span>&nbsp;<span tal:content="context/address/municipality"></span><br />
 
                 <tal:block tal:condition="context/person_contact/phone">
@@ -67,7 +67,7 @@ i18n:domain="cirb.organizations">
 
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
             <p>
-            <span tal:content="context/person_contact/second_name"></span> <tal:block tal:condition="context/person_contact/function">,&nbsp;<span tal:content="context/person_contact/function"></span></tal:block><br />
+            <span tal:content="context/person_contact/first_name"></span>&nbsp;<span tal:content="context/person_contact/second_name"></span> <tal:block tal:condition="context/person_contact/function">,&nbsp;<span tal:content="context/person_contact/function"></span></tal:block><br />
                 <tal:block tal:condition="context/person_contact/phone">
                     <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" /><span tal:content="context/person_contact/phone"></span><br />
                 </tal:block>
