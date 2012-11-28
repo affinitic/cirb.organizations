@@ -184,6 +184,18 @@
         />
 
     <browser:resource
+        name="external-link.png"
+        image="img/external-link.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
+        name="link.png"
+        image="img/link.png"
+        layer=".interfaces.IOrganizationsLayer"
+        />
+
+    <browser:resource
         name="phone.png"
         image="img/phone.png"
         layer=".interfaces.IOrganizationsLayer"
