@@ -37,7 +37,11 @@
                 <img tal:attributes="src string:${context/portal_url}/++resource++mail.png" i18n:attributes="alt email; title email" class="icon" />
                 <span tal:content="orga/person_contact/email">email</span>
             </a>
-            <a tal:condition="orga/website" tal:attributes="href orga/website" target="_blank"><div tal:content="orga/website">website</div></a>
+            <!--a tal:condition="orga/website" tal:attributes="href orga/website" target="_blank"><div tal:content="orga/website">website</div></a-->
+            <div tal:condition="orga/website">
+                <img tal:attributes="src string:${context/portal_url}/++resource++link.png" class="icon"/>
+                <a tal:condition="orga/website" tal:attributes="href orga/website" target="_blank"><span tal:content="orga/website">website</span></a>
+            </div>
             <hr class="end-of-orga">
         </li>
         </tal:block>
