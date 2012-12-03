@@ -338,7 +338,7 @@ msgstr "Categorie"
 
 #: cirb.organizations:/browser/organizationsform.py:125
 msgid "Descritpion and comments"
-msgstr "Beschrijving en kommentaren"
+msgstr "Beschrijving en commentaren"
 
 #: cirb.organizations:/browser/organizationsform.py:140
 msgid "Organization"
