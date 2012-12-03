@@ -16,8 +16,7 @@ class IOrganizationsLayer(Interface):
 
 
 class ISearch(IOrganizationsLayer):
-    search = schema.TextLine(title=_(u'Search'), required=False)
-    objectif = schema.TextLine(title=_(u'Objectif'), required=False)
+    search = schema.TextLine(title=_(u'Search'), description=_(u"Search with organization name, objectif, activity type or tagert public."), required=False)
 
 
 def categories():
@@ -25,8 +24,7 @@ def categories():
 
 
 class IAdvancedSearch(IOrganizationsLayer):
-    search = schema.TextLine(title=_(u'Organization name'), required=False)
-    objectif = schema.TextLine(title=_(u'Objectif'), required=False)
+    search = schema.TextLine(title=_(u'Search'), description=_(u"Search with organization name, objectif, activity type or tagert public."), required=False)
     categories = schema.List(
             title=_(u"Categories"),
             description=_(u"Categorie d'activites"),

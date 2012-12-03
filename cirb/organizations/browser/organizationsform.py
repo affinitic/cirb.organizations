@@ -100,10 +100,18 @@ class ContactStep(wizard.GroupStep):
                 setattr(self.wizard.session['organization'].person_contact.address, field, data[field])
 
 
+def sorted_fields(context, fields):
+
+    return fields
+
+
 class CategoryStep(wizard.Step):
     prefix = "cat"
     label = _(u"Category")
     fields = field.Fields(ICategory)
+
+    def __init__(self, context, request, wizard):
+        super(CategoryStep, self).__init__(context, request, wizard)
 
     def load(self, context):
         data = self.getContent()

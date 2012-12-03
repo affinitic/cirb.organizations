@@ -67,13 +67,14 @@ class Search(form.Form):
         if searched_cat:
             self.searched_categories = searched_cat
 
-    def search(self, search, objectif=''):
+    def search(self, search):
         session = Session()
         request = session.query(Organization)
-        request = request.filter(func.lower(Organization.name).like(u'{0}'.format(search)))
-        if objectif:
-            additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'%{0}%'.format(objectif).lower())).all()
-            request = request.filter(Organization.organization_id.in_([addit.organization_id for addit in additionalinformations]))
+        additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'{0}'.format(search).lower())).all()
+
+        request = request.filter(or_
+                (func.lower(Organization.name).like(u'{0}'.format(search).lower()),
+                (Organization.organization_id.in_([addit.organization_id for addit in additionalinformations]))))
 
         request = request.filter(Organization.language == self.context.Language())
         request = request.order_by(Organization.name)
@@ -124,13 +125,12 @@ class Search(form.Form):
         data, errors = self.extractData()
         if not errors:
             input_search = data.get('search')
-            input_objectif = data.get('objectif')
             if not input_search:
                 search_text = u"%"
             else:
                 search_text = u"%{0}%".format(input_search.lower())
 
-            self.search(search_text, input_objectif)
+            self.search(search_text)
 
     def get_results(self):
         if not 'SESSION' in self.request.keys():
@@ -220,13 +220,13 @@ class AdvancedSearch(form.Form):
             session = Session()
             searched_categories = data.get('categories')
             search = data.get('search')
-            objectif = data.get('objectif')
             request = session.query(Organization)
             if search:
-                request = request.filter(func.lower(Organization.name).like(u'%{0}%'.format(search).lower()))
-            if objectif:
-                additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'%{0}%'.format(objectif).lower())).all()
-                request = request.filter(Organization.organization_id.in_([addit.organization_id for addit in additionalinformations]))
+                additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'%{0}%'.format(search).lower())).all()
+                request = request.filter(or_
+                        (func.lower(Organization.name).like(u'%{0}%'.format(search).lower()),
+                        (Organization.organization_id.in_([addit.organization_id for addit in additionalinformations]))))
+
             for categorie in searched_categories:
                 if categorie == 'enseignement_formation':
                     request = request.filter(

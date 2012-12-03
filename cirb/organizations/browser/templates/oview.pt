@@ -50,8 +50,7 @@ i18n:domain="cirb.organizations">
                 </tal:block>
 
                 <span i18n:translate="Responsable">Responsable</span> : 
-                <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span>
-                <tal:block tal:condition="context/person_incharge/function">,&nbsp;<span tal:content="context/person_incharge/function"></span></tal:block>
+                <span tal:content="context/person_incharge/first_name"></span>&nbsp;<span tal:content="context/person_incharge/second_name"></span><tal:block tal:condition="context/person_incharge/function">,&nbsp;<span tal:content="context/person_incharge/function"></span></tal:block>
                 <br />
             </p>
         </div>
@@ -68,7 +67,7 @@ i18n:domain="cirb.organizations">
 
             <h3 i18n:translate="Personne de contact">Personne de contact</h3>
             <p>
-            <span tal:content="context/person_contact/first_name"></span>&nbsp;<span tal:content="context/person_contact/second_name"></span> <tal:block tal:condition="context/person_contact/function">,&nbsp;<span tal:content="context/person_contact/function"></span></tal:block><br />
+            <span tal:content="context/person_contact/first_name"></span>&nbsp;<span tal:content="context/person_contact/second_name"></span><tal:block tal:condition="context/person_contact/function">,&nbsp;<span tal:content="context/person_contact/function"></span></tal:block><br />
                 <tal:block tal:condition="context/person_contact/phone">
                     <img tal:attributes="src string:${portal_url}/++resource++phone.png" i18n:attributes="alt phone; title phone" class="icon" /><span tal:content="context/person_contact/phone"></span><br />
                 </tal:block>
