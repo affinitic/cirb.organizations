@@ -39,11 +39,21 @@ class CategoryButton(button.ImageButton):
 
 
 def renderCategoryButton(context, name, selected=None):
+    render = []
+    render.append(u'<div class="categorie-inputs">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field'.format(name))
     if selected:
-        render = u'<div class="categorie-inputs">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field selected" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><div class="bottominputcategory">{2}</div>\n</div>\n'.format(name, context.portal_url(), context.translate(name))
+        render.append(u' selected"')
+    render.append(u'" src="{1}/++resource++{0}.png" value="{2}" type="image"'.format(name, context.portal_url(), context.translate(name)))
+    if name == "enseignement_formation":
+        msgid = "alt_enseignement_formation"
+        render.append(u' title="{0}"'.format(context.translate(msgid)))
+    elif name == "health":
+        msgid = "alt_health"
+        render.append(u' title="{0}"'.format(context.translate(msgid)))
     else:
-        render = u'<div class="categorie-inputs">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field" src="{1}/++resource++{0}.png" value="{2}" type="image" alt="{2}" title="{2} "/><div class="bottominputcategory">{2}</div></div>\n\n'.format(name, context.portal_url(), context.translate(name))
-    return render
+        render.append(u' title="{0}"'.format(context.translate(name)))
+    render.append(u' alt="{0}" /><div class="bottominputcategory">{0}</div></div>\n\n'.format(context.translate(name)))
+    return "".join(render)
 
 
 class Search(form.Form):

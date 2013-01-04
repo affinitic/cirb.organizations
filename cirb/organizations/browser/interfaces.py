@@ -28,7 +28,8 @@ class IAdvancedSearch(IOrganizationsLayer):
     categories = schema.List(
             title=_(u"Categories"),
             description=_(u"Categorie d'activites"),
-            value_type=schema.Choice(values=categories()))
+            value_type=schema.Choice(values=categories()),
+            required=False)
 
 
 class Terms(vocabulary.SimpleVocabulary):
