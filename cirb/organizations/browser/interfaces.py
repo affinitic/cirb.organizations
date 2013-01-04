@@ -27,7 +27,7 @@ class IAdvancedSearch(IOrganizationsLayer):
     search = schema.TextLine(title=_(u'Search'), description=_(u"Search with organization name, objectif, activity type or tagert public."), required=False)
     categories = schema.List(
             title=_(u"Categories"),
-            description=_(u"Categorie d'activites"),
+            description=_(u"Catégories d'activité"),
             value_type=schema.Choice(values=categories()),
             required=False)
 
