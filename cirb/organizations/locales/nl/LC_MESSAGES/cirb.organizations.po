@@ -470,3 +470,9 @@ msgstr "Nederlands"
 #: cirb.organizations:/browser/templates/search.pt:16
 msgid "advanced_search"
 msgstr "Geavanceerd zoeken"
+
+msgid "alt_enseignement_formation"
+msgstr "Onderwijssteun en opleiding"
+
+msgid "alt_health"
+msgstr "Geestelijke gezondheidszorg"

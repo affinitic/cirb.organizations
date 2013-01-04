@@ -473,3 +473,9 @@ msgstr "Recherche avancée"
 
 #~ msgid "Categories des activites"
 #~ msgstr "Catégories des activités"
+
+msgid "alt_enseignement_formation"
+msgstr "Soutien scolaire et formation"
+
+msgid "alt_health"
+msgstr "Santé mentale"

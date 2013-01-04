@@ -472,3 +472,8 @@ msgstr ""
 msgid "advanced_search"
 msgstr ""
 
+msgid "alt_enseignement_formation"
+msgstr ""
+
+msgid "alt_health"
+msgstr ""
