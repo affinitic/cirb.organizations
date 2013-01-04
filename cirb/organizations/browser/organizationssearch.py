@@ -45,10 +45,10 @@ def renderCategoryButton(context, name, selected=None):
         render.append(u' selected"')
     render.append(u'" src="{1}/++resource++{0}.png" value="{2}" type="image"'.format(name, context.portal_url(), context.translate(name)))
     if name == "enseignement_formation":
-        msgid = "alt_enseignement_formation"
+        msgid = _(u"alt_enseignement_formation")
         render.append(u' title="{0}"'.format(context.translate(msgid)))
     elif name == "health":
-        msgid = "alt_health"
+        msgid = _(u"alt_health")
         render.append(u' title="{0}"'.format(context.translate(msgid)))
     else:
         render.append(u' title="{0}"'.format(context.translate(name)))
