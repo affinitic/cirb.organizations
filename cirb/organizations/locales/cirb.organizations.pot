@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Fri Jan  4 14:11:49 2013\n"
+"POT-Creation-Date: Mon Jan  7 16:13:14 2013\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -481,5 +481,15 @@ msgstr ""
 
 #: cirb.organizations:/browser/templates/search.pt:16
 msgid "advanced_search"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/search.pt:7
+#: cirb.organizations:/browser/templates/search.pt:7
+msgid "add_orga"
+msgstr ""
+
+#: cirb.organizations:/browser/templates/search.pt:9
+#: cirb.organizations:/browser/templates/search.pt:9
+msgid "manage_orga"
 msgstr ""
 

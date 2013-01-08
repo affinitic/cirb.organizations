@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Fri Jan  4 14:11:49 2013\n"
+"POT-Creation-Date: Mon Jan  7 16:13:14 2013\n"
 "PO-Revision-Date: 2012-02-27 08:47+0100\n"
 "Last-Translator: bsuttor <bsuttor@cirb.irisnet.be>\n"
 "Language-Team: French\n"
@@ -378,11 +378,11 @@ msgstr "Recherche d'organisation avanvée"
 
 #: cirb.organizations:/browser/organizationssearch.py:48
 msgid "alt_enseignement_formation"
-msgstr "Soutien scolaire et formation"
+msgstr "Enseignement, Soutien scolaire et formation"
 
 #: cirb.organizations:/browser/organizationssearch.py:51
 msgid "alt_health"
-msgstr "Santé mentale"
+msgstr "Santé - Santé mentale"
 
 #: cirb.organizations:/browser/organizationssearch.py:62
 msgid "Organization search"
@@ -481,6 +481,14 @@ msgstr "Catégories d'activité"
 #: cirb.organizations:/browser/templates/search.pt:16
 msgid "advanced_search"
 msgstr "Recherche avancée"
+
+#: cirb.organizations:/browser/templates/search.pt:7
+msgid "add_orga"
+msgstr "Ajouter une organisation"
+
+#: cirb.organizations:/browser/templates/search.pt:9
+msgid "manage_orga"
+msgstr "Gérer les organisations"
 
 #~ msgid "Categories des activites"
 #~ msgstr "Catégories des activités"
