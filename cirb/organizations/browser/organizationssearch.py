@@ -41,7 +41,10 @@ class CategoryButton(button.ImageButton):
 
 def renderCategoryButton(context, name, selected=None):
     render = []
-    render.append(u'<div class="categorie-inputs">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field'.format(name))
+    render.append(u'<div class="categorie-inputs')
+    if selected:
+        render.append(u' selected')
+    render.append(u'">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field'.format(name))
     if selected:
         render.append(u' selected" src="{1}/++resource++{0}-select.png"'.format(str(name), context.portal_url()))
     else:
