@@ -19,7 +19,8 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 
 from zope.interface import implements
 SESSION_JSON = "search_json"
-SESSION_SEARCH = "search_term"
+SESSION_SEARCH = "searchs"
+SESSION_SEARCH_TERM = "search_term"
 SESSION_CATEGORIES = "searched_categories"
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -42,8 +43,11 @@ def renderCategoryButton(context, name, selected=None):
     render = []
     render.append(u'<div class="categorie-inputs">\n<input id="form-buttons-{0}" name="form.buttons.{0}" class="image-widget categorybutton-field'.format(name))
     if selected:
-        render.append(u' selected"')
-    render.append(u'" src="{1}/++resource++{0}.png" value="{2}" type="image"'.format(name, context.portal_url(), context.translate(name)))
+        render.append(u' selected" src="{1}/++resource++{0}-select.png"'.format(str(name), context.portal_url()))
+    else:
+        render.append(u'" src="{1}/++resource++{0}.png"'.format(name, context.portal_url()))
+    render.append(u'" value="{0}" type="image"'.format(context.translate(name)))
+
     if name == "enseignement_formation":
         msgid = _(u"alt_enseignement_formation")
         render.append(u' title="{0}"'.format(context.translate(msgid)))
@@ -76,6 +80,9 @@ class Search(form.Form):
         searched_cat = request.SESSION.get(SESSION_CATEGORIES)
         if searched_cat:
             self.searched_categories = searched_cat
+        search_term = request.SESSION.get(SESSION_SEARCH_TERM)
+        if search_term:
+            self.fields.get('search').field.default = search_term
 
     def search(self, search):
         session = Session()
@@ -114,11 +121,12 @@ class Search(form.Form):
                 self.actions[cat].render = renderCategoryButton(self.context, cat)
 
     def handleLettersButton(self, form, action):
+        form.widgets.get('search').value = u""
         self.search("{0}%".format(action.value.lower()))
 
     def handleCategoriesButton(self, form, action):
+        form.widgets.get('search').value = u""
         session = Session()
-        # add selected class
         self.searched_categories = action.value
         if action.value == 'enseignement_formation':
             self.results = session.query(Organization).filter(or_(Organization.category.has(getattr(Category, 'tutoring') == True),
@@ -253,6 +261,7 @@ class AdvancedSearch(form.Form):
                 self.status = _(u"No organization found.")
             else:
                 self.request.SESSION.set(SESSION_SEARCH, self.results)
+                self.request.SESSION.set(SESSION_SEARCH_TERM, search)
                 self.request.SESSION.set(SESSION_CATEGORIES, self.searched_categories)
                 self.request.response.redirect('organizations_search')
 

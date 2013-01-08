@@ -28,11 +28,6 @@ $(document).ready(function(){
         change_marker_color(this);
     });
 
-    //selected category
-    if ($('.categorybutton-field.selected').length > 0) {
-        src = $('.categorybutton-field.selected').attr('src').replace('.png', '-select.png');
-        $('.categorybutton-field.selected').attr('src', src);
-    }
 });
 
 function change_marker_color(elem) {

@@ -175,7 +175,7 @@ class Wizard(wizard.Wizard):
                 assoc.translated_id = organization.organization_id
                 assoc.canonical_id = canonical_id
                 sqlalsession.add(assoc)
-        
+
         from cirb.organizations.traversal import OrganizationWrapper
         #transaction.commit()
         self.request.SESSION.clear()
