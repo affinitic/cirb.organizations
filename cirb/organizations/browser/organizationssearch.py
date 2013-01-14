@@ -85,7 +85,6 @@ class Search(form.Form):
             self.searched_categories = searched_cat
         search_term = request.form.get('search_term', '')
         self.fields.get('search').field.default = unicode(search_term)
-        print search_term
 
     def search(self, search):
         session = Session()
