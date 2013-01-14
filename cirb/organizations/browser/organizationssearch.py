@@ -86,6 +86,7 @@ class Search(form.Form):
         search_term = request.SESSION.get(SESSION_SEARCH_TERM)
         if search_term:
             self.fields.get('search').field.default = search_term
+            request.SESSION.delete(SESSION_SEARCH_TERM)
 
     def search(self, search):
         session = Session()
