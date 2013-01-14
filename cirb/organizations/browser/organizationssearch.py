@@ -144,7 +144,8 @@ class Search(form.Form):
 
     @button.buttonAndHandler(_(u'Search'))
     def handleSubmit(self, action):
-        self.request.SESSION.delete(SESSION_SEARCH_TERM)
+        if SESSION_SEARCH_TERM in self.request.SESSION.keys():
+            self.request.SESSION.delete(SESSION_SEARCH_TERM)
         data, errors = self.extractData()
         if not errors:
             input_search = data.get('search')
