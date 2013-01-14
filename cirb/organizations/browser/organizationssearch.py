@@ -20,7 +20,7 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 from zope.interface import implements
 SESSION_JSON = "search_json"
 SESSION_SEARCH = "searchs"
-SESSION_SEARCH_TERM = "search_term"
+#SESSION_SEARCH_TERM = "search_term"
 SESSION_CATEGORIES = "searched_categories"
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -83,10 +83,9 @@ class Search(form.Form):
         searched_cat = request.SESSION.get(SESSION_CATEGORIES)
         if searched_cat:
             self.searched_categories = searched_cat
-        search_term = request.SESSION.get(SESSION_SEARCH_TERM)
-        if search_term:
-            self.fields.get('search').field.default = search_term
-            request.SESSION.delete(SESSION_SEARCH_TERM)
+        search_term = request.form.get('search_term', '')
+        self.fields.get('search').field.default = unicode(search_term)
+        print search_term
 
     def search(self, search):
         session = Session()
@@ -144,8 +143,6 @@ class Search(form.Form):
 
     @button.buttonAndHandler(_(u'Search'))
     def handleSubmit(self, action):
-        if SESSION_SEARCH_TERM in self.request.SESSION.keys():
-            self.request.SESSION.delete(SESSION_SEARCH_TERM)
         data, errors = self.extractData()
         if not errors:
             input_search = data.get('search')
@@ -267,9 +264,8 @@ class AdvancedSearch(form.Form):
                 self.status = _(u"No organization found.")
             else:
                 self.request.SESSION.set(SESSION_SEARCH, self.results)
-                self.request.SESSION.set(SESSION_SEARCH_TERM, search)
                 self.request.SESSION.set(SESSION_CATEGORIES, self.searched_categories)
-                self.request.response.redirect('organizations_search')
+                self.request.response.redirect('organizations_search?search_term={0}'.format(search))
 
     def get_result(self):
         return self.results
