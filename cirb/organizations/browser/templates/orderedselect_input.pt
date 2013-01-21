@@ -41,7 +41,6 @@ function moveItems(from, to)
 // move item from "from" selection to "to" selection
 function from2to(name)
   {
-  console.log("bsuttor cirb.orga");
   moveItems(name+"-from", name+"-to");
   copyDataForSubmit(name);
   }
