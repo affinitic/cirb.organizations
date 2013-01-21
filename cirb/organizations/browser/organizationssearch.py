@@ -71,6 +71,7 @@ class Search(form.Form):
     fields = field.Fields(ISearch)
 
     cat_search = ''
+    search_term = ''
     template = ViewPageTemplateFile('templates/search.pt')
     results = []
     searched_categories = []
@@ -84,6 +85,7 @@ class Search(form.Form):
         if searched_cat:
             self.searched_categories = searched_cat
         search_term = request.form.get('search_term', '')
+        print search_term
         self.fields.get('search').field.default = unicode(search_term)
 
     def search(self, search):
@@ -240,6 +242,8 @@ class AdvancedSearch(form.Form):
             session = Session()
             searched_categories = data.get('categories')
             search = data.get('search')
+            if search == None:
+                search = ""
             request = session.query(Organization)
             if search:
                 additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'%{0}%'.format(search).lower())).all()
