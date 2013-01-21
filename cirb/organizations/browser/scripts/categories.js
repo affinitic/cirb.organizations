@@ -66,7 +66,6 @@ jQuery.fn.sortElements = (function(){
 
 $(document).ready(function(){
     $('form#cat div.field').sortElements(function(a, b){
-        console.log(a);
         return $(a).text().trim() > $(b).text().trim() ? 1 : -1;
     });
     $('form#cat div#formfield-cat-widgets-other').insertAfter('form#cat div.field:last');
