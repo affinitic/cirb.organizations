@@ -87,7 +87,7 @@ msgstr "Sociaal restaurant"
 
 #: cirb.organizations:/browser/interfaces.py:112
 msgid "mental_health"
-msgstr "Geestelijke gezondheidszorg"
+msgstr "Mentale gezondheidszorg"
 
 #: cirb.organizations:/browser/interfaces.py:113
 #: cirb.organizations:/content/organization.py:155
@@ -102,7 +102,7 @@ msgstr "Solidariteit / Derde wereld"
 #: cirb.organizations:/browser/interfaces.py:115
 #: cirb.organizations:/content/organization.py:171
 msgid "tutoring"
-msgstr "Schoolopvang"
+msgstr "Schoolbegeleiding"
 
 #: cirb.organizations:/browser/interfaces.py:116
 #: cirb.organizations:/content/organization.py:152
@@ -276,7 +276,7 @@ msgstr "Gemeente"
 #: cirb.organizations:/browser/interfaces.py:88
 #: cirb.organizations:/content/organization.py:156
 msgid "welcome"
-msgstr "Welkom nieuwkomer"
+msgstr "Onthaal nieuwkomers"
 
 #: cirb.organizations:/browser/interfaces.py:89
 #: cirb.organizations:/content/organization.py:153
@@ -286,12 +286,12 @@ msgstr "Bibliotheek"
 #: cirb.organizations:/browser/interfaces.py:90
 #: cirb.organizations:/content/organization.py:154
 msgid "language_training"
-msgstr "Taalonderwijs"
+msgstr "Taallessen"
 
 #: cirb.organizations:/browser/interfaces.py:91
 #: cirb.organizations:/content/organization.py:153
 msgid "plastic_art"
-msgstr "Plastische kunsten"
+msgstr "Beeldende kunsten"
 
 #: cirb.organizations:/browser/interfaces.py:92
 #: cirb.organizations:/content/organization.py:153
@@ -306,7 +306,7 @@ msgstr "Sociale cohesie"
 #: cirb.organizations:/browser/interfaces.py:94
 #: cirb.organizations:/content/organization.py:156
 msgid "legal_advice"
-msgstr "Juridisch advies"
+msgstr "Rechtsbijstand"
 
 #: cirb.organizations:/browser/interfaces.py:95
 #: cirb.organizations:/content/organization.py:152
@@ -326,7 +326,7 @@ msgstr "Duurzame ontwikkeling"
 #: cirb.organizations:/browser/interfaces.py:98
 #: cirb.organizations:/content/organization.py:154
 msgid "employment"
-msgstr "Werk"
+msgstr "Werkgelegenheid"
 
 #: cirb.organizations:/browser/interfaces.py:99
 #: cirb.organizations:/content/organization.py:151
@@ -384,7 +384,7 @@ msgstr "Onderwijs, Onderwijssteun en opleiding"
 
 #: cirb.organizations:/browser/organizationssearch.py:51
 msgid "alt_health"
-msgstr "Gezondheid - Geestelijke gezondheidszorg"
+msgstr "Gezondheid - Mentale gezondheidszorg"
 
 #: cirb.organizations:/browser/organizationssearch.py:62
 msgid "Organization search"
