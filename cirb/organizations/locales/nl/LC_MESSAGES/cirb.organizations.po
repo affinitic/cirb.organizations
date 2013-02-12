@@ -380,7 +380,7 @@ msgstr "Uitgebreid zoek organisatie"
 
 #: cirb.organizations:/browser/organizationssearch.py:48
 msgid "alt_enseignement_formation"
-msgstr "Onderwijs, Onderwijssteun en opleiding"
+msgstr "Onderwijs, Schoolbegeleiding en opleiding"
 
 #: cirb.organizations:/browser/organizationssearch.py:51
 msgid "alt_health"
