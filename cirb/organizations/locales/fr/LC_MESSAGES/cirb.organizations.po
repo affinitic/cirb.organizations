@@ -274,7 +274,7 @@ msgstr "Commune"
 #: cirb.organizations:/browser/interfaces.py:88
 #: cirb.organizations:/content/organization.py:156
 msgid "welcome"
-msgstr "Accueil Primo-arrivant"
+msgstr "Accueil primo-arrivant"
 
 #: cirb.organizations:/browser/interfaces.py:89
 #: cirb.organizations:/content/organization.py:153
@@ -289,22 +289,22 @@ msgstr "Apprentissage de la langue"
 #: cirb.organizations:/browser/interfaces.py:91
 #: cirb.organizations:/content/organization.py:153
 msgid "plastic_art"
-msgstr "Arts Plastiques"
+msgstr "Arts plastiques"
 
 #: cirb.organizations:/browser/interfaces.py:92
 #: cirb.organizations:/content/organization.py:153
 msgid "scenic_art"
-msgstr "Arts Scéniques"
+msgstr "Arts scéniques"
 
 #: cirb.organizations:/browser/interfaces.py:93
 #: cirb.organizations:/content/organization.py:156
 msgid "social_cohesion"
-msgstr "Cohésion Sociale"
+msgstr "Cohésion sociale"
 
 #: cirb.organizations:/browser/interfaces.py:94
 #: cirb.organizations:/content/organization.py:156
 msgid "legal_advice"
-msgstr "Conseil Juridique"
+msgstr "Conseil juridique"
 
 #: cirb.organizations:/browser/interfaces.py:95
 #: cirb.organizations:/content/organization.py:152
@@ -319,7 +319,7 @@ msgstr "Danse"
 #: cirb.organizations:/browser/interfaces.py:97
 #: cirb.organizations:/content/organization.py:156
 msgid "sustainable_development"
-msgstr "Développement Durable"
+msgstr "Développement durable"
 
 #: cirb.organizations:/browser/interfaces.py:98
 #: cirb.organizations:/content/organization.py:154
