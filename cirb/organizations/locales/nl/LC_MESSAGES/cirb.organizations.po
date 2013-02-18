@@ -92,7 +92,7 @@ msgstr "Mentale gezondheidszorg"
 #: cirb.organizations:/browser/interfaces.py:113
 #: cirb.organizations:/content/organization.py:155
 msgid "health"
-msgstr "Gezondheid"
+msgstr "Gezondheid / Mentale gezondheid"
 
 #: cirb.organizations:/browser/interfaces.py:114
 #: cirb.organizations:/content/organization.py:155
@@ -364,11 +364,11 @@ msgstr "Contact"
 #: cirb.organizations:/browser/organizationsmanage.py:154
 #: cirb.organizations:/content/organization.py:154
 msgid "enseignement_formation"
-msgstr "Onderwijs en opleiding"
+msgstr "Onderwijs, schoolbegeleiding en opleiding"
 
 #: cirb.organizations:/browser/organizationsmanage.py:86
 msgid "no id fund for delete a organization"
-msgstr "Geen organisatie gevnden"
+msgstr "Geen organisatie gevonden"
 
 #: cirb.organizations:/browser/organizationsmanage.py:90
 msgid "The organization is deleted"
@@ -380,11 +380,11 @@ msgstr "Uitgebreid zoek organisatie"
 
 #: cirb.organizations:/browser/organizationssearch.py:48
 msgid "alt_enseignement_formation"
-msgstr "Onderwijs, Schoolbegeleiding en opleiding"
+msgstr "Onderwijs, schoolbegeleiding en opleiding"
 
 #: cirb.organizations:/browser/organizationssearch.py:51
 msgid "alt_health"
-msgstr "Gezondheid - Mentale gezondheidszorg"
+msgstr "Gezondheid / Mentale gezondheid"
 
 #: cirb.organizations:/browser/organizationssearch.py:62
 msgid "Organization search"

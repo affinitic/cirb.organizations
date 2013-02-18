@@ -92,7 +92,7 @@ msgstr "Santé Mentale"
 #: cirb.organizations:/browser/interfaces.py:113
 #: cirb.organizations:/content/organization.py:155
 msgid "health"
-msgstr "Santé"
+msgstr "Santé / Santé mentale"
 
 #: cirb.organizations:/browser/interfaces.py:114
 #: cirb.organizations:/content/organization.py:155
@@ -274,7 +274,7 @@ msgstr "Commune"
 #: cirb.organizations:/browser/interfaces.py:88
 #: cirb.organizations:/content/organization.py:156
 msgid "welcome"
-msgstr "Accueil Primo-arraivant"
+msgstr "Accueil Primo-arrivant"
 
 #: cirb.organizations:/browser/interfaces.py:89
 #: cirb.organizations:/content/organization.py:153
@@ -362,7 +362,7 @@ msgstr "Personne de contact"
 #: cirb.organizations:/browser/organizationsmanage.py:154
 #: cirb.organizations:/content/organization.py:154
 msgid "enseignement_formation"
-msgstr "Enseignement et formation"
+msgstr "Enseignement, soutien scolaire et formation"
 
 #: cirb.organizations:/browser/organizationsmanage.py:86
 msgid "no id fund for delete a organization"
@@ -378,11 +378,11 @@ msgstr "Recherche d'organisation avanvée"
 
 #: cirb.organizations:/browser/organizationssearch.py:48
 msgid "alt_enseignement_formation"
-msgstr "Enseignement, Soutien scolaire et formation"
+msgstr "Enseignement, soutien scolaire et formation"
 
 #: cirb.organizations:/browser/organizationssearch.py:51
 msgid "alt_health"
-msgstr "Santé - Santé mentale"
+msgstr "Santé / Santé mentale"
 
 #: cirb.organizations:/browser/organizationssearch.py:62
 msgid "Organization search"
