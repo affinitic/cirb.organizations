@@ -166,7 +166,7 @@ msgstr "Commentaires"
 #: cirb.organizations:/browser/interfaces.py:27
 msgid ""
 "Search with organization name, objectif, activity type or tagert public."
-msgstr "Nom d'organisme, objectif, type d'activité ou public cilbe."
+msgstr "Nom d'organisme, objectif, type d'activité ou public cible."
 
 #: cirb.organizations:/browser/interfaces.py:19
 #: cirb.organizations:/browser/interfaces.py:27
