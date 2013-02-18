@@ -58,7 +58,7 @@ msgstr "Handicap"
 #: cirb.organizations:/browser/interfaces.py:106
 #: cirb.organizations:/content/organization.py:154
 msgid "information"
-msgstr "Information et Documentation"
+msgstr "Information et documentation"
 
 #: cirb.organizations:/browser/interfaces.py:107
 #: cirb.organizations:/content/organization.py:154
