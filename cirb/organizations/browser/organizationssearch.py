@@ -85,8 +85,10 @@ class Search(form.Form):
         if searched_cat:
             self.searched_categories = searched_cat
         search_term = request.form.get('search_term', '')
-        print search_term
-        self.fields.get('search').field.default = unicode(search_term)
+        try:
+            self.fields.get('search').field.default = unicode(search_term)
+        except:
+            self.fields.get('search').field.default = unicode(search_term.decode('utf8'))
 
     def search(self, search):
         session = Session()
@@ -241,9 +243,9 @@ class AdvancedSearch(form.Form):
         if not errors:
             session = Session()
             searched_categories = data.get('categories')
-            search = data.get('search')
+            search = unicode(data.get('search'))
             if search == None:
-                search = ""
+                search = u""
             request = session.query(Organization)
             if search:
                 additionalinformations = session.query(AdditionalInformation).filter(func.lower(AdditionalInformation.objectif).like(u'%{0}%'.format(search).lower())).all()
@@ -268,7 +270,7 @@ class AdvancedSearch(form.Form):
             else:
                 self.request.SESSION.set(SESSION_SEARCH, self.results)
                 self.request.SESSION.set(SESSION_CATEGORIES, self.searched_categories)
-                self.request.response.redirect('organizations_search?search_term={0}'.format(search))
+                self.request.response.redirect('organizations_search?search_term={0}'.format(search.encode('utf8')))
 
     def get_result(self):
         return self.results
