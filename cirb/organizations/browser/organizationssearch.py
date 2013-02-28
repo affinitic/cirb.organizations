@@ -243,7 +243,7 @@ class AdvancedSearch(form.Form):
         if not errors:
             session = Session()
             searched_categories = data.get('categories')
-            search = unicode(data.get('search'))
+            search = data.get('search')
             if search == None:
                 search = u""
             request = session.query(Organization)
