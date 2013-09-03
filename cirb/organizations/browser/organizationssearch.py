@@ -106,6 +106,16 @@ class Search(form.Form):
         if len(self.results) == 0:
             self.status = _(u"No organization found.")
 
+    def search_name(self, search):
+        session = Session()
+        request = session.query(Organization)
+        request = request.filter(func.lower(Organization.name).like(u'{0}'.format(search).lower()))
+        request = request.filter(Organization.language == self.context.Language())
+        request = request.order_by(Organization.name)
+        self.results = request.all()
+        if len(self.results) == 0:
+            self.status = _(u"No organization found.")
+
     def get_categories(self):
         return Category.attributes
 
@@ -128,7 +138,7 @@ class Search(form.Form):
 
     def handleLettersButton(self, form, action):
         form.widgets.get('search').value = u""
-        self.search("{0}%".format(action.value.lower()))
+        self.search_name("{0}%".format(action.value.lower()))
 
     def handleCategoriesButton(self, form, action):
         form.widgets.get('search').value = u""
