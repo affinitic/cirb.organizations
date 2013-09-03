@@ -16,7 +16,7 @@ $(document).ready(function(){
 
     urlService = $('div.data').data('gis-service');
     $("#fieldset-addr input[type='text']").focus(function(){
-        updatexy();
+        //updatexy();
     });
 
     $("#localize").click(function(){
@@ -24,7 +24,6 @@ $(document).ready(function(){
     });
     if ($("#localize")) {
         readonlyHiddenXY();
-        updatexy();
     }
 });
 
