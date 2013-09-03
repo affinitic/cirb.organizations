@@ -23,7 +23,7 @@ $(document).ready(function(){
         updatexy();
     });
     if ($("#localize")) {
-        readonlyHiddenXY();
+        //readonlyHiddenXY();
     }
 });
 
