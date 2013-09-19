@@ -46,7 +46,7 @@ i18n:domain="cirb.organizations">
 
                 <tal:block tal:condition="context/website">
                     <img tal:attributes="src string:${portal_url}/++resource++link.png" class="icon" />
-                    <a target="_blank" tal:attributes="href string:${context/website}"><span tal:content="context/website">website</span></a><br />
+                    <a target="_blank" tal:attributes="href string:${context/website}"><span tal:content="context/get_visible_website">website</span></a><br />
                 </tal:block>
 
                 <span i18n:translate="Responsable">Responsable</span> : 

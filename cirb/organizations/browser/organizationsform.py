@@ -43,6 +43,10 @@ class OrganizationsStep(wizard.GroupStep):
 
     def apply(self, context):
         data = self.getContent()
+        website = data.get("website", '')
+        if  website:
+            if not website.startswith('http'):
+                data['website'] = "http://{0}".format(website)
         for field in self.fields:
             if data.get(field, False):
                 if isinstance(data[field], file.NamedImage):

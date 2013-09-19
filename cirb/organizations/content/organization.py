@@ -100,6 +100,11 @@ class Organization(ORMBase):
         categories = cat[0].get_list()
         return categories
 
+    def get_visible_website(self):
+        if self.website:
+            return self.website.replace("http://", "")
+        else:
+            return ""
 
 
 class Address(ORMBase):
