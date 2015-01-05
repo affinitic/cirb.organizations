@@ -11,7 +11,7 @@ from cirb.organizations import organizationsMessageFactory as _
 from cirb.organizations.content.organization import Organization, Category, Address, Contact, InCharge, AdditionalInformation, Association
 from cirb.organizations.browser.interfaces import IAddress, ICategory, IContact, IInCharge, IOrganizations, IAdditionalInformation
 
-from zope.app.pagetemplate import viewpagetemplatefile
+from zope.browserpage import viewpagetemplatefile
 import os
 
 
